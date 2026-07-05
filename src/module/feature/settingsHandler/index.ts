@@ -1,39 +1,31 @@
-import { PartialSettingsData, SettingsMenuPF2eWorkbench } from "../../settings/menu.js";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-
-export function toggleSettings(_html: HTMLElement) {
-    const settings: [string, any][] = Array.from(game.settings.settings.entries());
-    settings.forEach((_setting: [string, any]) => {
-        // None right now
-    });
-}
+import type { MenuTemplateData } from "../../settings/menu.ts";
+import { getModuleSetting } from "../../utils.ts";
 
 function setFormGroupVisibility(html: HTMLElement, selector: string, visible: boolean) {
     const el = html.querySelector<HTMLElement>(selector)?.closest<HTMLElement>(".form-group");
     if (el) el.style.display = visible ? "" : "none";
 }
 
-export function toggleMenuSettings(html: HTMLElement, settings: SettingsMenuPF2eWorkbench) {
-    for (const key in settings["settings"]) {
-        const settingElement: PartialSettingsData = settings["settings"][key];
-        if (settingElement && settingElement["key"]) {
-            const settingName = settingElement["key"];
+export function toggleMenuSettings(html: HTMLElement, settings: MenuTemplateData): void {
+    for (const settingElement of settings.settings) {
+        if (settingElement) {
+            const settingName = settingElement.key;
 
             if (settingName !== `handleDyingRecoveryRollAllow` && settingName.startsWith("handleDyingRecoveryRoll")) {
                 const applyToggle = !(
-                    game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow") === "none" ||
+                    getModuleSetting<string>("handleDyingRecoveryRollAllow") === "none" ||
                     (game.user?.isGM
-                        ? game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow") === "players"
-                        : game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow") === "gm")
+                        ? getModuleSetting<string>("handleDyingRecoveryRollAllow") === "players"
+                        : getModuleSetting<string>("handleDyingRecoveryRollAllow") === "gm")
                 );
                 setFormGroupVisibility(html, `input[name="${settingName}"]`, applyToggle);
             }
             if (settingName !== `autoRollDamageAllow` && settingName.startsWith(`autoRollDamage`)) {
                 const applyToggle = !(
-                    game.settings.get(MODULENAME, "autoRollDamageAllow") === "none" ||
+                    getModuleSetting<string>("autoRollDamageAllow") === "none" ||
                     (game.user?.isGM
-                        ? game.settings.get(MODULENAME, "autoRollDamageAllow") === "players"
-                        : game.settings.get(MODULENAME, "autoRollDamageAllow") === "gm")
+                        ? getModuleSetting<string>("autoRollDamageAllow") === "players"
+                        : getModuleSetting<string>("autoRollDamageAllow") === "gm")
                 );
 
                 setFormGroupVisibility(html, `input[name="${settingName}"]`, applyToggle);
@@ -42,7 +34,7 @@ export function toggleMenuSettings(html: HTMLElement, settings: SettingsMenuPF2e
         }
     }
 
-    const pingMode = game.settings.get(MODULENAME, "canvasPointerPingMode") as string;
+    const pingMode = getModuleSetting<string>("canvasPointerPingMode");
     const showSoundSettings = pingMode === "sound" || pingMode === "visualAndSound";
     setFormGroupVisibility(html, `[name="canvasPointerPingSound"]`, showSoundSettings);
     setFormGroupVisibility(html, `[name="canvasPointerPingVolume"]`, showSoundSettings);

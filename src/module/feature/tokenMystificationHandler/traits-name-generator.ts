@@ -1,6 +1,6 @@
 import { ActorPF2e, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
-import { CREATURE_IDENTIFICATION_TRAITS, ELITE_WEAK } from "../../xdy-pf2e-constants.js";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { CREATURE_IDENTIFICATION_TRAITS, ELITE_WEAK } from "../../xdy-pf2e-constants.ts";
+import { getModuleSetting } from "../../utils.ts";
 import * as systems from "../../utils/systems.ts";
 
 let TRAITS: {
@@ -12,7 +12,7 @@ let TRAITS: {
 };
 
 async function fixesPreAndPost(settingkey: string): Promise<string> {
-    const fixSetting = String(game.settings.get(MODULENAME, settingkey));
+    const fixSetting = getModuleSetting<string>(settingkey).trim();
 
     // "null" check is due to a previous bug that may have left invalid data in text fields
     if (fixSetting !== null && fixSetting !== "null" && fixSetting !== "") {
@@ -55,9 +55,8 @@ function fillTraits() {
 }
 
 function filterTraitList(traitsList: string[], prefix: string, postfix: string): string[] {
-    if (game.settings.get(MODULENAME, "npcMystifierBlacklist")) {
-        const blocklist =
-            String(game.settings.get(MODULENAME, "npcMystifierBlacklist")).toLocaleLowerCase().split(",") || null;
+    if (getModuleSetting<boolean>("npcMystifierBlacklist")) {
+        const blocklist = getModuleSetting<string>("npcMystifierBlacklist").toLocaleLowerCase().split(",") || null;
         if (blocklist) {
             traitsList = traitsList.filter((trait: string) => {
                 return !blocklist.map((trait: string) => trait.trim()).includes(trait);
@@ -66,40 +65,38 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
     }
 
     let size: string[] = [];
-    if (game.settings.get(MODULENAME, "npcMystifierUseSize")) {
+    if (getModuleSetting<boolean>("npcMystifierUseSize")) {
         size = traitsList.filter((trait: string) => TRAITS.SIZES.includes(trait));
     }
 
     let eliteWeak: string[] = [];
-    if (game.settings.get(MODULENAME, "npcMystifierUseEliteWeak")) {
+    if (getModuleSetting<boolean>("npcMystifierUseEliteWeak")) {
         eliteWeak = traitsList.filter((trait: string) => TRAITS.ELITE_WEAK.includes(trait));
     }
 
     let rarities: string[] = [];
-    if (game.settings.get(MODULENAME, "npcMystifierUseRarities")) {
+    if (getModuleSetting<boolean>("npcMystifierUseRarities")) {
         rarities = traitsList.filter((trait: string) => TRAITS.RARITIES.includes(trait));
-        const replacement: string = String(
-            game.settings.get(MODULENAME, "npcMystifierUseRaritiesReplacement"),
-        ).toLocaleLowerCase();
+        const replacement: string = getModuleSetting<string>("npcMystifierUseRaritiesReplacement").toLocaleLowerCase();
         if (replacement !== "") {
             rarities = rarities.map((trait: string) => (trait !== "common" ? replacement : trait));
         }
     }
 
     let creatureIdentificationTraits: string[] = [];
-    if (game.settings.get(MODULENAME, "npcMystifierUseCreatureTypesTraits")) {
+    if (getModuleSetting<boolean>("npcMystifierUseCreatureTypesTraits")) {
         creatureIdentificationTraits = traitsList.filter((trait: string) =>
             TRAITS.CREATURE_IDENTIFICATION_TRAITS.includes(trait),
         );
     }
 
     let pf2eCreatureTraits: string[] = [];
-    if (game.settings.get(MODULENAME, "npcMystifierUseCreatureTraits")) {
+    if (getModuleSetting<boolean>("npcMystifierUseCreatureTraits")) {
         pf2eCreatureTraits = traitsList.filter((trait: string) => TRAITS.PF2E_CREATURE_TRAITS.includes(trait));
     }
 
     let others: string[] = [];
-    if (game.settings.get(MODULENAME, "npcMystifierUseOtherTraits")) {
+    if (getModuleSetting<boolean>("npcMystifierUseOtherTraits")) {
         others = traitsList
             .filter((trait: string) => !TRAITS.ELITE_WEAK.includes(trait))
             .filter((trait: string) => !TRAITS.SIZES.includes(trait))
@@ -202,7 +199,7 @@ export async function generateNameFromTraits(token: TokenDocumentPF2e<ScenePF2e>
         }
     } else {
         // Shouldn't happen. But, just in case...
-        result = String(game.settings.get(MODULENAME, "npcMystifierNoMatch"));
+        result = getModuleSetting<string>("npcMystifierNoMatch");
     }
     return result;
 }

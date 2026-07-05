@@ -1,11 +1,12 @@
 import { ChatMessagePF2e, UserPF2e } from "foundry-pf2e";
-import { MODULENAME, NPC_TYPE } from "../xdy-pf2e-workbench.js";
-import * as systems from "../utils/systems.js";
-import { handleAsync } from "../utils.js";
-import { handlePrivateSpellcasting } from "../feature/qolHandler/handlePrivateSpellcasting.js";
-import { persistentDamageHealing } from "../feature/damageHandler/index.js";
-import { reminderTargeting } from "../feature/reminders/index.js";
-import { checkAttackValidity } from "../feature/reminders/checkAttackValidity.js";
+import { NPC_TYPE } from "../xdy-pf2e-workbench.ts";
+
+import * as systems from "../utils/systems.ts";
+import { fireAndForget, getModuleSetting } from "../utils.ts";
+import { handlePrivateSpellcasting } from "../feature/qolHandler/handlePrivateSpellcasting.ts";
+import { persistentDamageHealing } from "../feature/damageHandler/index.ts";
+import { reminderTargeting } from "../feature/reminders/index.ts";
+import { checkAttackValidity } from "../feature/reminders/checkAttackValidity.ts";
 
 /** Modifier keys that invert the private/public spell casting behavior. */
 const MODIFIER_KEYS = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight", "Meta", "OsLeft", "OsRight"];
@@ -18,9 +19,9 @@ export const preCreateChatMessageHook = (
 ): boolean => {
     let proceed = true;
 
-    const reminderTargetingEnabled = String(game.settings.get(MODULENAME, "reminderTargeting")) === "mustTarget";
-    const reminderCannotAttack = String(game.settings.get(MODULENAME, "reminderCannotAttack"));
-    const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
+    const reminderTargetingEnabled = getModuleSetting<string>("reminderTargeting") === "mustTarget";
+    const reminderCannotAttack = getModuleSetting<string>("reminderCannotAttack");
+    const castPrivateSpellEnabled = getModuleSetting("castPrivateSpell");
 
     // Handle private spellcasting
     if (castPrivateSpellEnabled && systems.getFlag(message, "casting.id")) {
@@ -29,20 +30,20 @@ export const preCreateChatMessageHook = (
         const privateCast = castPrivately(inParty, message);
 
         if ((ctrlHeld && !privateCast) || (!ctrlHeld && privateCast)) {
-            handleAsync(handlePrivateSpellcasting(data, message), "handlePrivateSpellcasting");
+            fireAndForget(handlePrivateSpellcasting(data, message), "handlePrivateSpellcasting");
         }
     }
 
     // Handle persistent damage/healing
-    const applyPersistentDamage = game.settings.get(MODULENAME, "applyPersistentDamage");
-    const applyPersistentHealing = game.settings.get(MODULENAME, "applyPersistentHealing");
+    const applyPersistentDamage = getModuleSetting("applyPersistentDamage");
+    const applyPersistentHealing = getModuleSetting("applyPersistentHealing");
     if (applyPersistentDamage || applyPersistentHealing) {
         persistentDamageHealing(message);
     }
 
     // Handle targeting reminders
     if (reminderTargetingEnabled) {
-        proceed = reminderTargeting(message, String(game.settings.get(MODULENAME, "reminderTargeting")));
+        proceed = reminderTargeting(message, getModuleSetting<string>("reminderTargeting"));
     }
 
     // Handle attack validity
@@ -56,9 +57,9 @@ export const preCreateChatMessageHook = (
 function castPrivately(inParty: boolean, message: ChatMessagePF2e): boolean {
     const isNpc = message.actor?.type === NPC_TYPE;
     const isAlly = message.actor?.alliance === "party";
-    const alwaysNpc = game.settings.get(MODULENAME, "castPrivateSpellAlwaysFor") === "npcs";
-    const alwaysNonAlly = game.settings.get(MODULENAME, "castPrivateSpellAlwaysFor") === "nonAllies";
-    const alwaysNonParty = game.settings.get(MODULENAME, "castPrivateSpellAlwaysFor") === "nonPartymembers";
+    const alwaysNpc = getModuleSetting("castPrivateSpellAlwaysFor") === "npcs";
+    const alwaysNonAlly = getModuleSetting("castPrivateSpellAlwaysFor") === "nonAllies";
+    const alwaysNonParty = getModuleSetting("castPrivateSpellAlwaysFor") === "nonPartymembers";
 
     return (isNpc && alwaysNpc) || (!isAlly && alwaysNonAlly) || (!inParty && alwaysNonParty);
 }

@@ -1,18 +1,18 @@
 import { EncounterPF2e, PhysicalItemPF2e } from "foundry-pf2e";
-import { MODULENAME } from "../xdy-pf2e-workbench.js";
-import { sendHeldItemChatMessage } from "../utils.js";
+import { MODULENAME } from "../constants.ts";
+import { getModuleSetting, sendHeldItemChatMessage } from "../utils.ts";
 import { clearToolbeltCaches } from "../feature/damageHandler/toolbeltIntegration.ts";
 
 export async function deleteCombatHook(encounter: EncounterPF2e, _options: object): Promise<void> {
     clearToolbeltCaches();
 
-    if (game.settings.get(MODULENAME, "sheatheHeldItemsAfterEncounter")) {
+    if (getModuleSetting("sheatheHeldItemsAfterEncounter")) {
         await sheatheHeldItemsAfterEncounter(encounter);
     }
 }
 
 async function sheatheHeldItemsAfterEncounter(encounter: EncounterPF2e) {
-    const itemTypes = String(game.settings.get(MODULENAME, "sheatheHeldItemsAfterEncounterTypes"))
+    const itemTypes = getModuleSetting<string>("sheatheHeldItemsAfterEncounterTypes")
         .split(",")
         .map((t) => t.trim())
         .filter((t) => t);
@@ -22,8 +22,7 @@ async function sheatheHeldItemsAfterEncounter(encounter: EncounterPF2e) {
         if (!actor) {
             continue;
         }
-        // @ts-expect-error TODO fix typing
-        const items = <PhysicalItemPF2e[]>actor.items?.filter((i) => i.isHeld);
+        const items = <PhysicalItemPF2e[]>actor.items?.filter((i) => (i as PhysicalItemPF2e).isHeld);
         if (!items || items.length === 0) {
             continue;
         }

@@ -1,12 +1,11 @@
 import { ChatMessagePF2e } from "foundry-pf2e";
-import { MODULENAME } from "../xdy-pf2e-workbench.js";
-import * as systems from "../utils/systems.js";
-import { handleAsync, isActuallyDamageRoll } from "../utils.js";
-import { autoRollDamage, evictDamageHandlerCaches } from "../feature/damageHandler/index.js";
-import { dyingHandlingCreateChatMessageHook } from "../feature/damageHandler/dyingHandling.js";
-import { checkAttackValidity } from "../feature/reminders/checkAttackValidity.js";
-import { reminderTargeting } from "../feature/reminders/index.js";
-import { reminderBreathWeapon } from "../feature/reminders/reminderBreathWeapon.js";
+import * as systems from "../utils/systems.ts";
+import { fireAndForget, getModuleFlag, getModuleSetting, isActuallyDamageRoll } from "../utils.ts";
+import { autoRollDamage, evictDamageHandlerCaches } from "../feature/damageHandler/index.ts";
+import { dyingHandlingCreateChatMessageHook } from "../feature/damageHandler/dyingHandling.ts";
+import { checkAttackValidity } from "../feature/reminders/checkAttackValidity.ts";
+import { reminderTargeting } from "../feature/reminders/index.ts";
+import { reminderBreathWeapon } from "../feature/reminders/reminderBreathWeapon.ts";
 
 function isDamageTaken(message: ChatMessagePF2e): boolean {
     return systems.getFlag(message, "context.type") === "damage-taken";
@@ -14,12 +13,12 @@ function isDamageTaken(message: ChatMessagePF2e): boolean {
 
 export function createChatMessageHook(message: ChatMessagePF2e): void {
     evictDamageHandlerCaches();
-    const reminderCancelAttack = String(game.settings.get(MODULENAME, "reminderCannotAttack"));
+    const reminderCancelAttack = getModuleSetting<string>("reminderCannotAttack");
     if (reminderCancelAttack === "reminder") {
         checkAttackValidity(message, false);
     }
 
-    const reminderTargetingSetting = String(game.settings.get(MODULENAME, "reminderTargeting"));
+    const reminderTargetingSetting = getModuleSetting<string>("reminderTargeting");
     if (["no", "reminder"].includes(reminderTargetingSetting)) {
         reminderTargeting(message, reminderTargetingSetting);
     }
@@ -29,15 +28,15 @@ export function createChatMessageHook(message: ChatMessagePF2e): void {
     const isDamage = isDamageRoll || isDamageTaken(message);
 
     if (!isDamage) {
-        const skipAutoRoll = message.getFlag(MODULENAME, "noAutoDamageRoll");
+        const skipAutoRoll = getModuleFlag(message, "noAutoDamageRoll");
         if (!skipAutoRoll) {
-            handleAsync(autoRollDamage(message), "autoRollDamage");
+            fireAndForget(autoRollDamage(message), "autoRollDamage");
         }
 
         // Check if we need to remind about breath weapon
-        const reminderBreathWeaponEnabled = game.settings.get(MODULENAME, "reminderBreathWeapon");
+        const reminderBreathWeaponEnabled = getModuleSetting("reminderBreathWeapon");
         if (reminderBreathWeaponEnabled) {
-            handleAsync(reminderBreathWeapon(message), "reminderBreathWeapon");
+            fireAndForget(reminderBreathWeapon(message), "reminderBreathWeapon");
         }
     }
 

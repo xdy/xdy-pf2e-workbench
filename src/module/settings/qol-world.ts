@@ -1,9 +1,29 @@
-import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
-import { SettingsMenuPF2eWorkbench } from "./menu.js";
+import { updateHooks } from "../xdy-pf2e-workbench.ts";
+import { MODULENAME } from "../constants.ts";
+import { HideListTemplateData, SettingsMenuPF2eWorkbench } from "./menu.ts";
 import { SettingRegistration } from "foundry/client/helpers/client-settings.mts";
 
 export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "qolWorldSettings";
+    static override readonly hidelist: HideListTemplateData = {
+        castPrivateSpell: {
+            list: [
+                "castPrivateSpellAutoRevealIfKnown",
+                "castPrivateSpellAutoRevealPartyMembersThatKnowSpell",
+                "castPrivateSpellAlwaysFor",
+                "castPrivateSpellAutoRevealOverrideGMRollMode",
+            ],
+        },
+        castPrivateSpellWithPublicMessage: {
+            list: ["castPrivateSpellWithPublicMessageShowToGM", "castPrivateSpellWithPublicMessageShowTraits"],
+        },
+        castPrivateSpellWithPublicMessageShowTraits: {
+            list: ["castPrivateSpellWithPublicMessageTraitsBlocklist"],
+        },
+        sheatheHeldItemsAfterEncounter: {
+            list: ["sheatheHeldItemsAfterEncounterTypes"],
+        },
+    };
 
     public static override get settings(): Record<string, SettingRegistration> {
         return {
@@ -199,24 +219,4 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
             },
         };
     }
-
-    static override readonly hidelist = {
-        castPrivateSpell: {
-            list: [
-                "castPrivateSpellAutoRevealIfKnown",
-                "castPrivateSpellAutoRevealPartyMembersThatKnowSpell",
-                "castPrivateSpellAlwaysFor",
-                "castPrivateSpellAutoRevealOverrideGMRollMode",
-            ],
-        },
-        castPrivateSpellWithPublicMessage: {
-            list: ["castPrivateSpellWithPublicMessageShowToGM", "castPrivateSpellWithPublicMessageShowTraits"],
-        },
-        castPrivateSpellWithPublicMessageShowTraits: {
-            list: ["castPrivateSpellWithPublicMessageTraitsBlocklist"],
-        },
-        sheatheHeldItemsAfterEncounter: {
-            list: ["sheatheHeldItemsAfterEncounterTypes"],
-        },
-    };
 }

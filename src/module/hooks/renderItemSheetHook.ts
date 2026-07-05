@@ -1,11 +1,13 @@
 import { ItemPF2e, ItemSheetPF2e } from "foundry-pf2e";
-import { MODULENAME } from "../xdy-pf2e-workbench.js";
-import { extractHtmlElement } from "../utils.js";
+
+import { extractHtmlElement, getModuleSetting } from "../utils.ts";
 
 export function renderItemSheetHook(sheet: ItemSheetPF2e<ItemPF2e>, element: unknown): void {
     const html = extractHtmlElement(element);
 
-    if (!html || !game.settings.get(MODULENAME, "showItemLicenseTags")) return;
+    if (!html) return;
+
+    if (!getModuleSetting("showItemLicenseTags")) return;
 
     const item = sheet.item;
     const license: string | undefined = item?.system?.publication?.license;

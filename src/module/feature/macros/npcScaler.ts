@@ -1,5 +1,5 @@
-import { scaleNPCToLevel } from "../cr-scaler/NPCScaler.js";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { scaleNPCToLevel } from "../cr-scaler/NPCScaler.ts";
+import { MODULENAME } from "../../constants.ts";
 import { NPCPF2e } from "foundry-pf2e";
 
 export async function npcScaler(): Promise<void> {
@@ -33,8 +33,10 @@ export async function npcScaler(): Promise<void> {
                 default: true,
                 callback: async (_event, button, _dialog) => {
                     ui.notifications?.info(`Scaling NPC... please wait.`);
-                    const startLevel = parseInt(button?.form?.elements["startLevel"].value);
-                    const endLevel = parseInt(button?.form?.elements["endLevel"].value);
+                    const startLevel = parseInt(
+                        (button?.form?.elements.namedItem("startLevel") as HTMLInputElement).value,
+                    );
+                    const endLevel = parseInt((button?.form?.elements.namedItem("endLevel") as HTMLInputElement).value);
 
                     for (let i = startLevel; i <= endLevel; i++) {
                         await scaleNPCToLevel(actor, i);

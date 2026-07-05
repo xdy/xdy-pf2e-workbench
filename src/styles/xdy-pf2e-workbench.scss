@@ -1,9 +1,14 @@
-@use "sass:math";
-
 :root {
     --xdy-pf2e-workbench-pause: "";
     --xdy-pf2e-workbench-pause-bottom: 10%;
     --xdy-pf2e-workbench-pause-figcaption-top: 0%;
+
+    /* Hero point rule colors */
+    --xdy-hero-keeley: var(--color-pf-secondary);
+    --xdy-hero-keeley-shadow: color-mix(in srgb, var(--color-pf-secondary) 30%, transparent);
+    --xdy-hero-highest: var(--color-pf-text-success);
+    --xdy-hero-heroic: var(--color-pf-text-adjusted-higher);
+    --xdy-hero-heroic-shadow: color-mix(in srgb, var(--color-pf-text-adjusted-higher) 30%, transparent);
 }
 
 #pause {
@@ -20,49 +25,49 @@
 
 /*Modified from the npc sheet*/
 .xdy-pf2e-workbench-rarity-common {
-    border-color: #323232;
-    color: #323232;
+    border-color: var(--color-rarity-common);
+    color: var(--color-rarity-common);
 }
 
 .xdy-pf2e-workbench-rarity-uncommon {
-    border-color: #98513d;
-    color: #98513d;
+    border-color: var(--color-rarity-uncommon);
+    color: var(--color-rarity-uncommon);
 }
 
 .xdy-pf2e-workbench-rarity-rare {
-    border-color: #002664;
-    color: #002664;
+    border-color: var(--color-rarity-rare);
+    color: var(--color-rarity-rare);
 }
 
 .xdy-pf2e-workbench-rarity-unique {
-    border-color: #54166e;
-    color: #54166e;
+    border-color: var(--color-rarity-unique);
+    color: var(--color-rarity-unique);
 }
 
 /** License tags on item sheets and OGL tag on character sheets */
 .xdy-pf2e-workbench-license-tag,
 .xdy-pf2e-workbench-ogl-char-tag {
-    color: #888;
-    border-color: #aaa;
-    background: #eee;
+    color: var(--color-text-light-7);
+    border-color: var(--color-text-light-5);
+    background: var(--color-text-light-1);
     cursor: pointer;
 }
 
 .xdy-pf2e-workbench-ogl-char-tag:hover {
-    color: #666;
-    border-color: #888;
-    background: #ddd;
+    color: var(--color-text-dark-5);
+    border-color: var(--color-text-light-7);
+    background: var(--color-text-light-2);
 }
 
 /** OGL items list in dialog */
 .xdy-pf2e-workbench-ogl-dialog h4 {
-    margin: 0.3em 0 0.15em;
+    margin: var(--spacer-4) 0 var(--spacer-2);
     font-size: var(--font-size-14);
 }
 
 .xdy-pf2e-workbench-ogl-dialog ul {
     margin: 0;
-    padding-left: 1.2em;
+    padding-left: var(--spacer-16);
     line-height: 1.3;
 }
 
@@ -71,45 +76,43 @@
 }
 
 .xdy-pf2e-workbench-ogl-dialog p {
-    margin-bottom: 0.3em;
+    margin-bottom: var(--spacer-4);
 }
 
 .xdy-pf2e-workbench-ogl-list {
     list-style: none;
     padding: 0;
-    margin: 0.5em 0;
+    margin: var(--spacer-8) 0;
 }
 
 .xdy-pf2e-workbench-ogl-list li {
-    padding: 0.25em 0;
+    padding: var(--spacer-4) 0;
 }
 
-/** Keeley's Hero Point Rule */
+/** Hero Point Rule styles */
 .chat-message .tags.modifiers .tag.keeley-add-10,
 .chat-message .dice-total.keeley-add-10,
 .chat-message .dice-formula > .keeley-add-10 {
-    color: purple;
-}
-
-/** Use Highest Roll Hero Point Rule */
-.chat-message .tags.modifiers .tag.use-highest-roll,
-.chat-message .dice-total.use-highest-roll,
-.chat-message .dice-formula > .use-highest-roll {
-    color: blue;
-}
-
-/** Heroic Rerolls Hero Point Rule */
-.chat-message .tags.modifiers .tag.heroic-reroll,
-.chat-message .dice-total.heroic-reroll {
-    color: teal;
-}
-
-.chat-message .tags.modifiers .tag.heroic-reroll {
-    box-shadow: inset 0 0 0 1px rgba(0, 128, 128, 0.3);
+    color: var(--xdy-hero-keeley);
 }
 
 .chat-message .tags.modifiers .tag.keeley-add-10 {
-    box-shadow: inset 0 0 0 1px rgba(128, 0, 128, 0.3);
+    box-shadow: inset 0 0 0 1px var(--xdy-hero-keeley-shadow);
+}
+
+.chat-message .tags.modifiers .tag.use-highest-roll,
+.chat-message .dice-total.use-highest-roll,
+.chat-message .dice-formula > .use-highest-roll {
+    color: var(--xdy-hero-highest);
+}
+
+.chat-message .tags.modifiers .tag.heroic-reroll,
+.chat-message .dice-total.heroic-reroll {
+    color: var(--xdy-hero-heroic);
+}
+
+.chat-message .tags.modifiers .tag.heroic-reroll {
+    box-shadow: inset 0 0 0 1px var(--xdy-hero-heroic-shadow);
 }
 
 /* NPC Roller */
@@ -126,18 +129,20 @@
 .roll-app nav.roll-app-nav {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: var(--space-2);
     flex-wrap: wrap;
 }
 
-.roll-app-nav button {
+%roll-app-btn-reset {
     all: revert;
-    background: unset;
-    border: unset;
-    padding: 4px 8px;
     font-family: var(--font-primary);
     font-size: var(--font-size-14);
     cursor: pointer;
+}
+
+.roll-app-nav button {
+    @extend %roll-app-btn-reset;
+    padding: var(--spacer-4) var(--spacer-8);
     text-align: left;
 }
 
@@ -155,61 +160,36 @@
 }
 
 .roll-app .roll-app-table tbody tr.selected {
-    background: rgb(0 0 0 / 66%);
-    color: white;
+    background: var(--color-cool-5-75);
+    color: var(--color-text-light-0);
 }
 
 .roll-app .roll-app-table tbody tr.selected button.rollable {
-    color: white;
+    color: var(--color-text-light-0);
 }
 
 .roll-app .roll-app-table tbody tr:nth-child(2n) {
-    background: rgba(0 0 0 / 20%);
+    background: rgb(0 0 0 / 0.2);
 }
 
 .roll-app .roll-app-table tbody tr:nth-child(2n):hover {
-    background: rgba(0 0 0 / 30%);
+    background: rgb(0 0 0 / 0.3);
 }
 
 .roll-app .roll-app-table tbody tr:not(.selected):hover {
-    background: rgba(0 0 0 / 10%);
+    background: rgb(0 0 0 / 0.1);
 }
 
 .roll-app .roll-app-table tbody button {
-    all: revert;
-    background: unset;
-    border: unset;
+    @extend %roll-app-btn-reset;
     width: unset;
-    font-family: var(--font-primary);
-    font-size: var(--font-size-14);
     display: block;
-    padding: 0 32px;
+    padding: 0 var(--spacer-32, 2rem);
     margin: 0 auto;
-    cursor: pointer;
 }
 
 .roll-app .roll-app-table tbody button:hover {
     font-weight: bold;
-}
-
-.xdy-pf2e-workbench-rarity-common {
-    border-color: #323232;
-    color: #323232;
-}
-
-.xdy-pf2e-workbench-rarity-uncommon {
-    border-color: #98513d;
-    color: #98513d;
-}
-
-.xdy-pf2e-workbench-rarity-rare {
-    border-color: #002664;
-    color: #002664;
-}
-
-.xdy-pf2e-workbench-rarity-unique {
-    border-color: #54166e;
-    color: #54166e;
 }
 
 .xdy-pf2e-workbench {
@@ -220,23 +200,19 @@
         section.content {
             flex: 1 1 auto;
             min-height: 0;
-            padding: 1rem;
+            padding: var(--spacer-16);
             overflow: hidden auto;
         }
 
         .form-footer {
             flex: 0 0 auto;
-            padding: 0.5rem 1rem;
+            padding: var(--spacer-8) var(--spacer-16);
         }
     }
 }
 
 .bam-dialog {
     container: bam-dialog / inline-size;
-
-    .standard-form {
-        gap: initial;
-    }
 }
 
 .hero-point-handler-dialog {
@@ -252,7 +228,7 @@
     }
 
     .col-md-4 {
-        margin-top: 0.25rem;
+        margin-top: var(--spacer-4);
     }
 
     .hero-point-handler-note,
@@ -263,13 +239,13 @@
     }
 
     .radio + .radio {
-        margin-top: 0.25rem;
+        margin-top: var(--spacer-4);
     }
 
     .input-group {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: var(--spacer-8);
     }
 
     .input-group-addon {
@@ -281,24 +257,24 @@
     }
 
     .help-block {
-        margin: 0.25rem 0 0;
+        margin: var(--spacer-4) 0 0;
     }
 
     .hero-point-handler-note {
-        margin-bottom: 0.5rem;
+        margin-bottom: var(--spacer-8);
     }
 
     hr {
-        margin: 0.5rem 0;
+        margin: var(--spacer-8) 0;
     }
 
     .form-group {
-        margin-bottom: 0.5rem;
+        margin-bottom: var(--spacer-8);
     }
 }
 
 .bam-tabs.tabs {
-    margin: 0.5rem 0 0.5rem 0;
+    margin: var(--spacer-8) 0;
 
     a.active > span {
         text-decoration: underline;
@@ -306,10 +282,10 @@
 }
 
 .bam-body {
-    padding-top: 2px;
+    padding-top: var(--space-3);
 
     h3 {
-        margin: 1rem 0 0.5rem 0;
+        margin: var(--spacer-16) 0 var(--spacer-8) 0;
 
         &:first-child {
             margin-top: 0;
@@ -322,24 +298,18 @@
     padding-top: 0;
 }
 
-.pf2e-bg .window-content {
-    //background: url('/systems/pf2e/assets/sheet/background.webp');
-}
-
 .bam-action-list {
     display: grid;
-    flex-wrap: wrap;
-    flex-direction: column;
     align-items: center;
-    margin-bottom: 8px;
-    grid-column-gap: 2px;
+    margin-bottom: var(--spacer-8);
+    column-gap: var(--space-2);
     grid-auto-flow: column;
     grid-template-rows: repeat(calc((var(--bam-count) + var(--bam-columns) / 2 - 0.01) / var(--bam-columns)), 1fr);
     grid-template-columns: repeat(var(--bam-columns), 1fr);
 
     .bam-map-wrapper {
         display: flex;
-        gap: 1px;
+        gap: var(--space-1);
         margin: 0 auto;
         width: 100%;
 
@@ -358,21 +328,21 @@
     }
 
     button.bam-action-btn {
-        margin: 1px auto;
+        margin: var(--space-1) auto;
         height: fit-content;
-        min-height: 28px;
+        min-height: var(--form-field-height, 26px);
         width: 100%;
-        box-shadow: inset 0 0 0 1px rgb(0 0 0 / 50%);
+        box-shadow: inset 0 0 0 1px var(--color-cool-5-50);
         text-shadow: none;
-        border: #000;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         white-space: nowrap;
         overflow: hidden;
+        color: var(--text-light);
 
         &:hover {
-            text-shadow: 0 0 2px #fff;
+            text-shadow: 0 0 var(--space-2) var(--color-text-light-0);
         }
 
         &.glow {
@@ -385,31 +355,26 @@
         &[data-rank="0"],
         &[data-rank] {
             background: var(--color-proficiency-untrained);
-            color: var(--text-light);
         }
 
         &[data-rank="1"] {
             background: var(--color-proficiency-trained);
-            color: var(--text-light);
         }
 
         &[data-rank="2"] {
             background: var(--color-proficiency-expert);
-            color: var(--text-light);
         }
 
         &[data-rank="3"] {
             background: var(--color-proficiency-master);
-            color: var(--text-light);
         }
 
         &[data-rank="4"] {
             background: var(--color-proficiency-legendary);
-            color: var(--text-light);
         }
 
         img {
-            margin-right: 5px;
+            margin-right: var(--space-6);
         }
     }
 }
@@ -417,11 +382,11 @@
 @keyframes glow2 {
     0% {
         color: hsl(var(--color-glow1), 90%, 50%);
-        box-shadow: 0 0 2px 2px hsl(var(--color-glow1), 100%, 50%);
+        box-shadow: 0 0 var(--space-2) var(--space-2) hsl(var(--color-glow1), 100%, 50%);
     }
     100% {
         color: hsl(var(--color-glow2), 90%, 50%);
-        box-shadow: 0 0 2px 2px hsl(var(--color-glow2), 100%, 50%);
+        box-shadow: 0 0 var(--space-2) var(--space-2) hsl(var(--color-glow2), 100%, 50%);
     }
 }
 
@@ -453,12 +418,12 @@
 .xdy-pf2e-workbench-pointer-remote {
     position: fixed;
     pointer-events: none;
-    z-index: 99999;
-    font-size: 48px;
+    z-index: var(--z-index-notification);
+    font-size: var(--font-size-48);
     transform: translate(-50%, -50%);
     text-shadow:
-        0 0 6px rgba(0, 0, 0, 0.9),
-        0 0 12px rgba(0, 0, 0, 0.6);
+        0 0 var(--space-8) var(--color-shadow-dark),
+        0 0 var(--spacer-12) var(--color-shadow-dark);
     transition: opacity 0.05s ease;
     will-change: left, top;
 }

@@ -1,6 +1,6 @@
 import type { ActorPF2e } from "foundry-pf2e";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { logError } from "../../utils.js";
+import { MODULENAME } from "../../constants.ts";
+import { fireAndForget } from "../../utils.ts";
 
 interface OglItemEntry {
     name: string;
@@ -99,7 +99,7 @@ export function addOglTagToCharacterSheet(html: HTMLElement, actor: ActorPF2e): 
     oglTag.title = tooltipText;
 
     oglTag.addEventListener("click", () => {
-        showCharacterOglItemsDialog(actor).catch((err) => logError(`${MODULENAME} | showCharacterOglDialog`, err));
+        fireAndForget(showCharacterOglItemsDialog(actor), "showCharacterOglDialog");
     });
 
     traitsUl.append(oglTag);

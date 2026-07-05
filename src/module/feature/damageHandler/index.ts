@@ -1,12 +1,15 @@
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { MODULENAME } from "../../constants.ts";
 import {
     degreeOfSuccessWithRerollHandling,
+    fireAndForget,
     getActorFromMessage,
+    getModuleSetting,
     isActuallyDamageRoll,
     isFirstGM,
     objectHasKey,
     shouldIHandleThisMessage,
 } from "../../utils.ts";
+import { isAllowedFor } from "../../utils/settings.ts";
 import type { ActorPF2e, CharacterPF2e, DamageRoll, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { ActorFlagsPF2e, ChatContextFlag, ChatMessagePF2e, RollOptionFlags, SpellPF2e } from "foundry-pf2e";
 import { Rolled } from "foundry/client/dice/roll.mts";
@@ -22,10 +25,10 @@ import {
 export async function autoRollDamage(message: ChatMessagePF2e, options: AutoRollDamageOptions = {}): Promise<void> {
     const numberOfMessagesToCheck = 10;
     const settings = {
-        autoRollDamageAllow: String(game.settings.get(MODULENAME, "autoRollDamageAllow")),
-        autoRollDamageForStrike: game.settings.get(MODULENAME, "autoRollDamageForStrike"),
-        autoRollDamageForSpellAttack: game.settings.get(MODULENAME, "autoRollDamageForSpellAttack"),
-        autoRollDamageForSpellWhenNotAnAttack: game.settings.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack"),
+        autoRollDamageAllow: getModuleSetting<string>("autoRollDamageAllow"),
+        autoRollDamageForStrike: getModuleSetting<boolean>("autoRollDamageForStrike"),
+        autoRollDamageForSpellAttack: getModuleSetting<boolean>("autoRollDamageForSpellAttack"),
+        autoRollDamageForSpellWhenNotAnAttack: getModuleSetting<string>("autoRollDamageForSpellWhenNotAnAttack"),
     };
 
     const shouldAutoRollDamage =
@@ -38,8 +41,8 @@ export async function autoRollDamage(message: ChatMessagePF2e, options: AutoRoll
         ? isFirstGM()
         : shouldIHandleThisMessage(
               message,
-              ["all", "players"].includes(settings.autoRollDamageAllow),
-              ["all", "gm"].includes(settings.autoRollDamageAllow),
+              isAllowedFor("autoRollDamageAllow", "player"),
+              isAllowedFor("autoRollDamageAllow", "gm"),
           );
 
     if (shouldAutoRollDamage && shouldHandle) {
@@ -202,7 +205,7 @@ export function persistentDamageHealing(message: ChatMessagePF2e): void {
         dtype = "Healing";
     }
 
-    if (dtype && game.settings.get(MODULENAME, `applyPersistent${dtype}`)) {
+    if (dtype && getModuleSetting<boolean>(`applyPersistent${dtype}`)) {
         const itemOptions = message.item?.getRollOptions("item") ?? [];
         const rollOptions = new Set([...itemOptions, ...message.actor.getSelfRollOptions()]);
         const damage = dtype === "Damage" ? rolls[0] : -rolls.reduce((sum, current) => sum + (current.total ?? 1), 0);
@@ -213,16 +216,17 @@ export function persistentDamageHealing(message: ChatMessagePF2e): void {
             rollOptions,
             skipIWR: dtype === "Healing",
         });
-        if (dtype === "Damage" && game.settings.get(MODULENAME, "applyPersistentDamageRecoveryRoll")) {
+        if (dtype === "Damage" && getModuleSetting<boolean>("applyPersistentDamageRecoveryRoll")) {
             // Use .then() here so the damage taken message is in chat before the recovery roll.  It works without, but the order
             // of the messages will be undetermined.
-            apply
-                .then(() => {
+            fireAndForget(
+                apply.then(() => {
                     if (message.item?.isOfType("condition")) {
                         message.item.rollRecovery();
                     }
-                })
-                .catch((error) => console.error("Error applying persistent healing/damage:", error));
+                }),
+                "damageHandler: persistent recovery roll",
+            );
         }
         // TODO Update the message to remove the recovery roll button, instead include the result in the message (and remove the message the following line creates.)
     }
@@ -381,7 +385,7 @@ async function determineCastRank(
         castRank = await getCastRankFromChat(numberOfMessagesToCheck, originUuid);
     }
     if (castRank === 0) {
-        if (game.settings.get(MODULENAME, "autoRollDamageNotifyOnSpellCardNotFound")) {
+        if (getModuleSetting<boolean>("autoRollDamageNotifyOnSpellCardNotFound")) {
             ui.notifications.info(game.i18n.format(`${MODULENAME}.spellCardNotFound`, { spell: spellName }));
         }
         // Give up and use spell level

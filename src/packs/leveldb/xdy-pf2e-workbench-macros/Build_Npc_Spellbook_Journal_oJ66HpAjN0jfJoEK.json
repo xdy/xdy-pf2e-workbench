@@ -1,31 +1,31 @@
 {
-  "name": "Build Npc Spellbook Journal",
-  "type": "script",
-  "scope": "global",
-  "author": "djBQtIcKM5qubNl2",
-  "img": "icons/skills/trades/academics-book-study-runes.webp",
-  "command": "await game.PF2eWorkbench.buildNpcSpellbookJournal();",
-  "ownership": {
-    "default": 0,
-    "djBQtIcKM5qubNl2": 3
-  },
-  "flags": {
-    "core": {
-      "sourceId": "Macro.vbBk0x74fo4ok513"
-    }
-  },
-  "_stats": {
-    "systemId": "pf2e",
-    "systemVersion": "5.15.0",
-    "coreVersion": "12.329",
-    "createdTime": 1669546904430,
-    "modifiedTime": 1712483370373,
-    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
-    "compendiumSource": "Macro.vbBk0x74fo4ok513",
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "_id": "oJ66HpAjN0jfJoEK",
-  "_key": "!macros!oJ66HpAjN0jfJoEK"
+    "name": "Build Npc Spellbook Journal",
+    "type": "script",
+    "scope": "global",
+    "author": "djBQtIcKM5qubNl2",
+    "img": "icons/skills/trades/academics-book-study-runes.webp",
+    "command": "await game.PF2eWorkbench.buildNpcSpellbookJournal();",
+    "ownership": {
+        "default": 0,
+        "djBQtIcKM5qubNl2": 3
+    },
+    "flags": {
+        "core": {
+            "sourceId": "Macro.vbBk0x74fo4ok513"
+        }
+    },
+    "_stats": {
+        "systemId": "pf2e",
+        "systemVersion": "5.15.0",
+        "coreVersion": "12.329",
+        "createdTime": 1669546904430,
+        "modifiedTime": 1712483370373,
+        "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+        "compendiumSource": "Macro.vbBk0x74fo4ok513",
+        "duplicateSource": null
+    },
+    "folder": null,
+    "sort": 0,
+    "_id": "oJ66HpAjN0jfJoEK",
+    "_key": "!macros!oJ66HpAjN0jfJoEK"
 }

@@ -1,4 +1,4 @@
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { getModuleSetting } from "../../utils.ts";
 import type { PointerPayload, PointerPingPayload, PointerSyncPayload } from "./constants.ts";
 import { DEFAULT_POINTER_COLOR, OP_PING, OP_SYNC, SOCKET_NAME } from "./constants.ts";
 import {
@@ -10,7 +10,6 @@ import {
     updateRemoteElement,
     worldToScreen,
 } from "./network.ts";
-import { logWarn } from "../../utils.ts";
 
 let initialized = false;
 let active = false;
@@ -46,10 +45,6 @@ export function activateCanvasPointer(faIconClass: string): boolean {
     iconClass = faIconClass;
     userColor = game.user?.color?.css ?? DEFAULT_POINTER_COLOR;
 
-    if (userColor === DEFAULT_POINTER_COLOR) {
-        logWarn(`${SOCKET_NAME} | userColor fell back to default — game.user?.color?.css was unavailable`);
-    }
-
     setupLocalOverlay();
     startBroadcast();
 
@@ -79,7 +74,7 @@ export function deactivateCanvasPointer(): boolean {
 
 function startBroadcast(): void {
     sendPosition(iconClass, userColor);
-    const interval = (game.settings.get(MODULENAME, "canvasPointerBroadcastInterval") as number) ?? 10;
+    const interval = getModuleSetting<number>("canvasPointerBroadcastInterval") ?? 10;
     broadcastTimer = setInterval(() => sendPosition(iconClass, userColor), interval);
 }
 
@@ -139,12 +134,12 @@ function onMouseMove(event: MouseEvent): void {
 
 function onMouseDown(_event: MouseEvent): void {
     if (!canvas?.ready) return;
-    const pingMode = game.settings.get(MODULENAME, "canvasPointerPingMode") as string;
+    const pingMode = getModuleSetting<string>("canvasPointerPingMode");
     if (pingMode === "sound" || pingMode === "visualAndSound") {
-        const src = game.settings.get(MODULENAME, "canvasPointerPingSound") as string;
-        const volume = game.settings.get(MODULENAME, "canvasPointerPingVolume") as number;
+        const src = getModuleSetting<string>("canvasPointerPingSound");
+        const volume = getModuleSetting<number>("canvasPointerPingVolume");
         if (src) {
-            game.audio.play(src, { volume });
+            game.audio.play(src, { volume } as Record<string, unknown>);
             sendPing(src, volume);
         }
     }
@@ -157,6 +152,6 @@ function handleRemotePing(payload: PointerPingPayload): void {
     if (!canvas?.ready) return;
     if (payload.userId === game.user?.id) return;
     if (payload.soundSrc) {
-        game.audio.play(payload.soundSrc, { volume: payload.volume });
+        game.audio.play(payload.soundSrc, { volume: payload.volume } as Record<string, unknown>);
     }
 }

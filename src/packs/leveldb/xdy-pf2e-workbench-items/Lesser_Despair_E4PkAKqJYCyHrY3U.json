@@ -1,107 +1,95 @@
 {
-  "name": "Lesser Despair",
-  "type": "action",
-  "effects": [],
-  "system": {
-    "description": {
-      "gm": "",
-      "value": "<p>30 feet. Living creatures of the mummy creature's level or lower are frightened 1 while in its despair aura. They can't naturally recover from this fear while in the area but recover instantly once they leave.</p>"
-    },
-    "rules": [
-      {
-        "key": "Aura",
-        "radius": 30,
-        "effects": [
-          {
-            "uuid": "Item.t8ztwT0lMeUdJn1v",
-            "affects": "enemies"
-          }
-        ],
-        "appearance": {
-          "border": {
-            "alpha": 0.7
-          }
+    "name": "Lesser Despair",
+    "type": "action",
+    "effects": [],
+    "system": {
+        "description": {
+            "gm": "",
+            "value": "<p>30 feet. Living creatures of the mummy creature's level or lower are frightened 1 while in its despair aura. They can't naturally recover from this fear while in the area but recover instantly once they leave.</p>"
         },
-        "traits": [
-          "aura",
-          "mental",
-          "divine",
-          "emotion",
-          "fear"
-        ]
-      }
-    ],
-    "slug": null,
-    "_migration": {
-      "version": 0.932,
-      "lastMigration": null,
-      "previous": {
-        "schema": 0.879,
-        "foundry": "12.329",
-        "system": "6.0.4"
-      }
+        "rules": [
+            {
+                "key": "Aura",
+                "radius": 30,
+                "effects": [
+                    {
+                        "uuid": "Item.t8ztwT0lMeUdJn1v",
+                        "affects": "enemies"
+                    }
+                ],
+                "appearance": {
+                    "border": {
+                        "alpha": 0.7
+                    }
+                },
+                "traits": ["aura", "mental", "divine", "emotion", "fear"]
+            }
+        ],
+        "slug": null,
+        "_migration": {
+            "version": 0.932,
+            "lastMigration": null,
+            "previous": {
+                "schema": 0.879,
+                "foundry": "12.329",
+                "system": "6.0.4"
+            }
+        },
+        "traits": {
+            "otherTags": [],
+            "value": ["aura", "divine", "emotion", "fear", "mental"]
+        },
+        "publication": {
+            "title": "",
+            "authors": "",
+            "license": "OGL",
+            "remaster": false
+        },
+        "actionType": {
+            "value": "passive"
+        },
+        "category": "offensive",
+        "actions": {
+            "value": null
+        },
+        "deathNote": false,
+        "requirements": {
+            "value": ""
+        },
+        "trigger": {
+            "value": ""
+        }
     },
-    "traits": {
-      "otherTags": [],
-      "value": [
-        "aura",
-        "divine",
-        "emotion",
-        "fear",
-        "mental"
-      ]
+    "img": "systems/pf2e/icons/default-icons/action.svg",
+    "folder": "owikMtjfAzsm3tqk",
+    "ownership": {
+        "default": 0,
+        "HShcH53gfTrrSBR1": 3
     },
-    "publication": {
-      "title": "",
-      "authors": "",
-      "license": "OGL",
-      "remaster": false
+    "flags": {
+        "scene-packer": {
+            "hash": "e17070b0f3ad9e6dcf93923b48a7146daad6847b",
+            "sourceId": "Item.7MvZ4caOu1wUS11z"
+        },
+        "core": {},
+        "exportSource": {
+            "world": "pf2e-test",
+            "system": "pf2e",
+            "coreVersion": "11.314",
+            "systemVersion": "5.8.2"
+        }
     },
-    "actionType": {
-      "value": "passive"
+    "_stats": {
+        "systemId": "pf2e",
+        "systemVersion": "6.0.4",
+        "coreVersion": "12.329",
+        "createdTime": 1699187595754,
+        "modifiedTime": 1721420437467,
+        "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+        "compendiumSource": null,
+        "duplicateSource": null
     },
-    "category": "offensive",
-    "actions": {
-      "value": null
-    },
-    "deathNote": false,
-    "requirements": {
-      "value": ""
-    },
-    "trigger": {
-      "value": ""
-    }
-  },
-  "img": "systems/pf2e/icons/default-icons/action.svg",
-  "folder": "owikMtjfAzsm3tqk",
-  "ownership": {
-    "default": 0,
-    "HShcH53gfTrrSBR1": 3
-  },
-  "flags": {
-    "scene-packer": {
-      "hash": "e17070b0f3ad9e6dcf93923b48a7146daad6847b",
-      "sourceId": "Item.7MvZ4caOu1wUS11z"
-    },
-    "core": {},
-    "exportSource": {
-      "world": "pf2e-test",
-      "system": "pf2e",
-      "coreVersion": "11.314",
-      "systemVersion": "5.8.2"
-    }
-  },
-  "_stats": {
-    "systemId": "pf2e",
-    "systemVersion": "6.0.4",
-    "coreVersion": "12.329",
-    "createdTime": 1699187595754,
-    "modifiedTime": 1721420437467,
-    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "_id": "E4PkAKqJYCyHrY3U",
-  "sort": 200000,
-  "_key": "!items!E4PkAKqJYCyHrY3U"
+    "_id": "E4PkAKqJYCyHrY3U",
+    "sort": 200000,
+    "_key": "!items!E4PkAKqJYCyHrY3U"
 }

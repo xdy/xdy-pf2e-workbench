@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import { IDataUpdates, IHandledItemType } from "./NPCScalerTypes.js";
-import { getActor, getFolder, getFolderInFolder } from "./Utilities.js";
-import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil.js";
+import { IDataUpdates, IHandledItemType } from "./NPCScalerTypes.ts";
+import { getActor, getFolder, getFolderInFolder } from "./Utilities.ts";
+import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil.ts";
 import { ItemPF2e, NPCPF2e, NPCSystemData } from "foundry-pf2e";
-import { logDebug } from "../../utils.js";
+import { logDebug } from "../../utils/logging.ts";
 
 /**
  * Scales an NPC to a specified level based on an actor ID.
@@ -34,7 +34,7 @@ export async function scaleNPCToLevelFromActor(actorId: string, newLevel: number
     }
 }
 
-function extractLabel(label) {
+function extractLabel(label: string) {
     const match = label.match(/^(.*?)(?:\s+\d+)?$/);
     return match ? match[1] : label;
 }
@@ -49,11 +49,11 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number): Promise
             name: folderName,
             type: "Actor",
             parent: rootFolder ? rootFolder.id : "",
-        })) as Folder;
+        }) as Folder);
 
     const system: NPCSystemData = <NPCSystemData>actor.system;
     const oldLevel = system.details.level.value;
-    const updateData = {
+    const updateData: Record<string, unknown> = {
         folder: folder.id,
         ["system.details.level.value"]: newLevel,
     };
@@ -182,7 +182,8 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number): Promise
                 ["system.bonus.total"]: newAttack,
             };
 
-            const damage = (item.system as unknown as { damageRolls: unknown }).damageRolls as { damage: string; damageType: string }[] | Record<string, { damage: string; damageType: string }>;
+            const damage = (item.system as unknown as { damageRolls: unknown }).damageRolls as
+                { damage: string; damageType: string }[] | Record<string, { damage: string; damageType: string }>;
 
             if (Array.isArray(damage)) {
                 for (let i = 0; i < damage.length; i++) {

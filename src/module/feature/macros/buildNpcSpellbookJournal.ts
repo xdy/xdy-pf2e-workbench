@@ -1,5 +1,5 @@
 // Originally from Avery (Velara) Avery#9136, modified by me. Included with permission.
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { MODULENAME } from "../../constants.ts";
 
 /**
  * Builds the NPC Spellbook Journal.
@@ -19,7 +19,7 @@ export async function buildNpcSpellbookJournal(): Promise<void> {
         }
     }
 
-    const spellcastingEntries = actor?.spellcasting?.contents?.filter((item) => item.spells);
+    const spellcastingEntries = actor?.spellcasting?.contents?.filter((item: { spells: unknown }) => item.spells);
     const length = spellcastingEntries?.length;
 
     if (!actor || length === 0) {

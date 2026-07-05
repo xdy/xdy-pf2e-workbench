@@ -1,7 +1,8 @@
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { ActorPF2e } from "foundry-pf2e";
+import { MODULENAME } from "../../constants.ts";
 
-async function increaseFocusPoints(actor, value) {
-    const focus = actor.system.resources.focus;
+async function increaseFocusPoints(actor: ActorPF2e, value: number) {
+    const focus = (actor.system as Record<string, any>)["resources"].focus;
     const current = focus.value;
     const result = Math.min(current + value, focus.max);
     await actor.update({ "system.resources.focus.value": result });
@@ -26,7 +27,7 @@ export async function refocus(actors: any = canvas.tokens.controlled.map((token)
             // @ts-expect-error iterable in pf2e, but not typed to allow map
             const feats = actor.feats?.map((x) => x.feats).flat();
             if (
-                feats?.find((i) => {
+                feats?.find((i: any) => {
                     return [
                         "bloodline-focus",
                         "bonded-focus",
@@ -42,7 +43,7 @@ export async function refocus(actors: any = canvas.tokens.controlled.map((token)
                     ].includes(i.feat?.system?.slug);
                 })
             ) {
-                regain = actor.system["resources"].focus.max;
+                regain = (actor.system as Record<string, any>)["resources"].focus.max;
             }
             increaseFocusPoints(actor, regain);
         }

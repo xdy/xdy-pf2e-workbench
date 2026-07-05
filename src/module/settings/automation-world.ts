@@ -1,9 +1,22 @@
-import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
-import { SettingsMenuPF2eWorkbench } from "./menu.js";
+import { updateHooks } from "../xdy-pf2e-workbench.ts";
+import { MODULENAME } from "../constants.ts";
+import { HideListTemplateData, SettingsMenuPF2eWorkbench } from "./menu.ts";
 import { SettingRegistration } from "foundry/client/helpers/client-settings.mts";
 
 export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "automationWorldSettings";
+    static override readonly hidelist: HideListTemplateData = {
+        autoGainDyingAtZeroHP: {
+            type: "select",
+            falsy: "no",
+            list: [
+                "nonLethalIsNotLethal",
+                "autoGainDyingAtZeroHPIfCriticallyHitOneMore",
+                "autoGainDyingIfTakingDamageWhenAlreadyDying",
+                "autoGainDyingIgnoresTargeting",
+            ],
+        },
+    };
 
     public static override get settings(): Record<string, SettingRegistration> {
         return {
@@ -263,17 +276,4 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
             },
         };
     }
-
-    static override readonly hidelist = {
-        autoGainDyingAtZeroHP: {
-            type: "select",
-            falsy: "no",
-            list: [
-                "nonLethalIsNotLethal",
-                "autoGainDyingAtZeroHPIfCriticallyHitOneMore",
-                "autoGainDyingIfTakingDamageWhenAlreadyDying",
-                "autoGainDyingIgnoresTargeting",
-            ],
-        },
-    };
 }

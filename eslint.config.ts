@@ -22,7 +22,7 @@ export default tseslint.config(
             ...ts.configs["recommended"].rules,
             eqeqeq: "error",
             "no-console": "off",
-            "no-plusplus": ["warn", { allowForLoopAfterthoughts: true }],
+            "no-plusplus": "off",
             "no-unused-expressions": ["error", { allowShortCircuit: true }],
             "no-var": "error",
             "spaced-comment": ["error", "always", { markers: ["/"] }],

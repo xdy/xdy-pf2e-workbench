@@ -1,4 +1,5 @@
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { MODULENAME } from "../../constants.ts";
+import { getModuleSetting } from "../../utils.ts";
 import * as systems from "../../utils/systems.ts";
 import { ChatMessagePF2e } from "foundry-pf2e";
 import { autoRollDamage } from "./index.ts";
@@ -103,6 +104,9 @@ function cacheToolbeltTargetHelperData(messageId: string, value: unknown): void 
 }
 
 export function getToolbeltTargetHelperData(message: ChatMessagePF2e): ToolbeltTargetHelperData | null {
+    if (!game.modules.get("pf2e-toolbelt")?.active) {
+        return null;
+    }
     const targetHelper = message.getFlag("pf2e-toolbelt", "targetHelper");
     return targetHelper && typeof targetHelper === "object" ? (targetHelper as ToolbeltTargetHelperData) : null;
 }
@@ -210,7 +214,7 @@ export function shouldRollToolbeltSaveSpellDamage(state: ToolbeltSaveTrackerStat
 }
 
 export function isExperimentalToolbeltSaveIntegrationEnabled(): boolean {
-    return Boolean(game.settings.get(MODULENAME, "experimentalToolbeltSaveIntegration"));
+    return getModuleSetting<boolean>("experimentalToolbeltSaveIntegration");
 }
 
 export function shouldWaitForToolbeltTargetHelper(

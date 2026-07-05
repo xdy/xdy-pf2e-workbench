@@ -1,72 +1,72 @@
 {
-  "img": "systems/pf2e/icons/default-icons/action.svg",
-  "name": "Slink in Shadows",
-  "system": {
-    "description": {
-      "gm": "",
-      "value": "<p>The shadow can @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{Hide} or end its @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{Sneak} in a creature's or object's shadow.</p>"
+    "img": "systems/pf2e/icons/default-icons/action.svg",
+    "name": "Slink in Shadows",
+    "system": {
+        "description": {
+            "gm": "",
+            "value": "<p>The shadow can @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{Hide} or end its @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{Sneak} in a creature's or object's shadow.</p>"
+        },
+        "rules": [],
+        "slug": null,
+        "_migration": {
+            "version": 0.932,
+            "lastMigration": null,
+            "previous": {
+                "schema": 0.879,
+                "foundry": "12.329",
+                "system": "6.0.4"
+            }
+        },
+        "traits": {
+            "otherTags": [],
+            "value": [],
+            "rarity": "common"
+        },
+        "publication": {
+            "title": "",
+            "authors": "",
+            "license": "ORC",
+            "remaster": true
+        },
+        "actionType": {
+            "value": "passive"
+        },
+        "category": "offensive",
+        "actions": {
+            "value": null
+        },
+        "deathNote": false,
+        "requirements": {
+            "value": ""
+        },
+        "trigger": {
+            "value": ""
+        },
+        "weapon": {
+            "value": ""
+        }
     },
-    "rules": [],
-    "slug": null,
-    "_migration": {
-      "version": 0.932,
-      "lastMigration": null,
-      "previous": {
-        "schema": 0.879,
-        "foundry": "12.329",
-        "system": "6.0.4"
-      }
+    "type": "action",
+    "effects": [],
+    "folder": "owikMtjfAzsm3tqk",
+    "ownership": {
+        "default": 0,
+        "HShcH53gfTrrSBR1": 3
     },
-    "traits": {
-      "otherTags": [],
-      "value": [],
-      "rarity": "common"
+    "flags": {
+        "core": {}
     },
-    "publication": {
-      "title": "",
-      "authors": "",
-      "license": "ORC",
-      "remaster": true
+    "_stats": {
+        "systemId": "pf2e",
+        "systemVersion": "6.0.4",
+        "coreVersion": "12.329",
+        "createdTime": 1699192759148,
+        "modifiedTime": 1721420439274,
+        "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+        "compendiumSource": null,
+        "duplicateSource": null
     },
-    "actionType": {
-      "value": "passive"
-    },
-    "category": "offensive",
-    "actions": {
-      "value": null
-    },
-    "deathNote": false,
-    "requirements": {
-      "value": ""
-    },
-    "trigger": {
-      "value": ""
-    },
-    "weapon": {
-      "value": ""
-    }
-  },
-  "type": "action",
-  "effects": [],
-  "folder": "owikMtjfAzsm3tqk",
-  "ownership": {
-    "default": 0,
-    "HShcH53gfTrrSBR1": 3
-  },
-  "flags": {
-    "core": {}
-  },
-  "_stats": {
-    "systemId": "pf2e",
-    "systemVersion": "6.0.4",
-    "coreVersion": "12.329",
-    "createdTime": 1699192759148,
-    "modifiedTime": 1721420439274,
-    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "_id": "jsMqvMOtWuaUdDBb",
-  "sort": 150000,
-  "_key": "!items!jsMqvMOtWuaUdDBb"
+    "_id": "jsMqvMOtWuaUdDBb",
+    "sort": 150000,
+    "_key": "!items!jsMqvMOtWuaUdDBb"
 }

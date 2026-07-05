@@ -1,5 +1,5 @@
 import { SpellPF2e } from "foundry-pf2e";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { MODULENAME } from "../../constants.ts";
 
 const I18N_RECALL_KNOWLEDGE = "PF2E.RecallKnowledge.Label";
 const I18N_TRAIT_PREFIX = "PF2E.Trait";
@@ -23,7 +23,7 @@ export function buildSpellMessage(
     traitsBlocklist: string,
 ): string {
     if (!originSpell) {
-        return game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.secondPartNoRK`);
+        return game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.secondPartNoRk`);
     }
 
     let content = buildSpellHeader(tokenName, type, tradition, spellUuid);

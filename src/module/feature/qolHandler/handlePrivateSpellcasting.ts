@@ -1,7 +1,8 @@
-import { ChatMessagePF2e, SpellPF2e } from "foundry-pf2e";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import * as systems from "../../utils/systems.js";
-import { buildSpellMessage } from "./buildPublicSpellMessage.js";
+import { ChatMessagePF2e, ItemPF2e, SpellPF2e } from "foundry-pf2e";
+import { MODULENAME } from "../../constants.ts";
+import * as systems from "../../utils/systems.ts";
+import { buildSpellMessage } from "./buildPublicSpellMessage.ts";
+import { getModuleSetting } from "../../utils.ts";
 
 const I18N_PREFIX = `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage`;
 
@@ -43,7 +44,6 @@ export async function handlePrivateSpellcasting(
         const gmId = game.users.activeGM?.id;
         const whisper = settings.showToGM ? [] : game.users.filter((u) => u.active && u.id !== gmId).map((u) => u.id);
 
-        // @ts-expect-error TODO Fix typing
         await ChatMessage.create({
             author: game.userId,
             content,
@@ -55,33 +55,25 @@ export async function handlePrivateSpellcasting(
 
 function readSpellcastingSettings(): SpellcastingSettings {
     return {
-        autoRevealIfKnown: Boolean(game.settings.get(MODULENAME, "castPrivateSpellAutoRevealIfKnown")),
-        autoRevealMembers: Boolean(
-            game.settings.get(MODULENAME, "castPrivateSpellAutoRevealPartyMembersThatKnowSpell"),
-        ),
-        autoRevealOverrideGMRoll: Boolean(
-            game.settings.get(MODULENAME, "castPrivateSpellAutoRevealOverrideGMRollMode"),
-        ),
-        publicMessage: Boolean(game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessage")),
-        showToGM: Boolean(game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessageShowToGM")),
-        showTraits: Boolean(game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessageShowTraits")),
-        traitsBlocklist: String(
-            game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessageTraitsBlocklist") ?? "",
-        ),
+        autoRevealIfKnown: getModuleSetting<boolean>("castPrivateSpellAutoRevealIfKnown"),
+        autoRevealMembers: getModuleSetting<boolean>("castPrivateSpellAutoRevealPartyMembersThatKnowSpell"),
+        autoRevealOverrideGMRoll: getModuleSetting<boolean>("castPrivateSpellAutoRevealOverrideGMRollMode"),
+        publicMessage: getModuleSetting<boolean>("castPrivateSpellWithPublicMessage"),
+        showToGM: getModuleSetting<boolean>("castPrivateSpellWithPublicMessageShowToGM"),
+        showTraits: getModuleSetting<boolean>("castPrivateSpellWithPublicMessageShowTraits"),
+        traitsBlocklist: getModuleSetting<string>("castPrivateSpellWithPublicMessageTraitsBlocklist") ?? "",
     };
 }
 
 function findPartyMembersWithSpell(originSpell: SpellPF2e | null): string[] | undefined {
     if (!originSpell) return undefined;
     return game.actors?.party?.members
-        ?.filter((actor) => actor?.items?.some((item) => actorKnowsSpell(item, originSpell)))
+        ?.filter((actor) => actor?.items?.some((item: ItemPF2e) => actorKnowsSpell(item, originSpell)))
         .map((actor) => actor?.name);
 }
 
-function actorKnowsSpell(item: foundry.abstract.Document, originSpell: SpellPF2e): boolean {
-    // @ts-expect-error TODO Fix typing
+function actorKnowsSpell(item: ItemPF2e, originSpell: SpellPF2e): boolean {
     if (item.slug !== originSpell.slug) return false;
-    // @ts-expect-error TODO Fix typing
     if (!item.isOfType("spell")) return false;
 
     const spell = item as unknown as SpellPF2e;
@@ -137,7 +129,7 @@ async function buildMessageData(
     spellUuid: string,
     data: Record<string, unknown>,
     settings: SpellcastingSettings,
-): Promise<{ content: string; flags: Record<string, unknown> }> {
+): Promise<{ content: string; flags: Record<string, Record<string, unknown>> }> {
     const anonymous = game.i18n.localize(`${I18N_PREFIX}.they`);
     const tokenName = game.pf2e.settings.tokens.nameVisibility
         ? anonymous
@@ -165,7 +157,7 @@ async function buildMessageData(
     return { content, flags };
 }
 
-function buildPrivateSpellFlags(message: ChatMessagePF2e): Record<string, unknown> {
+function buildPrivateSpellFlags(message: ChatMessagePF2e): Record<string, Record<string, unknown>> {
     return {
         "xdy-pf2e-workbench": {
             privateSpell: {

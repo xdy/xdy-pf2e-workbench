@@ -1,98 +1,98 @@
 {
-  "_id": "YcyN7BDbL0Nt3CFN",
-  "name": "Aura: Bane",
-  "type": "effect",
-  "img": "systems/pf2e/icons/spells/bane.webp",
-  "effects": [],
-  "folder": "EAnrqTQqTri4NwlI",
-  "sort": 200000,
-  "flags": {
-    "core": {
-      "sourceId": "Item.QRgj7jrEnit1ROJw"
+    "_id": "YcyN7BDbL0Nt3CFN",
+    "name": "Aura: Bane",
+    "type": "effect",
+    "img": "systems/pf2e/icons/spells/bane.webp",
+    "effects": [],
+    "folder": "EAnrqTQqTri4NwlI",
+    "sort": 200000,
+    "flags": {
+        "core": {
+            "sourceId": "Item.QRgj7jrEnit1ROJw"
+        },
+        "exportSource": {
+            "world": "_pf2beginners",
+            "system": "pf2e",
+            "coreVersion": "9.269",
+            "systemVersion": "3.13.1"
+        }
     },
-    "exportSource": {
-      "world": "_pf2beginners",
-      "system": "pf2e",
-      "coreVersion": "9.269",
-      "systemVersion": "3.13.1"
-    }
-  },
-  "system": {
-    "description": {
-      "gm": "",
-      "value": "<p>A 'good enough' aura for @Compendium[pf2e.spells-srd.7ZinJNzxq0XF0oMx]{Bane} (technically not an aura, but, meh...)</p>\n<p>This effect has an aura of 10 feet, if you increase the size, you'll need to edit the rule manually.</p>"
-    },
-    "rules": [
-      {
-        "effects": [
-          {
-            "uuid": "Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso",
-            "affects": "enemies"
-          }
+    "system": {
+        "description": {
+            "gm": "",
+            "value": "<p>A 'good enough' aura for @Compendium[pf2e.spells-srd.7ZinJNzxq0XF0oMx]{Bane} (technically not an aura, but, meh...)</p>\n<p>This effect has an aura of 10 feet, if you increase the size, you'll need to edit the rule manually.</p>"
+        },
+        "rules": [
+            {
+                "effects": [
+                    {
+                        "uuid": "Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso",
+                        "affects": "enemies"
+                    }
+                ],
+                "key": "Aura",
+                "radius": "@item.badge.value*10",
+                "slug": "aura-effect-bane"
+            }
         ],
-        "key": "Aura",
-        "radius": "@item.badge.value*10",
-        "slug": "aura-effect-bane"
-      }
-    ],
-    "slug": null,
-    "_migration": {
-      "version": 0.932,
-      "lastMigration": null,
-      "previous": {
-        "schema": 0.878,
-        "foundry": "12.329",
-        "system": "6.0.4"
-      }
+        "slug": null,
+        "_migration": {
+            "version": 0.932,
+            "lastMigration": null,
+            "previous": {
+                "schema": 0.878,
+                "foundry": "12.329",
+                "system": "6.0.4"
+            }
+        },
+        "traits": {
+            "otherTags": [],
+            "value": [],
+            "rarity": "common"
+        },
+        "publication": {
+            "title": "",
+            "authors": "",
+            "license": "ORC",
+            "remaster": true
+        },
+        "level": {
+            "value": 1
+        },
+        "duration": {
+            "value": 1,
+            "unit": "minutes",
+            "expiry": "turn-start",
+            "sustained": false
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": {
+            "type": "counter",
+            "value": 1
+        },
+        "context": null,
+        "target": null,
+        "unidentified": false
     },
-    "traits": {
-      "otherTags": [],
-      "value": [],
-      "rarity": "common"
+    "ownership": {
+        "default": 0,
+        "T3daHvrK0qISk4mb": 3
     },
-    "publication": {
-      "title": "",
-      "authors": "",
-      "license": "ORC",
-      "remaster": true
+    "_stats": {
+        "systemId": "pf2e",
+        "systemVersion": "6.0.4",
+        "coreVersion": "12.329",
+        "createdTime": 1665671947294,
+        "modifiedTime": 1721420377449,
+        "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+        "compendiumSource": "Item.QRgj7jrEnit1ROJw",
+        "duplicateSource": null
     },
-    "level": {
-      "value": 1
-    },
-    "duration": {
-      "value": 1,
-      "unit": "minutes",
-      "expiry": "turn-start",
-      "sustained": false
-    },
-    "start": {
-      "value": 0,
-      "initiative": null
-    },
-    "tokenIcon": {
-      "show": true
-    },
-    "badge": {
-      "type": "counter",
-      "value": 1
-    },
-    "context": null,
-    "target": null,
-    "unidentified": false
-  },
-  "ownership": {
-    "default": 0,
-    "T3daHvrK0qISk4mb": 3
-  },
-  "_stats": {
-    "systemId": "pf2e",
-    "systemVersion": "6.0.4",
-    "coreVersion": "12.329",
-    "createdTime": 1665671947294,
-    "modifiedTime": 1721420377449,
-    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
-    "compendiumSource": "Item.QRgj7jrEnit1ROJw",
-    "duplicateSource": null
-  },
-  "_key": "!items!YcyN7BDbL0Nt3CFN"
+    "_key": "!items!YcyN7BDbL0Nt3CFN"
 }

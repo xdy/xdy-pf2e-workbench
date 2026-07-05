@@ -79,4 +79,3 @@ export function getModulePackId(packBaseName: string, moduleId = "xdy-pf2e-workb
     const systemSpecificName = getPackName(packBaseName);
     return `${moduleId}.${systemSpecificName}`;
 }
-

@@ -1,5 +1,5 @@
 import { ChatMessagePF2e } from "foundry-pf2e";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { MODULENAME } from "../../constants.ts";
 import * as systems from "../../utils/systems.ts";
 
 export async function hideSpellNameInDamageroll(message: ChatMessagePF2e, html: HTMLElement): Promise<void> {

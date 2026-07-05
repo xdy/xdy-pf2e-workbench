@@ -4,8 +4,16 @@
 // * Timeout, recalc timeout, ignore on the first, random on the second
 
 import type { ActorPF2e } from "foundry-pf2e";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { handleAsync, heroes, logDebug, pushNotification } from "../../utils.js";
+import { MODULENAME } from "../../constants.ts";
+import {
+    fireAndForget,
+    getModuleFlag,
+    getModuleSetting,
+    getModuleSettingAsNumber,
+    heroes,
+    pushNotification,
+} from "../../utils.ts";
+import { logDebug } from "../../utils/logging.ts";
 
 export enum HPHState {
     Start,
@@ -62,7 +70,7 @@ async function stopTimer(): Promise<void> {
 }
 
 export async function startTimer(remainingMinutes: number): Promise<void> {
-    const oldTimeout = <NodeJS.Timeout>game.user?.getFlag(MODULENAME, "heroPointHandler.timeout");
+    const oldTimeout = getModuleFlag<NodeJS.Timeout>(game.user, "heroPointHandler.timeout");
     if (oldTimeout) {
         clearTimeout(oldTimeout);
     }
@@ -112,6 +120,36 @@ export function createRemainingTimeMessage(remainingMinutes: number): void {
     sendMessage(message, [game.user.id]);
 }
 
+function buildDialogButtons() {
+    return [
+        {
+            action: "timer",
+            label: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.submitShortLabel`),
+            default: true,
+            callback: async (_event: PointerEvent | SubmitEvent, button: HTMLButtonElement, _dialog: unknown) => {
+                const response = handleDialogResponse(button.form ?? button.closest("form"));
+                return {
+                    button: "timer",
+                    remainingMinutes: response.remainingMinutes,
+                    reason: response.reason,
+                };
+            },
+        },
+        {
+            action: "noTimer",
+            label: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.stopShortLabel`),
+            callback: async (_event: PointerEvent | SubmitEvent, button: HTMLButtonElement, _dialog: unknown) => {
+                handleDialogResponse(button.form ?? button.closest("form"));
+                return {
+                    button: "noTimer",
+                    remainingMinutes: 0,
+                    reason: "",
+                };
+            },
+        },
+    ];
+}
+
 export async function heroPointHandler(state: HPHState): Promise<void> {
     if (isHeroPointHandlerDialogOpen) {
         return;
@@ -123,17 +161,13 @@ export async function heroPointHandler(state: HPHState): Promise<void> {
         let remainingMinutes: number;
         switch (state) {
             case HPHState.Start:
-                remainingMinutes = Number.parseInt(
-                    String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")),
-                );
+                remainingMinutes = getModuleSettingAsNumber("heroPointHandlerDefaultTimeoutMinutes");
                 break;
             case HPHState.Check:
                 remainingMinutes = calcRemainingMinutes(true);
                 break;
             case HPHState.Timeout:
-                remainingMinutes = Number.parseInt(
-                    String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")),
-                );
+                remainingMinutes = getModuleSettingAsNumber("heroPointHandlerDefaultTimeoutMinutes");
                 break;
         }
 
@@ -196,33 +230,7 @@ export async function heroPointHandler(state: HPHState): Promise<void> {
                 icon: "fa-solid fa-hourglass",
             },
             content,
-            buttons: [
-                {
-                    action: "timer",
-                    label: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.submitShortLabel`),
-                    default: true,
-                    callback: async (_event, button, _dialog) => {
-                        const response = handleDialogResponse(button.form ?? button.closest("form"));
-                        return {
-                            button: "timer",
-                            remainingMinutes: response.remainingMinutes,
-                            reason: response.reason,
-                        };
-                    },
-                },
-                {
-                    action: "noTimer",
-                    label: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.stopShortLabel`),
-                    callback: async (_event, button, _dialog) => {
-                        handleDialogResponse(button.form ?? button.closest("form"));
-                        return {
-                            button: "noTimer",
-                            remainingMinutes: 0,
-                            reason: "",
-                        };
-                    },
-                },
-            ],
+            buttons: buildDialogButtons(),
             close: () => {
                 Hooks.off("renderDialogV2", renderHookId);
             },
@@ -263,8 +271,7 @@ async function randomPartymemberThatHasNotReceivedAHeropoint(actors: ActorPF2e[]
         return -1;
     }
 
-    const existingFlagValue =
-        <string | null | undefined>game.actors?.party?.getFlag(MODULENAME, PARTY_MEMBERS_FLAG_KEY) ?? "";
+    const existingFlagValue = getModuleFlag<string>(game.actors?.party, PARTY_MEMBERS_FLAG_KEY, "");
     logDebug("Hero point handler existing party flag value", existingFlagValue);
     const hasReceivedHP: Set<string> = existingFlagValue ? new Set(existingFlagValue.split(",")) : new Set();
     const noHPYet = actors.filter((actor) => !hasReceivedHP.has(actor.id));
@@ -289,7 +296,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
             break;
         case HPHState.Timeout: {
             let selectedActor = -1;
-            switch (game.settings.get(MODULENAME, "heropointHandlerRandomization")) {
+            switch (getModuleSetting<string>("heropointHandlerRandomization")) {
                 case "none":
                     break;
                 case "random":
@@ -307,7 +314,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
             break;
     }
 
-    const maxMinutes = Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")));
+    const maxMinutes = getModuleSettingAsNumber("heroPointHandlerDefaultTimeoutMinutes");
     const templateData: HeroPointHandlerTemplateData = {
         instructions: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.instructions`),
         doWhat: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.doWhat`),
@@ -346,16 +353,10 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
 }
 
 export function calcRemainingMinutes(useDefault: boolean): number {
-    const savedTime: number = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.startTime");
-    const savedMinutes = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes");
-    const remainingMinutes: number = Math.clamp(
-        savedMinutes ??
-            (useDefault
-                ? Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))
-                : 0),
-        0,
-        Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))),
-    );
+    const savedTime = getModuleFlag<number>(game.user, "heroPointHandler.startTime");
+    const savedMinutes = getModuleFlag<number>(game.user, "heroPointHandler.remainingMinutes");
+    const defaultMinutes = getModuleSettingAsNumber("heroPointHandlerDefaultTimeoutMinutes");
+    const remainingMinutes = Math.clamp(savedMinutes ?? (useDefault ? defaultMinutes : 0), 0, defaultMinutes);
     const passedMillis = game.time.serverTime - (savedTime ?? game.time.serverTime);
     return remainingMinutes - Math.floor(passedMillis / ONE_MINUTE_IN_MS);
 }
@@ -424,8 +425,8 @@ function addOneToSelectedCharactersIfAny(actorIds: string[], reason: string = ""
                     message += ` (${reason})`;
                 }
                 sendMessage(message);
-                if (game.settings.get(MODULENAME, "heropointHandlerNotification")) {
-                    pushNotification(message);
+                if (getModuleSetting<boolean>("heropointHandlerNotification")) {
+                    pushNotification("info", message);
                 }
             }
         });
@@ -433,8 +434,8 @@ function addOneToSelectedCharactersIfAny(actorIds: string[], reason: string = ""
 }
 
 function sendMessage(message: string, whisper: string[] | undefined = undefined) {
-    if (game.settings.get(MODULENAME, "heropointHandlerNotificationChat")) {
-        handleAsync(ChatMessage.create({ flavor: message, whisper }, {}), "heroPointHandler ChatMessage");
+    if (getModuleSetting<boolean>("heropointHandlerNotificationChat")) {
+        fireAndForget(ChatMessage.create({ flavor: message, whisper }), "heropointhandler#sendMessage");
     } else {
         ui.notifications.info(message);
     }
@@ -458,7 +459,7 @@ function handleDialogResponse(element: ParentNode | null): { remainingMinutes: n
     const actorIds: string[] = Array.from(actorIdEls).map((el) => el.value);
 
     const remainingMinutesEl = element.querySelector<HTMLInputElement>('input[name="timerText"]');
-    const maxMinutes = Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")));
+    const maxMinutes = getModuleSettingAsNumber("heroPointHandlerDefaultTimeoutMinutes");
     const remainingMinutes = Math.clamp(
         remainingMinutesEl ? Number.parseInt(remainingMinutesEl.value) || 0 : 0,
         0,

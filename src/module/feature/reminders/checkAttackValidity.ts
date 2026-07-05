@@ -1,10 +1,10 @@
-import { ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { shouldIHandleThis } from "../../utils.js";
+import { ActorPF2e, ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
+import { MODULENAME } from "../../constants.ts";
+import { getModuleSetting, shouldIHandleThis } from "../../utils.ts";
 import * as systems from "../../utils/systems.ts";
 
-function ignoreDeadEidolon(actor) {
-    return actor?.traits.has("eidolon") && game.settings.get(MODULENAME, "reminderCannotAttackIgnoreDeadEidolon");
+function ignoreDeadEidolon(actor: ActorPF2e) {
+    return actor?.traits.has("eidolon") && getModuleSetting<boolean>("reminderCannotAttackIgnoreDeadEidolon");
 }
 
 export function checkAttackValidity(message: ChatMessagePF2e, cancelAttack: boolean): boolean {
@@ -43,7 +43,7 @@ function shouldBeChecked(message: ChatMessagePF2e): boolean {
         message.flags &&
         message.author &&
         ["spell-attack-roll", "attack-roll", "skill-check"].includes(flag) &&
-        traits?.some((t) => t === "attack")
+        traits?.some((t: string) => t === "attack")
     );
 }
 

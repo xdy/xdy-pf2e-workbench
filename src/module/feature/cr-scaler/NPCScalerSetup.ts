@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { scaleNPCToLevel } from "./NPCScaler.js";
+import { scaleNPCToLevel } from "./NPCScaler.ts";
 import { ActorDirectoryPF2e } from "foundry-pf2e";
 import { ContextMenuEntry } from "foundry/client/applications/ux/context-menu.mts";
+import type DialogV2 from "foundry/client/applications/api/dialog.mjs";
 
 function condition(li: HTMLElement): boolean {
     return li.dataset.entryId !== undefined && (game.actors.get(li.dataset.entryId)?.isOfType("npc") ?? false);
@@ -40,11 +41,7 @@ function callback(li: HTMLElement) {
                 default: true,
                 icon: '<i class="fa-solid fa-level-up-alt"></i>',
                 label: "Scale",
-                callback: async (
-                    _event: PointerEvent | SubmitEvent,
-                    button: HTMLButtonElement,
-                    _dialog: HTMLDialogElement,
-                ) => {
+                callback: async (_event: PointerEvent | SubmitEvent, button: HTMLButtonElement, _dialog: DialogV2) => {
                     ui.notifications.info(`Scaling NPC... please wait.`);
                     const elements = button.form?.elements as HTMLFormControlsCollection & {
                         startLevel: HTMLInputElement;
@@ -72,4 +69,3 @@ export function onScaleNPCContextHook(_actors: ActorDirectoryPF2e, menuItems: Co
         callback,
     });
 }
-

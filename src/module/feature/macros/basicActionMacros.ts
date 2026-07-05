@@ -2,7 +2,7 @@
 // noinspection CssUnresolvedCustomProperty,CssUnknownTarget
 
 import * as R from "remeda";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { MODULENAME } from "../../constants.ts";
 import type { MacroPF2e, SkillSlug } from "foundry-pf2e";
 import {
     AbilityTrait,
@@ -15,6 +15,7 @@ import {
 } from "foundry-pf2e";
 import { followTheExpert } from "./follow-the-expert.ts";
 import * as systems from "../../utils/systems.ts";
+import { actorHasItemBySlug, getModuleSetting } from "../../utils.ts";
 
 type DialogV2 = foundry.applications.api.DialogV2;
 
@@ -50,7 +51,7 @@ function getBestBonuses(
     for (const actorId of party) {
         const skills = actorSkills.get(actorId);
         for (const action of actionList) {
-            const skill = skills?.[action.skill];
+            const skill = skills?.[action.skill as StatisticSlug];
             if (!skill) continue;
             const bonus = skill.check?.mod ?? skill.mod;
             if (bonus > (action.best ?? -1)) {
@@ -91,11 +92,11 @@ function createButtonData(
     party: string[],
     actorSkills: Partial<Record<StatisticSlug, Statistic>>,
 ): ButtonData {
-    const skill: Statistic | undefined = actorSkills[action.skill];
+    const skill: Statistic | undefined = actorSkills[action.skill as StatisticSlug];
     const rank: number = skill?.rank ?? (skill?.proficient ? 1 : 0);
     const bonus = action.bonus ?? skill?.mod;
     const best =
-        !!game.settings.get(MODULENAME, "basicActionMacroShowBestBonus") &&
+        getModuleSetting<boolean>("basicActionMacroShowBestBonus") &&
         party.includes(actor.id) &&
         (bonus ?? -100) >= (action.best ?? 0);
     return { best, idx, action, rank, bonus };
@@ -140,9 +141,8 @@ type MacroAction = {
  * @return {MacroAction[]} The filtered list of actions to use.
  */
 function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): MacroAction[] {
-    const showUnusable = game.settings.get(MODULENAME, "bamShowUnusable");
-    const hasFeat = (slug: string) => selectedActor.itemTypes.feat.some((feat) => feat.slug === slug);
-    const cleverImproviser = hasFeat("clever-improviser");
+    const showUnusable = getModuleSetting<boolean>("bamShowUnusable");
+    const cleverImproviser = actorHasItemBySlug(selectedActor, "clever-improviser");
     const getSkill = (skill: StatisticSlug): Statistic | undefined =>
         skill === "perception" ? selectedActor.perception : selectedActor.skills?.[skill];
     const proficient = (skill: StatisticSlug | ""): boolean =>
@@ -150,10 +150,12 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
 
     const actionsToUse = bamActions.filter((x) => {
         if (x.module && !game.modules.get(x.module)?.active) return false;
-        if (x.feat && !hasFeat(x.feat)) return false;
+        if (x.feat && !actorHasItemBySlug(selectedActor, x.feat)) return false;
 
         // Has the skill, or an alt skill if any
-        const hasSkill = proficient(x.skill) || x.altSkillAndFeat?.some((y) => proficient(y.skill) && hasFeat(y.feat));
+        const hasSkill =
+            proficient(x.skill) ||
+            x.altSkillAndFeat?.some((y) => proficient(y.skill) && actorHasItemBySlug(selectedActor, y.feat));
 
         return (
             x.actionType !== "skill_trained" ||
@@ -198,13 +200,9 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
 // Class to wrap a macro into an object that supports the ActionVariant
 // interface, which is what most of the system actions use.
 class MacroActionVariant implements ActionVariant {
-    traits: AbilityTrait[] = [];
-    #macro: string;
-    #compendium: string;
-
-    get slug() {
-        return this.#macro.slugify();
-    }
+    readonly traits: AbilityTrait[] = [];
+    readonly #macro: string;
+    readonly #compendium: string;
 
     constructor(macro: string, compendiumId: string) {
         this.#macro = macro;
@@ -214,6 +212,10 @@ class MacroActionVariant implements ActionVariant {
         } else {
             this.#compendium = compendiumId;
         }
+    }
+
+    get slug() {
+        return this.#macro.slugify();
     }
 
     async use(options: ActionUseOptions): Promise<undefined> {
@@ -283,7 +285,8 @@ export async function basicActionMacros(): Promise<void> {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidPF2eMacros`),
             skill: "",
-            action: (options) => game["activemacros"].aid(options.actors?.[0]),
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            action: (options: { actors: ActorPF2e[] }) => (game as any)["activemacros"].aid(options.actors?.[0]),
             module: "pf2e-macros",
             icon: `systems/${game.system.id}/icons/spells/efficient-apport.webp`,
         },
@@ -766,7 +769,7 @@ export async function basicActionMacros(): Promise<void> {
     //     30 + ~~(((30 * actionsToUse.filter((x) => !x.showMAP).length + 1) +
     //             (64 * actionsToUse.filter((x) => x.showMAP).length + 1)) / columns
     //     );
-    const tabView = game.settings.get(MODULENAME, "bamTabview");
+    const tabView = getModuleSetting<string>("bamTabview");
 
     const selectedActorSkills = allActorsSkills.get(selectedActor.id) ?? {};
     const data = actionsToUse.map((action, idx) =>
@@ -822,17 +825,53 @@ export async function basicActionMacros(): Promise<void> {
             },
         };
 
-        override async _prepareContext(options) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        static async handler(event: PointerEvent, _form: HTMLFormElement, _formData: any) {
+            const ev = (event as PointerEvent & { submitter?: HTMLElement | null }).submitter;
+            if (ev && ev.dataset.action === "cancel") {
+                const app = foundry.applications.instances.get("xdy-pf2e-workbench-BAM-app");
+                app?.close();
+            }
+        }
+
+        static async use(event: PointerEvent, button: HTMLElement) {
+            const idx = Number(button.dataset.action);
+            if (isNaN(idx)) return;
+            const action = actionsToUse[idx];
+            const current = action.action;
+            if (typeof current === "object") {
+                // TODO Handle other variants than map
+                const mapValue = -(Number.parseInt(button.dataset.map ?? "0") / 5);
+                await current.use({
+                    event,
+                    actors: [selectedActor],
+                    multipleAttackPenalty: mapValue,
+                    ...action.options,
+                });
+            } else if (current) {
+                await current({
+                    event,
+                    actors: [selectedActor],
+                    skill: action.skill,
+                });
+            }
+        }
+
+        override async _prepareContext(options?: object): Promise<object> {
+            // @ts-expect-error TODO fix
             const context = await super._prepareContext(options);
             foundry.utils.mergeObject(context, filteredData);
             return context;
         }
 
-        override async _preparePartContext(partId, context, options) {
+        // noinspection JSUnusedGlobalSymbols
+        override async _preparePartContext(partId: string, context: object, options?: object): Promise<object> {
+            // @ts-expect-error TODO fix
             context = await super._preparePartContext(partId, context, options);
             switch (partId) {
                 case "footer":
-                    context.buttons = [
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    (context as any).buttons = [
                         {
                             type: "cancel",
                             action: "cancel",
@@ -842,42 +881,13 @@ export async function basicActionMacros(): Promise<void> {
                     ];
                     break;
                 case "index":
-                    context.tabs = this._prepareTabs("primary");
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    (context as any).tabs = this._prepareTabs("primary");
                     break;
                 default:
                     break;
             }
             return context;
-        }
-
-        static async handler(event, _form, _formData) {
-            const ev = event.submitter;
-            if (ev.dataset.action === "cancel") {
-                const app = foundry.applications.instances.get("xdy-pf2e-workbench-BAM-app");
-                app?.close();
-            }
-        }
-
-        static use(event, button) {
-            const idx = button.dataset.action;
-            const action = actionsToUse[idx];
-            const current = action.action;
-            if (typeof current === "object") {
-                // TODO Handle other variants than map
-                const mapValue = -(Number.parseInt(button.dataset.map ?? "0") / 5);
-                current.use({
-                    event,
-                    actors: [selectedActor],
-                    multipleAttackPenalty: mapValue,
-                    ...action.options,
-                });
-            } else if (current) {
-                current({
-                    event,
-                    actors: [selectedActor],
-                    skill: action.skill,
-                });
-            }
         }
     }
 

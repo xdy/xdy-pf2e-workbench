@@ -1,15 +1,14 @@
-import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
-import { WorkbenchNpcMystificationSettings } from "./npc-mystification.js";
-import { WorkbenchItemMystificationSettings } from "./item-mystification.js";
-import { WorkbenchRemindersSettings } from "./reminders.js";
-import { WorkbenchWorldAutomationSettings } from "./automation-world.js";
-import { WorkbenchClientAutomationSettings } from "./automation-client.js";
-import { WorkbenchQolWorldSettings } from "./qol-world.js";
-import { logInfo } from "../utils.js";
-import { WorkbenchHouseRulesSettings } from "./houseRules.js";
-import { WorkbenchCanvasFeaturesSettings } from "./canvas-features.js";
-
-export { mystifyModifierKey, mystifyRandomPropertyType } from "./npc-mystification.js";
+import { updateHooks } from "../xdy-pf2e-workbench.ts";
+import { MODULENAME } from "../constants.ts";
+import { WorkbenchNpcMystificationSettings } from "./npc-mystification.ts";
+import { WorkbenchItemMystificationSettings } from "./item-mystification.ts";
+import { WorkbenchRemindersSettings } from "./reminders.ts";
+import { WorkbenchWorldAutomationSettings } from "./automation-world.ts";
+import { WorkbenchClientAutomationSettings } from "./automation-client.ts";
+import { WorkbenchQolWorldSettings } from "./qol-world.ts";
+import { logInfo } from "../utils/logging.ts";
+import { WorkbenchHouseRulesSettings } from "./houseRules.ts";
+import { WorkbenchCanvasFeaturesSettings } from "./canvas-features.ts";
 
 function collapseChoices(settingKey: string): Record<string, string> {
     return {

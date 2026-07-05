@@ -14,7 +14,7 @@ import type {
     RuleElementSource,
 } from "foundry-pf2e";
 import { ItemUUID } from "foundry/common/documents/_module.mts";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { MODULENAME } from "../../constants.ts";
 import * as systems from "../../utils/systems.ts";
 
 // IDK why choices isn't in ChoiceSetSource
@@ -59,6 +59,42 @@ class FollowTheExpertAction implements Action {
         this.traits = ["exploration"];
         this.variants = new Collection();
         this.effect = "Compendium.pf2e.other-effects.VCSpuc3Tf3XWMkd3" as ItemUUID; // Effect: Follow The Expert
+    }
+
+    async use(_options?: Partial<ActionUseOptions>): Promise<unknown> {
+        const source = (await fromUuid(this.effect)) as EffectPF2e | null;
+        if (!source) throw new Error(`Effect ${this.effect} not found!`);
+        const effect = source.toObject();
+        (effect.flags.core ??= {}).sourceId = this.effect;
+
+        const actors = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
+        if (actors.length === 0 && game.user.character) actors.push(game.user.character);
+        if (actors.length === 0) {
+            return ui.notifications.error("PF2E.ErrorMessage.NoTokenSelected", { localize: true });
+        }
+
+        const target = game.user.targets.first();
+        if (target?.actor) {
+            this.fixupRules(effect, target.actor);
+        }
+
+        for (const actor of actors) {
+            const existing = actor.itemTypes.effect.find((e) => e.flags.core?.sourceId === this.effect);
+            if (existing) {
+                await existing.delete();
+            } else {
+                await actor.createEmbeddedDocuments("Item", [effect]);
+            }
+        }
+
+        // SimpleAction would return a list of [actor, effect, message] tuples,
+        // but nothing will use it, so it's not done here.
+        return true;
+    }
+
+    async toMessage(_options?: Partial<ActionMessageOptions>): Promise<ChatMessagePF2e | undefined> {
+        // There isn't a message for toggling an effect.  Could be added.
+        return undefined;
     }
 
     private fixupRules(effect: EffectSource, expert: ActorPF2e) {
@@ -117,48 +153,16 @@ class FollowTheExpertAction implements Action {
                 selector: "{item|flags.pf2e.rulesSelections.followTheExpertSkill}",
                 value: {
                     brackets: rankSlugs
-                        .map((r, i) => ({ start: i, end: i, value: flags.bonus?.[r] }))
+                        .map((r, i) => ({
+                            start: i,
+                            end: i,
+                            value: (flags.bonus as Record<string, number | undefined>)?.[r],
+                        }))
                         .filter((b) => b.value !== undefined),
                     field: "item|flags.pf2e.rulesSelections.followTheExpertProficiency",
                 },
             } as RuleElementSource);
         }
-    }
-
-    async use(_options?: Partial<ActionUseOptions>): Promise<unknown> {
-        const source = (await fromUuid(this.effect)) as EffectPF2e | null;
-        if (!source) throw new Error(`Effect ${this.effect} not found!`);
-        const effect = source.toObject();
-        (effect.flags.core ??= {}).sourceId = this.effect;
-
-        const actors = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
-        if (actors.length === 0 && game.user.character) actors.push(game.user.character);
-        if (actors.length === 0) {
-            return ui.notifications.error("PF2E.ErrorMessage.NoTokenSelected", { localize: true });
-        }
-
-        const target = game.user.targets.first();
-        if (target?.actor) {
-            this.fixupRules(effect, target.actor);
-        }
-
-        for (const actor of actors) {
-            const existing = actor.itemTypes.effect.find((e) => e.flags.core?.sourceId === this.effect);
-            if (existing) {
-                await existing.delete();
-            } else {
-                await actor.createEmbeddedDocuments("Item", [effect]);
-            }
-        }
-
-        // SimpleAction would return a list of [actor, effect, message] tuples,
-        // but nothing will use it, so it's not done here.
-        return true;
-    }
-
-    async toMessage(_options?: Partial<ActionMessageOptions>): Promise<ChatMessagePF2e | undefined> {
-        // There isn't a message for toggling an effect.  Could be added.
-        return undefined;
     }
 }
 

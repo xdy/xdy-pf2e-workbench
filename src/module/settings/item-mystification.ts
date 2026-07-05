@@ -1,6 +1,7 @@
-import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
-import { SettingsMenuPF2eWorkbench } from "./menu.js";
-import { capitalize, MAX_ABSOLUTE_LEVEL, NOT_MYSTIFIED_VALUE } from "../utils.js";
+import { updateHooks } from "../xdy-pf2e-workbench.ts";
+import { MODULENAME } from "../constants.ts";
+import { HideListTemplateData, SettingsMenuPF2eWorkbench } from "./menu.ts";
+import { capitalize, getModuleSetting, MAX_ABSOLUTE_LEVEL, NOT_MYSTIFIED_VALUE } from "../utils.ts";
 import { SettingRegistration } from "foundry/client/helpers/client-settings.mts";
 
 function buildPlThresholdChoices(): Record<string, string> {
@@ -47,6 +48,16 @@ const RARITIES = ["common", "uncommon", "rare", "unique"] as const;
 
 export class WorkbenchItemMystificationSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "itemMystificationSettings";
+    static override readonly hidelist: HideListTemplateData = {
+        npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel: {
+            type: "input",
+            falsy: false,
+            list: RARITIES.flatMap((r) => {
+                const cap = capitalize(r);
+                return [`mystifyThreshold${cap}Pl`];
+            }),
+        },
+    };
 
     public static override get settings(): Record<string, SettingRegistration> {
         return {
@@ -96,19 +107,8 @@ export class WorkbenchItemMystificationSettings extends SettingsMenuPF2eWorkbenc
         return result;
     }
 
-    static override readonly hidelist = {
-        npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel: {
-            type: "input",
-            falsy: false,
-            list: RARITIES.flatMap((r) => {
-                const cap = capitalize(r);
-                return [`mystifyThreshold${cap}Pl`];
-            }),
-        },
-    };
-
-    override _onRender(context: object, options: object): void {
-        super._onRender(context, options);
+    override async _onRender(context: object, options: object): Promise<void> {
+        await super._onRender(context, options);
 
         const absSettingKey = "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel";
 
@@ -122,7 +122,7 @@ export class WorkbenchItemMystificationSettings extends SettingsMenuPF2eWorkbenc
             }
         };
 
-        applyAbsVisibility(Boolean(game.settings.get(MODULENAME, absSettingKey)));
+        applyAbsVisibility(getModuleSetting<boolean>(absSettingKey));
 
         const checkbox = this.element.querySelector<HTMLInputElement>(`.form-fields [name="${absSettingKey}"]`);
         checkbox?.addEventListener("change", () => applyAbsVisibility(checkbox.checked));

@@ -1,13 +1,14 @@
 import { CreaturePF2e, ItemPF2e } from "foundry-pf2e";
-import { CHARACTER_TYPE, MODULENAME } from "../xdy-pf2e-workbench.js";
-import { sendHeldItemChatMessage } from "../utils.js";
+import { CHARACTER_TYPE } from "../xdy-pf2e-workbench.ts";
+import { MODULENAME } from "../constants.ts";
+import { getModuleSetting, sendHeldItemChatMessage } from "../utils.ts";
 
-export async function preCreateItemHook(item: ItemPF2e, _data: object, _options: object, _id: string): Promise<void> {
+export function preCreateItemHook(item: ItemPF2e, _data: object, _options: object, _id: string): false | void {
     if (
         item.type === "condition" &&
         item.slug === "unconscious" &&
         item.actor?.isOfType(CHARACTER_TYPE) &&
-        game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious")
+        getModuleSetting("dropHeldItemsOnBecomingUnconscious")
     ) {
         dropHeldItemsOnBecomingUnconscious(item.actor);
     }

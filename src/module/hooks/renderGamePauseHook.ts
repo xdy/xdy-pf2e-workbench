@@ -1,4 +1,5 @@
-import { MODULENAME, phase, Phase } from "../xdy-pf2e-workbench.js";
+import { phase, Phase } from "../xdy-pf2e-workbench.ts";
+import { getModuleSetting } from "../utils.ts";
 
 function encodeUriPathSegment(text: string): string {
     try {
@@ -17,7 +18,7 @@ export function renderGamePauseHook(): void {
 
     const style = document.documentElement.style;
 
-    const imagePath = <string>game.settings.get(MODULENAME, "customPauseImage");
+    const imagePath = getModuleSetting<string>("customPauseImage");
 
     if (imagePath !== "") {
         let url: string;
@@ -40,13 +41,13 @@ export function renderGamePauseHook(): void {
         const element = document.querySelector<HTMLElement>("#pause > figcaption");
         const pauseImage = document.querySelector("#pause > img");
 
-        const text = <string>game.settings.get(MODULENAME, "customPauseText");
+        const text = getModuleSetting<string>("customPauseText");
 
         if (text && element) {
             element.textContent = text;
         }
 
-        if (game.settings.get(MODULENAME, "pauseImageNoSpin")) {
+        if (getModuleSetting("pauseImageNoSpin")) {
             pauseImage?.classList.remove("fa-spin");
         } else {
             pauseImage?.classList.add("fa-spin");

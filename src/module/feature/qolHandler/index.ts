@@ -1,5 +1,5 @@
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { isActuallyDamageRoll, NOT_MYSTIFIED_VALUE } from "../../utils.js";
+import { MODULENAME } from "../../constants.ts";
+import { getModuleSetting, isActuallyDamageRoll, NOT_MYSTIFIED_VALUE } from "../../utils.ts";
 import { ChatMessagePF2e, CreaturePF2e, PhysicalItemPF2e, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 
 export function chatCardDescriptionCollapse(html: HTMLElement): void {
@@ -10,14 +10,13 @@ export function chatCardDescriptionCollapse(html: HTMLElement): void {
     const hasCardContent = html.querySelectorAll(".card-content:not(span.flavor-text *)");
     if (hasCardContent.length > 0) {
         const effectItem = game.i18n.localize(`${MODULENAME}.effectItem`);
-        if (String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) === "collapsedDefault") {
-            // @ts-expect-error TODO fix
-            hasCardContent.forEach((content) => (content["style"].display = "none"));
+        if (getModuleSetting<string>("autoCollapseItemChatCardContent") === "collapsedDefault") {
+            hasCardContent.forEach((content) => ((content as HTMLElement).style.display = "none"));
             const cardContentSiblings = (hasCardContent[0] as HTMLElement).parentElement?.children;
             if (cardContentSiblings?.[0]) {
                 cardContentSiblings[0].insertAdjacentHTML("beforeend", eye);
             }
-            if (game.settings.get(MODULENAME, "autoCollapseItemChatCardMoveEffectLinks")) {
+            if (getModuleSetting<boolean>("autoCollapseItemChatCardMoveEffectLinks")) {
                 const linksToMove: any[] = [];
                 const pTags = Array.from(html.getElementsByTagName("p"));
                 for (const pTag of pTags) {
@@ -71,8 +70,7 @@ function handleRollNoteToggling(html: HTMLElement) {
     let note;
     const hasNote = html.querySelectorAll(".roll-note");
     for (note of Array.from(hasNote)) {
-        // @ts-expect-error TODO fix
-        note.style.display = note.style.display === "none" ? "block" : "none";
+        (note as HTMLElement).style.display = (note as HTMLElement).style.display === "none" ? "block" : "none";
     }
     toggleEyes(html);
 }
@@ -82,10 +80,9 @@ export function chatActionCardDescriptionCollapse(html: HTMLElement): void {
     if (hasAction.length > 0) {
         const rollNotes = html.querySelectorAll(".roll-note");
         if (rollNotes.length > 0) {
-            if (String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) === "collapsedDefault") {
+            if (getModuleSetting<string>("autoCollapseItemActionChatCardContent") === "collapsedDefault") {
                 for (const note of Array.from(rollNotes)) {
-                    // @ts-expect-error TODO fix
-                    note["style"].display = "none";
+                    (note as HTMLElement).style.display = "none";
                 }
 
                 const actionSiblings = (hasAction[0] as HTMLElement).parentElement?.children;
@@ -109,7 +106,7 @@ const eye = ' <i style="font-size: small; max-width: min-content" class="fa-soli
 export function chatAttackCardDescriptionCollapse(html: HTMLElement): void {
     const hasRollNote = html.querySelectorAll(".roll-note");
     if (hasRollNote.length > 0) {
-        if (String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) === "collapsedDefault") {
+        if (getModuleSetting<string>("autoCollapseItemAttackChatCardContent") === "collapsedDefault") {
             for (const note of hasRollNote) {
                 (note as HTMLElement).style.display = "none";
             }
@@ -142,6 +139,10 @@ Hooks.on("createChatMessage", (message: ChatMessagePF2e) => {
             recentDamageMessages.delete(toRemove);
         }
     }
+});
+
+Hooks.on("deleteChatMessage", (message: ChatMessagePF2e) => {
+    recentDamageMessages.delete(message.id);
 });
 
 export function damageCardExpand(message: ChatMessagePF2e, html: HTMLElement, expandDmg: string): void {
@@ -213,8 +214,8 @@ const PHYSICAL_ITEM_TYPES = new Set([
  */
 export async function mystifyNpcItemsByRarity(
     actor: CreaturePF2e<TokenDocumentPF2e<ScenePF2e | null> | null>,
-    usingPartyLevel: boolean = Boolean(
-        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel"),
+    usingPartyLevel: boolean = getModuleSetting<boolean>(
+        "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel",
     ),
     thresholds: Partial<Record<string, number>> = {},
 ): Promise<void> {
@@ -228,7 +229,7 @@ export async function mystifyNpcItemsByRarity(
     for (const rarity of RARITY_KEYS) {
         resolvedThresholds[rarity] =
             thresholds[rarity] ??
-            Number.parseInt(String(game.settings.get(MODULENAME, getThresholdSettingKey(rarity, usingPartyLevel))));
+            Number.parseInt(getModuleSetting<string>(getThresholdSettingKey(rarity, usingPartyLevel)));
     }
 
     const itemUpdates: {
@@ -264,45 +265,4 @@ export async function mystifyNpcItemsByRarity(
     if (itemUpdates.length > 0) {
         await actor.updateEmbeddedDocuments("Item", itemUpdates);
     }
-}
-
-/**
- * @deprecated Use {@link mystifyNpcItemsByRarity} instead. This wrapper converts the old
- * minimumRarity/minimumLevel/multiplier parameters to per-rarity thresholds for backward compatibility.
- */
-export async function mystifyNpcItems(
-    actor: CreaturePF2e<TokenDocumentPF2e<ScenePF2e | null> | null>,
-    minimumRarity: string = String(
-        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater") ?? "common",
-    ),
-    usingPartyLevel: boolean = Boolean(
-        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel"),
-    ),
-    minimumLevel: number = Number.parseInt(
-        String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater")),
-    ) ?? -1,
-    multiplier: number = Number.parseFloat(
-        String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier")),
-    ),
-): Promise<void> {
-    if (usingPartyLevel) {
-        minimumLevel = game.actors?.party?.level ?? minimumLevel;
-    }
-    if (multiplier !== 1 && minimumLevel !== -1) {
-        minimumLevel = minimumLevel * multiplier;
-    }
-
-    const rarityKeys = Object.keys(CONFIG.PF2E.rarityTraits);
-    const minimumRarityIndex = rarityKeys.indexOf(minimumRarity);
-
-    // Convert legacy params to per-rarity thresholds
-    const derivedThresholds: Record<string, number> = {};
-    for (const rarity of RARITY_KEYS) {
-        const rarityIndex = rarityKeys.indexOf(rarity);
-        if (rarityIndex >= minimumRarityIndex) {
-            derivedThresholds[rarity] = minimumLevel;
-        }
-    }
-
-    return mystifyNpcItemsByRarity(actor, usingPartyLevel, derivedThresholds);
 }

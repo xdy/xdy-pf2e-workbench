@@ -1,6 +1,7 @@
 import { ActorPF2e, ActorSheetPF2e, FeatPF2e, ItemPF2e } from "foundry-pf2e";
-import { CHARACTER_TYPE, MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { handleAsync, shouldIHandleThis } from "../../utils.js";
+import { CHARACTER_TYPE } from "../../xdy-pf2e-workbench.ts";
+import { MODULENAME } from "../../constants.ts";
+import { fireAndForget, getModuleSetting, shouldIHandleThis } from "../../utils.ts";
 
 export function itemFromActor(element: Element, attributeName: string, actor: ActorPF2e): ItemPF2e | null {
     const itemId = <string>element.getAttribute(attributeName);
@@ -33,7 +34,7 @@ export function colorActorItemsByRarity({
     fetchItem,
     headingSelector = "h4",
 }: ColorItemsByRarityOptions): void {
-    if (actor.type === CHARACTER_TYPE && game.settings.get(MODULENAME, setting)) {
+    if (actor.type === CHARACTER_TYPE && getModuleSetting<boolean>(setting)) {
         const lists = html?.querySelectorAll(listSelector) ?? [];
         for (const list of lists) {
             const itemNodes = list.querySelectorAll(itemSelector);
@@ -54,7 +55,7 @@ export function colorActorItemsByRarity({
 }
 
 export function markFeatsWithPrerequisites(html: HTMLElement, actor: ActorPF2e): void {
-    if (actor.type !== CHARACTER_TYPE || !game.settings.get(MODULENAME, "playerFeatsPrerequisiteHint")) return;
+    if (actor.type !== CHARACTER_TYPE || !getModuleSetting<boolean>("playerFeatsPrerequisiteHint")) return;
 
     const featLists = html.querySelectorAll(".feats-pane");
     featLists.forEach((list) => {
@@ -78,7 +79,7 @@ function getSpellContainer(target: HTMLElement): Element | null {
 
 export function rewriteSpellToChatToSendLink(sheet: ActorSheetPF2e<ActorPF2e>, html: HTMLElement): void {
     if (sheet.actor?.type !== CHARACTER_TYPE) return;
-    if (!game.settings.get(MODULENAME, "playerSpellsChangeSendToChat")) return;
+    if (!getModuleSetting<boolean>("playerSpellsChangeSendToChat")) return;
 
     const actor = sheet.actor;
 
@@ -99,7 +100,7 @@ export function rewriteSpellToChatToSendLink(sheet: ActorSheetPF2e<ActorPF2e>, h
                     if (!item || item.type !== "spell") return;
 
                     const flavor = `${game.i18n.localize(`${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.text`)}<em>@UUID[${item.sourceId}]</em></p>`;
-                    handleAsync(
+                    fireAndForget(
                         ChatMessage.create({
                             style: CONST.CHAT_MESSAGE_STYLES.OOC,
                             speaker: ChatMessage.getSpeaker(),

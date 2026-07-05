@@ -1,87 +1,87 @@
 {
-  "_id": "Z2RXTsLcFQEU5Qaj",
-  "name": "Effect: Dirge Of Doom",
-  "type": "effect",
-  "img": "systems/pf2e/icons/spells/dirge-of-doom.webp",
-  "effects": [],
-  "folder": "3k9ymrOLXRMPWQkb",
-  "sort": 100000,
-  "system": {
-    "description": {
-      "gm": "",
-      "value": "<p><span style=\"color:#191813;font-family:Roboto, sans-serif;font-size:13px\">Creatures with this effect </span><span style=\"color:#191813;font-family:Roboto, sans-serif;font-size:13px\">won't automatically reduce their @Compendium[pf2e.conditionitems.TBSHQspnbcqxsmjL]{Frightened} value below 1.</span></p>"
+    "_id": "Z2RXTsLcFQEU5Qaj",
+    "name": "Effect: Dirge Of Doom",
+    "type": "effect",
+    "img": "systems/pf2e/icons/spells/dirge-of-doom.webp",
+    "effects": [],
+    "folder": "3k9ymrOLXRMPWQkb",
+    "sort": 100000,
+    "system": {
+        "description": {
+            "gm": "",
+            "value": "<p><span style=\"color:#191813;font-family:Roboto, sans-serif;font-size:13px\">Creatures with this effect </span><span style=\"color:#191813;font-family:Roboto, sans-serif;font-size:13px\">won't automatically reduce their @Compendium[pf2e.conditionitems.TBSHQspnbcqxsmjL]{Frightened} value below 1.</span></p>"
+        },
+        "rules": [
+            {
+                "key": "ActiveEffectLike",
+                "mode": "add",
+                "path": "flags.xdy-pf2e-workbench.condition.frightened.min",
+                "value": 1
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL",
+                "allowDuplicate": true,
+                "inMemoryOnly": true,
+                "onDeleteActions": {
+                    "grantee": "restrict"
+                }
+            }
+        ],
+        "slug": null,
+        "_migration": {
+            "version": 0.932,
+            "lastMigration": null,
+            "previous": {
+                "schema": 0.878,
+                "foundry": "12.329",
+                "system": "6.0.4"
+            }
+        },
+        "traits": {
+            "otherTags": [],
+            "value": [],
+            "rarity": "common"
+        },
+        "publication": {
+            "title": "",
+            "authors": "",
+            "license": "ORC",
+            "remaster": true
+        },
+        "level": {
+            "value": 1
+        },
+        "duration": {
+            "value": 1,
+            "unit": "rounds",
+            "expiry": "turn-start",
+            "sustained": false
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": null,
+        "context": null,
+        "target": null,
+        "unidentified": false
     },
-    "rules": [
-      {
-        "key": "ActiveEffectLike",
-        "mode": "add",
-        "path": "flags.xdy-pf2e-workbench.condition.frightened.min",
-        "value": 1
-      },
-      {
-        "key": "GrantItem",
-        "uuid": "Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL",
-        "allowDuplicate": true,
-        "inMemoryOnly": true,
-        "onDeleteActions": {
-          "grantee": "restrict"
-        }
-      }
-    ],
-    "slug": null,
-    "_migration": {
-      "version": 0.932,
-      "lastMigration": null,
-      "previous": {
-        "schema": 0.878,
-        "foundry": "12.329",
-        "system": "6.0.4"
-      }
+    "ownership": {
+        "default": 0
     },
-    "traits": {
-      "otherTags": [],
-      "value": [],
-      "rarity": "common"
+    "_stats": {
+        "systemId": "pf2e",
+        "systemVersion": "6.0.4",
+        "coreVersion": "12.329",
+        "createdTime": 1665671947295,
+        "modifiedTime": 1721420361678,
+        "lastModifiedBy": null,
+        "compendiumSource": "Compendium.xdy-pf2e-workbench.xdy-pf2e-workbench-items.Item.Z2RXTsLcFQEU5Qaj",
+        "duplicateSource": null
     },
-    "publication": {
-      "title": "",
-      "authors": "",
-      "license": "ORC",
-      "remaster": true
-    },
-    "level": {
-      "value": 1
-    },
-    "duration": {
-      "value": 1,
-      "unit": "rounds",
-      "expiry": "turn-start",
-      "sustained": false
-    },
-    "start": {
-      "value": 0,
-      "initiative": null
-    },
-    "tokenIcon": {
-      "show": true
-    },
-    "badge": null,
-    "context": null,
-    "target": null,
-    "unidentified": false
-  },
-  "ownership": {
-    "default": 0
-  },
-  "_stats": {
-    "systemId": "pf2e",
-    "systemVersion": "6.0.4",
-    "coreVersion": "12.329",
-    "createdTime": 1665671947295,
-    "modifiedTime": 1721420361678,
-    "lastModifiedBy": null,
-    "compendiumSource": "Compendium.xdy-pf2e-workbench.xdy-pf2e-workbench-items.Item.Z2RXTsLcFQEU5Qaj",
-    "duplicateSource": null
-  },
-  "_key": "!items!Z2RXTsLcFQEU5Qaj"
+    "_key": "!items!Z2RXTsLcFQEU5Qaj"
 }

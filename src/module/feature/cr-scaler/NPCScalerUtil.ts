@@ -13,8 +13,15 @@
  * limitations under the License.
  */
 
-import { IDicePool } from "./NPCScalerTypes.js";
+import type { IDicePool } from "./NPCScalerTypes.ts";
 import SCALE_APP_DATA from "../npc-scale-data.json" with { type: "json" };
+
+interface ScaleEntry {
+    level: number;
+    [key: string]: number | IDicePool | { minimum: number; maximum: number } | undefined;
+}
+
+type ScaleTable = ScaleEntry[];
 
 export function parseDamage(value: string): IDicePool {
     const [diceString, bonusString] = value.split("+");
@@ -54,31 +61,31 @@ export function constructFormula({
 }
 
 export function getLeveledData(key: keyof typeof SCALE_APP_DATA, oldValue: number, oldLevel: number, newLevel: number) {
-    const data = SCALE_APP_DATA[key];
+    const data = SCALE_APP_DATA[key] as ScaleTable;
     const oldLevelData = data[oldLevel + 1];
     const newLevelData = data[newLevel + 1];
 
     let bestMatch: { key: string; delta: number } = { key: "undefined", delta: Number.MAX_SAFE_INTEGER };
     for (const entry of Object.entries(oldLevelData)) {
-        const key = entry[0];
-        if (key === "level") {
+        const entryKey = entry[0];
+        if (entryKey === "level") {
             continue;
         }
 
-        const value = parseInt(entry[1] as any);
+        const value = Number(entry[1]);
         const delta = Math.abs(value - oldValue);
 
         if (delta < bestMatch.delta) {
             bestMatch = {
-                key,
+                key: entryKey,
                 delta,
             };
         }
     }
 
     const result = {
-        value: newLevelData[bestMatch.key],
-        delta: oldValue - oldLevelData[bestMatch.key],
+        value: newLevelData[bestMatch.key] as number,
+        delta: oldValue - (oldLevelData[bestMatch.key] as number),
         total: 0,
     };
     result.total = result.value + result.delta;
@@ -86,8 +93,8 @@ export function getLeveledData(key: keyof typeof SCALE_APP_DATA, oldValue: numbe
     return result;
 }
 
-export function getHPData(oldValue: number, oldLevel: number, newLevel: number) {
-    const data = SCALE_APP_DATA["hitPoints"];
+export function getHPData(oldValue: number, oldLevel: number, newLevel: number): number {
+    const data = SCALE_APP_DATA["hitPoints"] as ScaleTable;
     const oldLevelData = data[oldLevel + 1];
     const newLevelData = data[newLevel + 1];
 
@@ -129,7 +136,7 @@ export function getHPData(oldValue: number, oldLevel: number, newLevel: number) 
         }
     }
 
-    const newValue = newLevelData[bestMatch.key];
+    const newValue = newLevelData[bestMatch.key] as { minimum: number; maximum: number };
     return Math.round(newValue.minimum + (newValue.maximum - newValue.minimum) * bestMatch.percentile);
 }
 
@@ -139,7 +146,7 @@ export function getMinMaxData(
     oldLevel: number,
     newLevel: number,
 ): number {
-    const data = SCALE_APP_DATA[key];
+    const data = SCALE_APP_DATA[key] as { level: number; maximum: number; minimum: number }[];
     const oldLevelData = data[oldLevel + 1];
     const newLevelData = data[newLevel + 1];
 
@@ -164,8 +171,8 @@ export function constructRelativeDamage(oldDmg: IDicePool, stdDmg: IDicePool, ne
     );
 }
 
-export function getDamageData(oldValue: string, oldLevel: number, newLevel: number) {
-    const data = SCALE_APP_DATA["strikeDamage"];
+export function getDamageData(oldValue: string, oldLevel: number, newLevel: number): string {
+    const data = SCALE_APP_DATA["strikeDamage"] as ScaleTable;
     const oldLevelData = data[oldLevel + 1];
     const newLevelData = data[newLevel + 1];
     const parsedOldValue = parseDamage(oldValue);
@@ -189,15 +196,18 @@ export function getDamageData(oldValue: string, oldLevel: number, newLevel: numb
     }
 
     if (bestMatch.delta < parsedOldValue.average * 0.5) {
-        return constructRelativeDamage(parsedOldValue, oldLevelData[bestMatch.key], newLevelData[bestMatch.key])
-            .original;
+        return constructRelativeDamage(
+            parsedOldValue,
+            oldLevelData[bestMatch.key] as IDicePool,
+            newLevelData[bestMatch.key] as IDicePool,
+        ).original;
     } else {
         return oldValue;
     }
 }
 
-export function getAreaDamageData(oldValue: string, oldLevel: number, newLevel: number) {
-    const data = SCALE_APP_DATA["areaDamage"];
+export function getAreaDamageData(oldValue: string, oldLevel: number, newLevel: number): string {
+    const data = SCALE_APP_DATA["areaDamage"] as ScaleTable;
     const oldLevelData = data[oldLevel + 1];
     const newLevelData = data[newLevel + 1];
     const parsedOldValue = parseDamage(oldValue);
@@ -221,8 +231,11 @@ export function getAreaDamageData(oldValue: string, oldLevel: number, newLevel: 
     }
 
     if (bestMatch.delta < parsedOldValue.average * 0.5) {
-        return constructRelativeDamage(parsedOldValue, oldLevelData[bestMatch.key], newLevelData[bestMatch.key])
-            .original;
+        return constructRelativeDamage(
+            parsedOldValue,
+            oldLevelData[bestMatch.key] as IDicePool,
+            newLevelData[bestMatch.key] as IDicePool,
+        ).original;
     } else {
         return oldValue;
     }

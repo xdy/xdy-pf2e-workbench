@@ -1,5 +1,5 @@
 import { ActorPF2e } from "foundry-pf2e";
-import { handleAsync, shouldIHandleThis } from "../../utils.js";
+import { fireAndForget, shouldIHandleThis } from "../../utils.ts";
 
 /**
  * Moves the selected combatant ahead of the current combatant.
@@ -33,6 +33,6 @@ export function moveOnZeroHP(actor: ActorPF2e): void {
             : <string>canvas?.scene?.tokens?.find((t) => t.actor?.id === actor.id)?.id,
     );
     if (shouldIHandleThis(actor) && combatant && combatant.id !== game.combat?.combatant?.id) {
-        handleAsync(moveSelectedAheadOfCurrent(combatant.id), "moveSelectedAheadOfCurrent");
+        fireAndForget(moveSelectedAheadOfCurrent(combatant.id), "moveSelectedAheadOfCurrent");
     }
 }

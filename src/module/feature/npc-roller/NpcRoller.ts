@@ -1,6 +1,7 @@
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { logWarn } from "../../utils.js";
+import { MODULENAME } from "../../constants.ts";
+import { logWarn } from "../../utils/logging.ts";
 import SCALE_APP_DATA from "../npc-scale-data.json" with { type: "json" };
+import type { RollMode } from "foundry-pf2e/foundry/common/constants.d.mts";
 
 export async function registerNpcRollerHandlebarsTemplates(): Promise<void> {
     await foundry.applications.handlebars.loadTemplates([
@@ -47,17 +48,6 @@ export class NpcRoller extends foundry.applications.api.HandlebarsApplicationMix
         },
         position: { width: 800, height: "auto" },
     };
-
-    override get title(): string {
-        return game.i18n.localize(`${MODULENAME}.npcRoller.title`);
-    }
-
-    static override get PARTS() {
-        return {
-            index: { template: `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs` },
-        };
-    }
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     static override TABS: Record<string, any> = {
         primary: {
@@ -80,6 +70,24 @@ export class NpcRoller extends foundry.applications.api.HandlebarsApplicationMix
 
     public constructor(options?: any) {
         super(options);
+    }
+
+    static override get PARTS(): { index: { template: string } } {
+        return {
+            index: { template: `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs` },
+        };
+    }
+
+    override get title(): string {
+        return game.i18n.localize(`${MODULENAME}.npcRoller.title`);
+    }
+
+    static onControlToken(): void {
+        // @ts-expect-error TODO fix
+        const roller = Object.values(ui.windows).find((w) => w.id === "xdy-pf2e-workbench-npc-roller") as NpcRoller;
+        if (roller) {
+            roller.render({ force: true });
+        }
     }
 
     override async _prepareContext(options?: object): Promise<object> {
@@ -126,14 +134,6 @@ export class NpcRoller extends foundry.applications.api.HandlebarsApplicationMix
             .forEach((btn) => btn.addEventListener("click", (event) => this.#handleRollButtonClick(event)));
     }
 
-    static onControlToken(): void {
-        // @ts-expect-error TODO fix
-        const roller = Object.values(ui.windows).find((w) => w.id === "xdy-pf2e-workbench-npc-roller") as NpcRoller;
-        if (roller) {
-            roller.render({ force: true });
-        }
-    }
-
     async #handleRollButtonClick(event: Event): Promise<void> {
         const target = event.currentTarget as HTMLButtonElement;
         const rollName = target.dataset.rollname as string;
@@ -152,7 +152,6 @@ export class NpcRoller extends foundry.applications.api.HandlebarsApplicationMix
             } else {
                 roll = Roll;
             }
-            // @ts-expect-error TODO fix
             await new roll(formulaString).toMessage(
                 {
                     speaker: ChatMessage.getSpeaker({ token: <any>token?.document }),
@@ -160,7 +159,9 @@ export class NpcRoller extends foundry.applications.api.HandlebarsApplicationMix
                     whisper: ChatMessage.getWhisperRecipients("GM").map((u) => u.id),
                 },
                 {
-                    messageMode: secret ? CONST.DICE_ROLL_MODES.PRIVATE : game.settings.get("core", "messageMode"),
+                    rollMode: secret
+                        ? CONST.DICE_ROLL_MODES.PRIVATE
+                        : (game.settings.get("core", "messageMode") as RollMode),
                     create: true,
                 },
             );

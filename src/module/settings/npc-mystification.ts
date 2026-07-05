@@ -1,6 +1,8 @@
-import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
-import { SettingsMenuPF2eWorkbench } from "./menu.js";
+import { updateHooks } from "../xdy-pf2e-workbench.ts";
+import { MODULENAME } from "../constants.ts";
+import { SettingsMenuPF2eWorkbench } from "./menu.ts";
 import { SettingRegistration } from "foundry/client/helpers/client-settings.mts";
+import { getModuleSetting } from "../utils.ts";
 
 export let mystifyRandomPropertyType: string;
 export let mystifyModifierKey: string;
@@ -218,7 +220,7 @@ export class WorkbenchNpcMystificationSettings extends SettingsMenuPF2eWorkbench
 
     static override registerSettings(): void {
         super.registerSettings();
-        mystifyModifierKey = String(game.settings.get(MODULENAME, "npcMystifierModifierKey"));
-        mystifyRandomPropertyType = String(game.settings.get(MODULENAME, "npcMystifierAddRandomProperty"));
+        mystifyModifierKey = getModuleSetting<string>("npcMystifierModifierKey");
+        mystifyRandomPropertyType = getModuleSetting<string>("npcMystifierAddRandomProperty");
     }
 }

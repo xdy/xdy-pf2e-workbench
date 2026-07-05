@@ -5,10 +5,24 @@
 // strictSourcing: if true, will suppress documents with missing source information, if false they're let through
 // fetch: if true, return full documents instead of the filtered index
 
+import type { CompendiumIndexData } from "foundry/client/documents/collections/compendium-collection.mjs";
+
+interface PackInfo {
+    load: boolean;
+    name: string;
+}
+
+interface SourceInfo {
+    load: boolean;
+    name: string;
+}
+
+type BrowserSettings = Record<string, Record<string, PackInfo | undefined>>;
+
 interface GetAllFromAllowedPacksParams {
     type?: string;
     fields?: string[];
-    filter?: any | null;
+    filter?: ((d: CompendiumIndexData) => boolean) | null;
     strictSourcing?: boolean;
     fetch?: boolean;
 }
@@ -30,12 +44,12 @@ export async function getAllFromAllowedPacks({
     filter = null,
     strictSourcing = true,
     fetch = false,
-}: GetAllFromAllowedPacksParams = {}) {
+}: GetAllFromAllowedPacksParams = {}): Promise<CompendiumIndexData[] | null> {
     const FUNC = "getAllFromAllowedPacks";
     const browser = game.pf2e.compendiumBrowser;
     const validTypes = Object.keys(browser.settings);
     validTypes.push("all");
-    const aliases = {
+    const aliases: Record<string, string> = {
         actor: "bestiary",
         npc: "bestiary",
         ability: "action",
@@ -59,17 +73,21 @@ export async function getAllFromAllowedPacks({
     if (!Object.keys(browser.packLoader.sourcesSettings.sources).length) {
         await browser.packLoader.updateSources(browser.loadedPacksAll());
     }
-    const packList =
+    const packList: [string, PackInfo][] =
         type === "all"
-            ? Object.values(browser.settings).flatMap((t: any) => Object.entries(t))
-            : Object.entries(browser.settings[type]);
+            ? Object.values(browser.settings).flatMap((t: Record<string, PackInfo | undefined>) =>
+                  Object.entries(t).filter((entry): entry is [string, PackInfo] => entry[1] !== undefined),
+              )
+            : Object.entries((browser.settings as BrowserSettings)[type] ?? {}).filter(
+                  (entry): entry is [string, PackInfo] => entry[1] !== undefined,
+              );
 
-    const loadablePacks = packList.filter(([_, p]) => (<any>p).load).map(([pack]) => pack);
+    const loadablePacks = packList.filter(([, p]) => p.load).map(([pack]) => pack);
     // const unloadablePacks = packList.filter(([_, p]) => !p.load).map(([pack]) => pack);
     const sources = browser.packLoader.sourcesSettings.sources;
-    const values: any[] = <any[]>(<unknown>Object.values(sources));
+    const values = Object.values(sources);
     const loadableSources = values
-        .filter((s) => s?.load)
+        .filter((s): s is SourceInfo => s !== undefined && s.load)
         .map((s) =>
             s.name.slugify({
                 strict: true,
@@ -77,8 +95,8 @@ export async function getAllFromAllowedPacks({
         );
     fields.push("system.details.publication", "system.publication", "system.source", "system.details.source");
 
-    const out = <any[]>[];
-    const sourceFilter = (d) => {
+    const out: CompendiumIndexData[] = [];
+    const sourceFilter = (d: CompendiumIndexData) => {
         const slug = (
             d?.system?.details?.publication?.title ??
             d?.system?.publication?.title ??
@@ -98,21 +116,22 @@ export async function getAllFromAllowedPacks({
             fields,
         });
         const sourcedDocs = initialDocs?.filter(sourceFilter);
-        let filteredDocs: any[] | undefined = <any[]>[];
+        let filteredDocs: CompendiumIndexData[] | undefined;
         try {
             filteredDocs = filter ? sourcedDocs?.filter(filter) : sourcedDocs;
         } catch (error) {
-            ui.notifications.error(`Error in provided filter: ${error.toString()}`);
+            const message = error instanceof Error ? error.message : String(error);
+            ui.notifications.error(`Error in provided filter: ${message}`);
             return null;
         }
 
         if (fetch) {
-            const newVar = await pack?.getDocuments({
+            const documents = await pack?.getDocuments({
                 _id__in: filteredDocs?.map((d) => d._id),
             });
-            out.push(...(<any[]>newVar));
+            out.push(...((documents ?? []) as CompendiumIndexData[]));
         } else {
-            out.push(...(<any[]>filteredDocs));
+            out.push(...(filteredDocs ?? []));
         }
     }
     return out;

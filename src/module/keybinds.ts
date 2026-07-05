@@ -1,10 +1,11 @@
-import { handleAsync, logInfo } from "./utils.js";
-import { MODULENAME } from "./xdy-pf2e-workbench.js";
-import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler/index.js";
-import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler/index.js";
-import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.js";
-import { activateCanvasPointer, deactivateCanvasPointer } from "./feature/canvas-pointer/index.js";
-import { DEFAULT_POINTER_ICON } from "./feature/canvas-pointer/constants.js";
+import { fireAndForget, getModuleSetting } from "./utils.ts";
+import { logInfo } from "./utils/logging.ts";
+import { MODULENAME } from "./constants.ts";
+import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler/index.ts";
+import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler/index.ts";
+import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.ts";
+import { activateCanvasPointer, deactivateCanvasPointer } from "./feature/canvas-pointer/index.ts";
+import { DEFAULT_POINTER_ICON } from "./feature/canvas-pointer/constants.ts";
 
 export function registerWorkbenchKeybindings(): void {
     logInfo(`${MODULENAME} | registerKeybindings`);
@@ -92,8 +93,8 @@ export function registerWorkbenchKeybindings(): void {
         hint: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandlerKey.hint`),
         restricted: true,
         onDown: () => {
-            if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
-                handleAsync(
+            if (game.user?.isGM && getModuleSetting<boolean>("heroPointHandler")) {
+                fireAndForget(
                     heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start),
                     "heroPointHandler",
                 );
@@ -109,11 +110,12 @@ export function registerWorkbenchKeybindings(): void {
         restricted: true,
         onDown: () => {
             if (game.user?.isGM) {
+                // @ts-expect-error getCombatantsByToken exists according to https://foundryvtt.com/api/classes/foundry.documents.Combat.html
                 const combatantByToken: Combatant | undefined = game?.combat?.getCombatantsByToken(
                     <string>canvas?.tokens?.controlled[0].id,
                 )[0];
                 if (combatantByToken) {
-                    handleAsync(moveSelectedAheadOfCurrent(combatantByToken.id), "moveSelectedAheadOfCurrent");
+                    fireAndForget(moveSelectedAheadOfCurrent(combatantByToken.id), "moveSelectedAheadOfCurrent");
                 }
             }
             return true;
@@ -127,10 +129,10 @@ export function registerWorkbenchKeybindings(): void {
         restricted: true,
         editable: [{ key: "KeyM", modifiers: ["Shift"] }],
         onDown: () => {
-            if (game.settings.get(MODULENAME, "npcMystifier")) {
+            if (getModuleSetting<boolean>("npcMystifier")) {
                 if (canMystify()) {
                     for (const token of canvas?.tokens?.controlled ?? []) {
-                        handleAsync(doMystification(token?.document, isTokenMystified(token)), "doMystification");
+                        fireAndForget(doMystification(token?.document, isTokenMystified(token)), "doMystification");
                     }
                 } else {
                     ui.notifications?.warn(game.i18n.localize(`${MODULENAME}.SETTINGS.notifications.cantMystify`));
@@ -150,8 +152,8 @@ export function registerWorkbenchKeybindings(): void {
         restricted: false,
         editable: [{ key: "KeyX", modifiers: [] }],
         onDown: () => {
-            if (!game.settings.get(MODULENAME, "canvasPointer")) return false;
-            const iconClass = game.settings.get(MODULENAME, "canvasPointerIcon") as string;
+            if (!getModuleSetting<boolean>("canvasPointer")) return false;
+            const iconClass = getModuleSetting<string>("canvasPointerIcon");
             return activateCanvasPointer(iconClass || DEFAULT_POINTER_ICON);
         },
         onUp: () => {
@@ -169,7 +171,7 @@ export function registerWorkbenchKeybindings(): void {
                 hint: `Call hotbar macro on page ${page} position ${column}`,
                 restricted: false,
                 onDown: () => {
-                    game.user?.getHotbarMacros(page)?.[column - 1]["macro"].execute();
+                    (game.user?.getHotbarMacros(page)?.[column - 1] as Record<string, any>)["macro"].execute();
                     return true;
                 },
             });

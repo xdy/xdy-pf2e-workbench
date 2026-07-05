@@ -1,9 +1,10 @@
-import { handleAsync, minionsInCurrentScene, shouldIHandleThis } from "../../utils.js";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { fireAndForget, minionsInCurrentScene, shouldIHandleThis } from "../../utils.ts";
+import { isAllowedFor } from "../../utils/settings.ts";
+import { MODULENAME } from "../../constants.ts";
 import { ActorPF2e, ChatContextFlag, ChatMessagePF2e, CombatantPF2e, UserPF2e } from "foundry-pf2e";
 import * as systems from "../../utils/systems.ts";
 
-export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
+export function actionsReminder(combatant: CombatantPF2e, reduction = 0): void {
     const actor = combatant.actor;
     if (actor && shouldIHandleThis(actor)) {
         if (shouldShowActionReminder(actor, reduction)) {
@@ -17,26 +18,28 @@ export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
                 0,
             )} actions remaining.`;
 
-            handleAsync(ChatMessage.create(
-                {
-                    flavor: actionsMessage,
-                    whisper: !actor?.hasPlayerOwner ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id) : [],
-                },
-                {},
-            ), "actionsReminder ChatMessage");
+            fireAndForget(
+                ChatMessage.create(
+                    {
+                        flavor: actionsMessage,
+                        whisper: !actor?.hasPlayerOwner ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id) : [],
+                    },
+                    {},
+                ),
+                "actionsReminder ChatMessage",
+            );
             ui.notifications.info(actionsMessage);
         }
     }
 }
 
-export function shouldShowActionReminder(actor, reduction: number) {
-    const reminderAllowSetting = String(game.settings.get(MODULENAME, "actionsReminderAllow"));
-    const showForPC = ["all", "players"].includes(reminderAllowSetting) && actor?.hasPlayerOwner;
-    const showForNPC = ["all", "gm"].includes(reminderAllowSetting) && !actor?.hasPlayerOwner;
+export function shouldShowActionReminder(actor: ActorPF2e, reduction: number): boolean {
+    const showForPC = isAllowedFor("actionsReminderAllow", "player") && actor?.hasPlayerOwner;
+    const showForNPC = isAllowedFor("actionsReminderAllow", "gm") && !actor?.hasPlayerOwner;
     return (showForPC || showForNPC) && hasConditionOrReduction(actor, reduction);
 }
 
-export function hasConditionOrReduction(actor, reduction: number) {
+export function hasConditionOrReduction(actor: ActorPF2e, reduction: number): boolean {
     return actor.hasCondition("stunned", "slowed", "quickened") || reduction > 0;
 }
 
@@ -44,7 +47,7 @@ function calculateMaxActions(actor: ActorPF2e) {
     return actor.traits?.has("minion") ? 2 : 3 + (actor.hasCondition("quickened") ? 1 : 0);
 }
 
-export async function autoReduceStunned(combatant, userId: string): Promise<number> {
+export async function autoReduceStunned(combatant: CombatantPF2e, userId: string): Promise<number> {
     if (!combatant?.actor || (userId !== game.user.id && !shouldIHandleThis(combatant?.actor))) {
         return 0;
     }
@@ -60,6 +63,7 @@ export async function autoReduceStunned(combatant, userId: string): Promise<numb
                 await actor?.decreaseCondition("stunned");
             }
             const combat = combatant?.combat;
+            if (!combat) continue;
             await actor?.setFlag(MODULENAME, "stunReduction", {
                 combat: combat.id,
                 round: combat.round,

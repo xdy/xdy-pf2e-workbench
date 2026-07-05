@@ -1,17 +1,33 @@
 import {
+    fireAndForget,
     getActorFromMessage,
-    handleAsync,
+    getModuleFlag,
+    getModuleSetting,
     isFirstGM,
-    logDebug,
     shouldIHandleThis,
     shouldIHandleThisMessage,
-} from "../../utils.js";
-import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "../../xdy-pf2e-workbench.js";
+} from "../../utils.ts";
+import { isAllowedFor } from "../../utils/settings.ts";
+import { logDebug } from "../../utils/logging.ts";
+import { CHARACTER_TYPE, NPC_TYPE } from "../../xdy-pf2e-workbench.ts";
+import { MODULENAME } from "../../constants.ts";
 import { ActorPF2e, ActorSystemData, ChatMessagePF2e, ItemPF2e } from "foundry-pf2e";
-import { moveOnZeroHP } from "../initiativeHandler/index.js";
+import { moveOnZeroHP } from "../initiativeHandler/index.ts";
 import * as systems from "../../utils/systems.ts";
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+function createStatusEffectChatMessage(actor: ActorPF2e, name: string, i18nKey: string, context: string): void {
+    fireAndForget(
+        ChatMessage.create({
+            flavor: game.i18n.format(`${MODULENAME}.SETTINGS.${i18nKey}`, { name }),
+            speaker: ChatMessage.getSpeaker({ actor }),
+            whisper:
+                systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
+                    ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                    : [],
+        }),
+        context,
+    );
+}
 
 export function dyingHandlingPreUpdateActorHook(
     actor: any,
@@ -20,18 +36,18 @@ export function dyingHandlingPreUpdateActorHook(
     updateHp: number,
     autoGainDying: string,
 ): void {
-    const automaticMove = String(game.settings.get(MODULENAME, "enableAutomaticMove"));
+    const automaticMove = getModuleSetting<string>("enableAutomaticMove");
     const automoveIfZeroHP =
         game.combat &&
         ((automaticMove === "reaching0HPCharactersOnly" && actor.type === CHARACTER_TYPE) ||
             (automaticMove === "reaching0HP" && [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
-    const autoRemoveDying = String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP"));
-    const autoRemoveUnconscious = String(game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP"));
+    const autoRemoveDying = getModuleSetting<string>("autoRemoveDyingAtGreaterThanZeroHP");
+    const autoRemoveUnconscious = getModuleSetting<boolean>("autoRemoveUnconsciousAtGreaterThanZeroHP");
 
     const isHealed = currentActorHp <= 0 && updateHp > 0;
 
     if (autoGainDying && !autoGainDying.startsWith("no")) {
-        handleAsync(
+        fireAndForget(
             (async () => {
                 const hpRaisedAbove0 = await handleDyingOnZeroHP(
                     actor,
@@ -43,7 +59,7 @@ export function dyingHandlingPreUpdateActorHook(
                 logDebug("Workbench increaseDyingOnZeroHP complete");
                 if (hpRaisedAbove0 || isHealed) {
                     if (autoRemoveDying && !autoRemoveDying.startsWith("no")) {
-                        await delay(250);
+                        await new Promise((resolve) => setTimeout(resolve, 250));
                         await autoRemoveDyingAtGreaterThanZeroHp(actor, true, autoRemoveDying);
                         logDebug("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
                     }
@@ -58,7 +74,7 @@ export function dyingHandlingPreUpdateActorHook(
         );
     } else {
         if (isHealed) {
-            handleAsync(
+            fireAndForget(
                 (async () => {
                     if (autoRemoveDying && !autoRemoveDying.startsWith("no")) {
                         await autoRemoveDyingAtGreaterThanZeroHp(actor, true, autoRemoveDying);
@@ -77,11 +93,11 @@ export function dyingHandlingPreUpdateActorHook(
 
 export async function itemHandlingItemHook(item: ItemPF2e): Promise<void> {
     if (isFirstGM() && item.slug === "dying" && item.parent) {
-        handleAsync(handleDying(0, 0, <ActorPF2e>item.parent, false), "itemHandlingItemHook handleDying");
+        fireAndForget(handleDying(0, 0, <ActorPF2e>item.parent, false), "itemHandlingItemHook handleDying");
     }
 
-    const giveWounded = game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved");
-    const giveUnconscious = game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP");
+    const giveWounded = getModuleSetting<boolean>("giveWoundedWhenDyingRemoved");
+    const giveUnconscious = getModuleSetting<boolean>("giveUnconsciousIfDyingRemovedAt0HP");
     if (giveWounded) {
         await giveWoundedWhenDyingRemoved(item);
         logDebug("Workbench giveWoundedWhenDyingRemoved complete");
@@ -99,8 +115,8 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boole
         enabled &&
         shouldIHandleThisMessage(
             message,
-            ["all", "players"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow"))),
-            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow"))),
+            isAllowedFor("handleDyingRecoveryRollAllow", "player"),
+            isAllowedFor("handleDyingRecoveryRollAllow", "gm"),
         ) &&
         (flavor.includes(game.i18n.localize("PF2E.Recovery.critFailure")) ||
             flavor.includes(game.i18n.localize("PF2E.Recovery.critSuccess")) ||
@@ -114,6 +130,7 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boole
         const outcome = systems.getFlag(message, "context.outcome") ?? "";
 
         const actor = getActorFromMessage(message);
+        if (!actor) return;
 
         const originalDyingCounter = token.actor?.getCondition("dying")?.value ?? 0;
         let dyingCounter = 0;
@@ -137,10 +154,13 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boole
                 break;
         }
         if (originalDyingCounter > 0 || dyingCounter !== 0) {
-            handleAsync(handleDying(dyingCounter, originalDyingCounter, actor), "handleDyingRecoveryRoll handleDying");
+            fireAndForget(
+                handleDying(dyingCounter, originalDyingCounter, actor),
+                "handleDyingRecoveryRoll handleDying",
+            );
 
             const total = message.rolls.reduce((total, roll) => total + roll.total, 0);
-            handleAsync(
+            fireAndForget(
                 ChatMessage.create({
                     flavor: game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.handled`, {
                         outcome: outcomeString,
@@ -155,7 +175,7 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boole
                 }),
                 "handleDyingRecoveryRoll ChatMessage",
             );
-            handleAsync(message.delete({ render: false }), "handleDyingRecoveryRoll delete");
+            fireAndForget(message.delete({ render: false }), "handleDyingRecoveryRoll delete");
         }
     }
 }
@@ -212,12 +232,16 @@ export async function autoRemoveDyingAtGreaterThanZeroHp(
     if (shouldIHandleThis(actor) && dying && !dying.isLocked && hpAboveZero) {
         const value = dying?.value || 0;
         if (dying && value > 0 && !dying.isLocked) {
-            if (autoRemoveDying.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
+            if (isRelevantForActor(actor.type, autoRemoveDying)) {
                 await handleDying(0, 0, actor);
             }
         }
     }
     return true;
+}
+
+function isRelevantForActor(actorType: string, option: string): boolean {
+    return option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actorType) : true;
 }
 
 export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
@@ -232,7 +256,7 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
 
 export function getRelevantMessages(actor: ActorPF2e): ChatMessagePF2e[] {
     const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
-    return game.settings.get(MODULENAME, "autoGainDyingIgnoresTargeting")
+    return getModuleSetting<boolean>("autoGainDyingIgnoresTargeting")
         ? relevant
         : relevant.filter((message) => message.target?.actor.id === actor.id);
 }
@@ -258,14 +282,7 @@ function findLastMessageWithTotalGreaterOrEqual(
 
 export function checkIfLatestDamageMessageIsCriticalHitByEnemy(actor: ActorPF2e, option: string): boolean {
     const hp = actor.attributes.hp;
-    if (
-        hp &&
-        hp.value &&
-        game.messages.contents.length > 0 &&
-        (!option.startsWith("no") && option.endsWith("ForCharacters")
-            ? ["character", "familiar"].includes(actor.type)
-            : true)
-    ) {
+    if (hp && hp.value && game.messages.contents.length > 0 && isRelevantForActor(actor.type, option)) {
         const relevant = getRelevantMessages(actor);
         const isDamageRoll = filterMessagesByContextType(relevant, "damage-roll");
         const isDamagingStrike = filterMessagesByStrikeDamaging(isDamageRoll);
@@ -289,7 +306,7 @@ export function handleOrcFerocity(
     name: string,
     shouldIncreaseWounded = true,
     hpNowAboveZero = false,
-) {
+): { shouldIncreaseWounded: boolean; hpNowAboveZero: boolean } {
     const orcFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "orc-ferocity");
     const orcFerocityUsed: any = actor.itemTypes.effect.find((effect) => effect.slug === "orc-ferocity-used");
     const incredibleFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "incredible-ferocity");
@@ -323,17 +340,10 @@ export function handleOrcFerocity(
         effectsToCreate.push(effect);
 
         if (rampagingFerocity) {
-            handleAsync(
-                ChatMessage.create({
-                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
-                        name: name,
-                    }),
-                    speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
-                    whisper:
-                        systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
-                            ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                            : [],
-                }),
+            createStatusEffectChatMessage(
+                actor,
+                name,
+                "autoGainDyingAtZeroHP.orcFerocityMessage",
                 "handleOrcFerocity ChatMessage",
             );
         }
@@ -343,7 +353,7 @@ export function handleOrcFerocity(
     return { shouldIncreaseWounded, hpNowAboveZero };
 }
 
-export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], name: string) {
+export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], name: string): void {
     const deliberateDeath = actor.itemTypes.feat.find((feat) => feat.slug === "deliberate-death");
     const deliberateDeathUsed: any = actor.itemTypes.effect.find((effect) => effect.slug === "deliberate-death-used");
     if (deliberateDeath && (!deliberateDeathUsed || deliberateDeathUsed.isExpired)) {
@@ -366,17 +376,10 @@ export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], 
         };
         effectsToCreate.push(effect);
 
-        handleAsync(
-            ChatMessage.create({
-                flavor: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.deliberateDeathMessage`, {
-                    name: name,
-                }),
-                speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
-                whisper:
-                    systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
-                        ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                        : [],
-            }),
+        createStatusEffectChatMessage(
+            actor,
+            name,
+            "autoGainDyingAtZeroHP.deliberateDeathMessage",
             "handleDeliberateDeath ChatMessage",
         );
     }
@@ -398,18 +401,20 @@ export async function handleDyingOnZeroHP(
     let dyingCounter = 0;
     let hpNowAboveZero = false;
     const effectsToCreate: any[] = [];
-    const nonlethalOption = String(game.settings.get(MODULENAME, "nonLethalIsNotLethal"));
+    const nonlethalOption = getModuleSetting<string>("nonLethalIsNotLethal");
 
-    const __ret = handleOrcFerocity(actor, update, effectsToCreate, name, shouldIncreaseWounded, hpNowAboveZero);
-    shouldIncreaseWounded = __ret.shouldIncreaseWounded;
-    hpNowAboveZero = __ret.hpNowAboveZero;
+    ({ shouldIncreaseWounded, hpNowAboveZero } = handleOrcFerocity(
+        actor,
+        update,
+        effectsToCreate,
+        name,
+        shouldIncreaseWounded,
+        hpNowAboveZero,
+    ));
 
     handleDeliberateDeath(actor, effectsToCreate, name);
 
-    if (
-        !hpNowAboveZero &&
-        (autogainDying.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
-    ) {
+    if (!hpNowAboveZero && isRelevantForActor(actor.type, autogainDying)) {
         if (autogainDying?.startsWith("addWoundedLevel")) {
             dyingCounter = (actor.getCondition("wounded")?.value ?? 0) + 1;
         } else {
@@ -429,11 +434,7 @@ export async function handleDyingOnZeroHP(
         await actor.increaseCondition("wounded");
     }
 
-    if (
-        String(game.settings.get(MODULENAME, "nonLethalIsNotLethal")).endsWith("ForCharacters")
-            ? ["character", "familiar"].includes(actor.type)
-            : true
-    ) {
+    if (isRelevantForActor(actor.type, nonlethalOption)) {
         if (!hpNowAboveZero && checkIfLatestDamageMessageIsNonlethal(actor, nonlethalOption)) {
             if (!actor.hasCondition("unconscious")) {
                 await actor.toggleCondition("unconscious");
@@ -442,7 +443,7 @@ export async function handleDyingOnZeroHP(
         }
     }
 
-    handleAsync(handleDying(dyingCounter, 0, actor), "handleDyingOnZeroHP handleDying");
+    fireAndForget(handleDying(dyingCounter, 0, actor), "handleDyingOnZeroHP handleDying");
 
     if (effectsToCreate.length > 0) {
         await actor.createEmbeddedDocuments("Item", effectsToCreate);
@@ -451,7 +452,7 @@ export async function handleDyingOnZeroHP(
     return hpNowAboveZero;
 }
 
-export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
+export async function giveWoundedWhenDyingRemoved(item: ItemPF2e): Promise<void> {
     const actor = item.parent;
     if (isFirstGM() && item.slug === "dying" && actor) {
         const items: any = actor.items;
@@ -487,17 +488,10 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                 },
             };
 
-            handleAsync(
-                ChatMessage.create({
-                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
-                        name: name,
-                    }),
-                    speaker: ChatMessage.getSpeaker({ token: <any>actor.token }),
-                    whisper:
-                        systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
-                            ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                            : [],
-                }),
+            createStatusEffectChatMessage(
+                actor,
+                name,
+                "giveWoundedWhenDyingRemoved.numbToDeathMessage",
                 "giveWoundedWhenDyingRemoved ChatMessage",
             );
 
@@ -528,12 +522,12 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
     }
 }
 
-export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
+export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e): Promise<void> {
     const actor = <ActorPF2e>item.parent;
     if (
         isFirstGM() &&
         item.slug === "dying" &&
-        game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP") &&
+        getModuleSetting<boolean>("giveUnconsciousIfDyingRemovedAt0HP") &&
         (<ActorSystemData>actor.system).attributes?.hp?.value === 0 &&
         !actor.hasCondition("unconscious")
     ) {
@@ -543,14 +537,14 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
     }
 }
 
-export function dyingHandlingCreateChatMessageHook(message: ChatMessagePF2e) {
-    const autoGainDying = String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"));
+export function dyingHandlingCreateChatMessageHook(message: ChatMessagePF2e): void {
+    const autoGainDying = getModuleSetting<string>("autoGainDyingIfTakingDamageWhenAlreadyDying");
     if (autoGainDying && !autoGainDying.startsWith("no")) {
         const actor = message.actor;
         if (actor && shouldIHandleThis(actor)) {
             if (message.content?.includes("damage-taken")) {
                 const now = Date.now();
-                const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || now;
+                const flag = getModuleFlag<number>(actor, "dyingLastApplied") || now;
                 logDebug(`dyingLastApplied is ${flag}, now is ${now}`);
                 // Ignore this if it occurs within last few seconds of the last time we applied dying
                 const notTooSoon = !flag?.between(now - 4000, now);
@@ -560,11 +554,7 @@ export function dyingHandlingCreateChatMessageHook(message: ChatMessagePF2e) {
                     if (!autoGainDying.startsWith("no") && originalDyingCounter > 0) {
                         const wasCritical = checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, autoGainDying);
 
-                        if (
-                            autoGainDying.endsWith("ForCharacters")
-                                ? ["character", "familiar"].includes(actor.type)
-                                : true
-                        ) {
+                        if (isRelevantForActor(actor.type, autoGainDying)) {
                             dyingCounter = dyingCounter + 1;
 
                             if (wasCritical) {
@@ -575,7 +565,7 @@ export function dyingHandlingCreateChatMessageHook(message: ChatMessagePF2e) {
                             `Before handleDying dyingLastApplied is ${flag}, now is ${now}, dyingCounter was ${originalDyingCounter} will increase by ${dyingCounter}`,
                         );
 
-                        handleAsync(
+                        fireAndForget(
                             handleDying(dyingCounter, originalDyingCounter, actor),
                             "dyingHandlingCreateChatMessageHook handleDying",
                         );
@@ -588,13 +578,7 @@ export function dyingHandlingCreateChatMessageHook(message: ChatMessagePF2e) {
 
 export function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string): boolean {
     const hp = actor.attributes.hp;
-    if (
-        hp &&
-        hp.value &&
-        game.messages.contents.length > 0 &&
-        !option.startsWith("no") &&
-        (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
-    ) {
+    if (hp && hp.value && game.messages.contents.length > 0 && isRelevantForActor(actor.type, option)) {
         const relevant = getRelevantMessages(actor);
         const lastDamageRoll = relevant.findLast(
             (message) => systems.getFlag(message, "context.type") === "damage-roll",

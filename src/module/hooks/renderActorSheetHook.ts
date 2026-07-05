@@ -1,14 +1,14 @@
 import { ActorPF2e, ActorSheetPF2e } from "foundry-pf2e";
-import { MODULENAME } from "../xdy-pf2e-workbench.js";
-import { extractHtmlElement } from "../utils.js";
-import { addOglTagToCharacterSheet } from "../feature/characterOglContent/index.js";
+
+import { extractHtmlElement, getModuleSetting } from "../utils.ts";
+import { addOglTagToCharacterSheet } from "../feature/characterOglContent/index.ts";
 import {
     colorActorItemsByRarity,
     itemFromActor,
     itemFromCompendium,
     markFeatsWithPrerequisites,
     rewriteSpellToChatToSendLink,
-} from "../feature/actorSheet/index.js";
+} from "../feature/actorSheet/index.ts";
 
 export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: unknown): void {
     const html = extractHtmlElement(element);
@@ -52,7 +52,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: 
     markFeatsWithPrerequisites(html, actor);
     rewriteSpellToChatToSendLink(sheet, html);
 
-    if (game.settings.get(MODULENAME, "showCharacterOglTag")) {
+    if (getModuleSetting("showCharacterOglTag")) {
         addOglTagToCharacterSheet(html, actor);
     }
 }

@@ -1,4 +1,4 @@
-import { MODULENAME } from "../xdy-pf2e-workbench.js";
+import { getModuleSetting } from "../utils.ts";
 
 export function preUpdateTokenHook(
     _document: unknown,
@@ -9,9 +9,9 @@ export function preUpdateTokenHook(
     options: object,
     ..._args: unknown[]
 ): void {
-    if (game.settings.get(MODULENAME, "tokenAnimation") && (update.x !== null || update.y !== null)) {
+    if (getModuleSetting("tokenAnimation") && (update.x !== null || update.y !== null)) {
         fu.setProperty(options, "animation", {
-            movementSpeed: game.settings.get(MODULENAME, "tokenAnimationSpeed"),
+            movementSpeed: getModuleSetting("tokenAnimationSpeed"),
         });
     }
 }

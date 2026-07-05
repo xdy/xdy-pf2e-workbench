@@ -1,7 +1,30 @@
 import { ActorPF2e, ChatMessagePF2e, PhysicalItemPF2e } from "foundry-pf2e";
-import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench.js";
+import { MODULENAME } from "./constants.ts";
 import BaseUser from "foundry/common/documents/user.mjs";
 import * as systems from "./utils/systems.ts";
+import { logError } from "./utils/logging.ts";
+
+export function getModuleSetting<T>(key: string): T {
+    const value = game.settings.get(MODULENAME, key);
+    if (value === undefined || value === null) {
+        logError(`${MODULENAME} | Setting "${key}" returned ${value}`);
+    }
+    return value as T;
+}
+
+export function getModuleSettingAsNumber(key: string, fallback = 0): number {
+    const raw = game.settings.get(MODULENAME, key);
+    if (raw === null || raw === undefined) return fallback;
+    const n = Number.parseInt(String(raw));
+    return Number.isNaN(n) ? fallback : n;
+}
+
+export function actorHasItemBySlug(actor: ActorPF2e, slug: string): boolean {
+    for (const item of actor.items) {
+        if ((item as unknown as { slug?: string }).slug === slug) return true;
+    }
+    return false;
+}
 
 function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true): boolean {
     const amIMessageSender = message.author?.id === game.user?.id;
@@ -66,7 +89,7 @@ export function sendHeldItemChatMessage(
         name: game?.scenes?.current?.tokens?.find((t) => t.actor?.id === actor.id)?.name ?? actor.name,
         items: items.map((i) => i.name).join(", "),
     });
-    handleAsync(
+    fireAndForget(
         ChatMessage.create({
             flavor: message,
             speaker: ChatMessage.getSpeaker({ actor }),
@@ -92,68 +115,11 @@ export const NOT_MYSTIFIED_VALUE = "999";
 export const MAX_ABSOLUTE_LEVEL = 20;
 
 /**
- * Fire-and-forget a promise with error logging. Use instead of bare `.then()`.
+ * Fire-and-forget a promise with error logging.
+ * Use when there is no result or it does not matter.
  */
-export function handleAsync(promise: Promise<unknown>, context: string): void {
-    promise.catch((error) => logError(`${MODULENAME} | ${context}:`, error));
-}
-
-export function logTrace(...args: unknown[]): void {
-    log(0, ...args);
-}
-
-export function logDebug(...args: unknown[]): void {
-    log(1, ...args);
-}
-
-export function logInfo(...args: unknown[]): void {
-    log(2, ...args);
-}
-
-export function logWarn(...args: unknown[]): void {
-    log(3, ...args);
-}
-
-export function logError(...args: unknown[]): void {
-    log(4, ...args);
-}
-
-function log(logLevel = 2, ...args: unknown[]): void {
-    let number = 2;
-    if (phase >= Phase.READY) {
-        number = Number(game.settings.get(MODULENAME, "logLevel")) ?? 2;
-    }
-
-    if (logLevel >= number) {
-        switch (logLevel) {
-            case 0:
-                console.trace(...args);
-                break;
-            case 1:
-                console.debug(...args);
-                break;
-            case 2:
-                console.info(...args);
-                break;
-            case 3:
-                console.warn(...args);
-                break;
-            case 4:
-                console.error(...args);
-                break;
-            case 5:
-                break;
-        }
-    }
-}
-
-export function debounce(callback: (...args: unknown[]) => void, wait: number): (...args: unknown[]) => void {
-    let timeout: NodeJS.Timeout | undefined;
-    return (...args: unknown[]): void => {
-        clearTimeout(timeout);
-        // @ts-expect-error TODO fix typing
-        timeout = setTimeout(() => callback.apply(this, args), wait);
-    };
+export function fireAndForget(promise: Promise<unknown>, context: string): void {
+    promise.catch((err) => logError(`${MODULENAME} | ${context}:`, err));
 }
 
 export function shouldIHandleThis(actor: ActorPF2e | null): boolean | null {
@@ -169,15 +135,15 @@ export function shouldIHandleThis(actor: ActorPF2e | null): boolean | null {
     return game.user.id === updater?.id;
 }
 
-export function pushNotification(message: string, type: string = "info"): void {
+export function pushNotification(type: string, message: string): void {
     game.socket.emit("module." + MODULENAME, { operation: "notification", args: [type, message] });
 }
 
 export function unflatten(object: Record<string, unknown>): Record<string, unknown> {
     const result: Record<string, unknown> = {};
-    Object.keys(object).forEach(function (k) {
-        setValue(result, k, object[k]);
-    });
+    for (const key of Object.keys(object)) {
+        setValue(result, key, object[key]);
+    }
     return result;
 }
 
@@ -186,8 +152,8 @@ export function setValue(object: Record<string, unknown>, path: string, value: u
     const top = split.pop();
 
     if (top !== undefined) {
-        // @ts-expect-error TODO fix typing
-        split.reduce(function (o, k, i, kk) {
+        // @ts-expect-error TODO Fix typing
+        split.reduce(function (o: Record<string, unknown>, k, i, kk) {
             return (o[k] = o[k] || (isFinite(i + 1 in kk ? Number(kk[i + 1]) : Number(top)) ? [] : {}));
         }, object)[top] = value;
     }
@@ -258,6 +224,24 @@ export function minionsInCurrentScene(actor: ActorPF2e): ActorPF2e[] {
               ?.filter((token) => token.canUserModify(<BaseUser>(<unknown>game.user), "update"))
               ?.map((token) => token.actor)
               ?.filter((x) => x?.traits.has("minion")) : [];
+}
+
+export function getModuleFlag<T>(
+    doc: { getFlag?: (scope: string, key: string) => unknown } | null | undefined,
+    flag: string,
+    fallback: T,
+): T;
+export function getModuleFlag<T>(
+    doc: { getFlag?: (scope: string, key: string) => unknown } | null | undefined,
+    flag: string,
+): T | undefined;
+export function getModuleFlag<T>(
+    doc: { getFlag?: (scope: string, key: string) => unknown } | null | undefined,
+    flag: string,
+    fallback?: T,
+): T | undefined {
+    const raw = doc?.getFlag?.(MODULENAME, flag) as T | undefined;
+    return raw !== undefined && raw !== null ? raw : fallback;
 }
 
 export function setFlag(doc: foundry.abstract.Document, flag: string, value: unknown): Promise<unknown> {

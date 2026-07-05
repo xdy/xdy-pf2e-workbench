@@ -3,7 +3,6 @@
         "allowSyntheticDefaultImports": true,
         "allowImportingTsExtensions": true,
         "allowUnusedLabels": false,
-        "baseUrl": ".",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "isolatedModules": true,

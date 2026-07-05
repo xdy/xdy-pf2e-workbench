@@ -1,15 +1,14 @@
-import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
-import { SettingsMenuPF2eWorkbench } from "./menu.js";
+import { updateHooks } from "../xdy-pf2e-workbench.ts";
+import { MODULENAME } from "../constants.ts";
+import { SettingsMenuPF2eWorkbench } from "./menu.ts";
 import { SettingRegistration } from "foundry/client/helpers/client-settings.mts";
 
 export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "automationClientSettings";
 
-    static override get defaultOptions() {
-        return fu.mergeObject(super.defaultOptions, {
-            height: "fit-content",
-        });
-    }
+    static override DEFAULT_OPTIONS = fu.mergeObject(super.DEFAULT_OPTIONS, {
+        height: "fit-content",
+    });
 
     public static override get settings(): Record<string, SettingRegistration> {
         return {

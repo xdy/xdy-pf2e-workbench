@@ -1,15 +1,15 @@
 import { ChatMessagePF2e } from "foundry-pf2e";
-import { MODULENAME } from "../xdy-pf2e-workbench.js";
-import * as systems from "../utils/systems.js";
-import { isActuallyDamageRoll } from "../utils.js";
+import { MODULENAME } from "../constants.ts";
+import * as systems from "../utils/systems.ts";
+import { getModuleSetting, isActuallyDamageRoll } from "../utils.ts";
 import {
     chatActionCardDescriptionCollapse,
     chatAttackCardDescriptionCollapse,
     chatCardDescriptionCollapse,
     damageCardExpand,
-} from "../feature/qolHandler/index.js";
-import { handleDyingRecoveryRoll } from "../feature/damageHandler/dyingHandling.js";
-import { hideSpellNameInDamageroll } from "../feature/qolHandler/hidePrivateSpellName.js";
+} from "../feature/qolHandler/index.ts";
+import { handleDyingRecoveryRoll } from "../feature/damageHandler/dyingHandling.ts";
+import { hideSpellNameInDamageroll } from "../feature/qolHandler/hidePrivateSpellName.ts";
 
 function needsCollapsing(setting: string): boolean {
     return setting === "collapsedDefault" || setting === "nonCollapsedDefault";
@@ -21,23 +21,19 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: HTMLElemen
     const isDamageRoll = isActuallyDamageRoll(message);
 
     if (isDamageRoll) {
-        const expandDamageRolls = String(game.settings.get(MODULENAME, "autoExpandDamageRolls"));
+        const expandDamageRolls = getModuleSetting<string>("autoExpandDamageRolls");
         if (["expandedAll", "expandedNew", "expandedNewest"].includes(expandDamageRolls)) {
             damageCardExpand(message, html, expandDamageRolls);
         }
 
-        const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
+        const castPrivateSpellEnabled = getModuleSetting("castPrivateSpell");
         if (castPrivateSpellEnabled && systems.getFlag(message, "origin.type") === "spell") {
             hideSpellNameInDamageroll(message, html);
         }
     } else {
-        const collapseItemContent = String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent"));
-        const collapseItemAttackContent = String(
-            game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent"),
-        );
-        const collapseItemActionContent = String(
-            game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent"),
-        );
+        const collapseItemContent = getModuleSetting<string>("autoCollapseItemChatCardContent");
+        const collapseItemAttackContent = getModuleSetting<string>("autoCollapseItemAttackChatCardContent");
+        const collapseItemActionContent = getModuleSetting<string>("autoCollapseItemActionChatCardContent");
 
         if (needsCollapsing(collapseItemContent)) {
             chatCardDescriptionCollapse(html);
@@ -53,14 +49,14 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: HTMLElemen
         }
     }
 
-    const heroPointRules = String(game.settings.get(MODULENAME, "heroPointRules"));
+    const heroPointRules = getModuleSetting<string>("heroPointRules");
     if (heroPointRules !== "no") {
         handleVariantHeroPointRules(message, html);
     }
 }
 
 function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e): void {
-    handleDyingRecoveryRoll(message, Boolean(game.settings.get(MODULENAME, "handleDyingRecoveryRoll")));
+    handleDyingRecoveryRoll(message, getModuleSetting<boolean>("handleDyingRecoveryRoll"));
 }
 
 function addHeroPointTag(element: HTMLElement, slug: string, localeKey: string): boolean {

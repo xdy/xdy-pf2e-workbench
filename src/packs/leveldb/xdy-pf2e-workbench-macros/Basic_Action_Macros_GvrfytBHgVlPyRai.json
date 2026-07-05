@@ -1,31 +1,31 @@
 {
-  "name": "Basic Action Macros",
-  "type": "script",
-  "author": "LyRgQdXNFeeP8bOE",
-  "img": "modules/xdy-pf2e-workbench/assets/icons/cc0/bam.webp",
-  "scope": "global",
-  "command": "await game.PF2eWorkbench.basicActionMacros();",
-  "ownership": {
-    "default": 0,
-    "LyRgQdXNFeeP8bOE": 3
-  },
-  "flags": {
-    "core": {
-      "sourceId": "Macro.kpXb0dEBMMVDh0AG"
-    }
-  },
-  "_stats": {
-    "systemId": "pf2e",
-    "systemVersion": "5.15.0",
-    "coreVersion": "12.329",
-    "createdTime": 1667835432979,
-    "modifiedTime": 1712483366329,
-    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
-    "compendiumSource": "Macro.kpXb0dEBMMVDh0AG",
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "_id": "GvrfytBHgVlPyRai",
-  "_key": "!macros!GvrfytBHgVlPyRai"
+    "name": "Basic Action Macros",
+    "type": "script",
+    "author": "LyRgQdXNFeeP8bOE",
+    "img": "modules/xdy-pf2e-workbench/assets/icons/cc0/bam.webp",
+    "scope": "global",
+    "command": "await game.PF2eWorkbench.basicActionMacros();",
+    "ownership": {
+        "default": 0,
+        "LyRgQdXNFeeP8bOE": 3
+    },
+    "flags": {
+        "core": {
+            "sourceId": "Macro.kpXb0dEBMMVDh0AG"
+        }
+    },
+    "_stats": {
+        "systemId": "pf2e",
+        "systemVersion": "5.15.0",
+        "coreVersion": "12.329",
+        "createdTime": 1667835432979,
+        "modifiedTime": 1712483366329,
+        "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+        "compendiumSource": "Macro.kpXb0dEBMMVDh0AG",
+        "duplicateSource": null
+    },
+    "folder": null,
+    "sort": 0,
+    "_id": "GvrfytBHgVlPyRai",
+    "_key": "!macros!GvrfytBHgVlPyRai"
 }

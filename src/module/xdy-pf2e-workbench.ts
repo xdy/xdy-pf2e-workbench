@@ -5,26 +5,27 @@
  * Software License: Apache 2.0
  */
 
-import { preloadTemplates } from "./preloadTemplates.js";
+import { preloadTemplates } from "./preloadTemplates.ts";
 import "../styles/xdy-pf2e-workbench.scss";
 
 // TODO Make it so holding shift pops up a dialog where one can change the name of the mystified creature
 // TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
 // TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
-import { registerWorkbenchKeybindings } from "./keybinds.js";
+import { registerWorkbenchKeybindings } from "./keybinds.ts";
 import { ActorPF2e } from "foundry-pf2e";
 
-import { handleAsync, isFirstGM, logInfo } from "./utils.js";
+import { fireAndForget, getModuleSetting, isFirstGM } from "./utils.ts";
+import { logInfo } from "./utils/logging.ts";
 import * as systems from "./utils/systems.ts";
 import {
     enableNpcRollerButton,
     NpcRoller,
     registerNpcRollerHandlebarsTemplates,
-} from "./feature/npc-roller/NpcRoller.js";
-import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler.js";
-import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator.js";
-import { basicActionMacros, registerBasicActionMacrosHandlebarsTemplates } from "./feature/macros/basicActionMacros.js";
-import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal.js";
+} from "./feature/npc-roller/NpcRoller.ts";
+import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler.ts";
+import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator.ts";
+import { basicActionMacros, registerBasicActionMacrosHandlebarsTemplates } from "./feature/macros/basicActionMacros.ts";
+import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal.ts";
 import {
     combatStartHook,
     createChatMessageHook,
@@ -47,8 +48,8 @@ import {
     renderItemSheetHook,
     renderTokenHUDHook,
     updateCombatHook,
-} from "./hooks.js";
-import { onScaleNPCContextHook } from "./feature/cr-scaler/NPCScalerSetup.js";
+} from "./hooks.ts";
+import { onScaleNPCContextHook } from "./feature/cr-scaler/NPCScalerSetup.ts";
 import {
     addHeroPoints,
     calcRemainingMinutes,
@@ -56,27 +57,27 @@ import {
     createRemainingTimeMessage,
     resetHeroPoints,
     startTimer,
-} from "./feature/heroPointHandler/index.js";
-import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.js";
-import { doMystificationFromToken } from "./feature/tokenMystificationHandler/index.js";
-import { autoRollDamage, noOrSuccessfulFlatcheck } from "./feature/damageHandler/index.js";
-import { registerWorkbenchSettings } from "./settings/index.js";
-import { mystifyNpcItems, mystifyNpcItemsByRarity } from "./feature/qolHandler/index.js";
-import { getAllFromAllowedPacks } from "./feature/api/getAllFromAllowedPacks.js";
+} from "./feature/heroPointHandler/index.ts";
+import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.ts";
+import { doMystificationFromToken } from "./feature/tokenMystificationHandler/index.ts";
+import { autoRollDamage, noOrSuccessfulFlatcheck } from "./feature/damageHandler/index.ts";
+import { registerWorkbenchSettings } from "./settings/index.ts";
+import { mystifyNpcItemsByRarity } from "./feature/qolHandler/index.ts";
+import { getAllFromAllowedPacks } from "./feature/api/getAllFromAllowedPacks.ts";
 
-import { refocus } from "./feature/macros/refocus.js";
-import { followTheExpert } from "./feature/macros/follow-the-expert.js";
-import { hypercognition } from "./feature/macros/hypercognition.js";
-import { npcScaler } from "./feature/macros/npcScaler.js";
-import { initCanvasPointer } from "./feature/canvas-pointer/index.js";
+import { refocus } from "./feature/macros/refocus.ts";
+import { followTheExpert } from "./feature/macros/follow-the-expert.ts";
+import { hypercognition } from "./feature/macros/hypercognition.ts";
+import { npcScaler } from "./feature/macros/npcScaler.ts";
+import { initCanvasPointer } from "./feature/canvas-pointer/index.ts";
 import { registerHandlebarsHelpers } from "./utils/handlebarsHelpers.ts";
 import { registerToolbeltWrappers } from "./feature/damageHandler/toolbeltIntegration.ts";
+import { MODULENAME } from "./constants.ts";
 
-export const MODULENAME = "xdy-pf2e-workbench";
 export const NPC_TYPE = "npc";
 export const CHARACTER_TYPE = "character";
 
-const activeHooks = new Set();
+const activeHooks = new Set<string>();
 
 // Enum for phases
 export enum Phase {
@@ -89,8 +90,12 @@ export enum Phase {
 
 export let phase: Phase = Phase.DOWN;
 
-// @ts-expect-error TODO fix typing
-function handle(hookName, shouldBeOn, hookFunction, once = false) {
+function handle(
+    hookName: string,
+    shouldBeOn: unknown,
+    hookFunction: (...args: unknown[]) => boolean | void | Promise<boolean | void>,
+    once = false,
+): void {
     if (!activeHooks.has(hookName)) {
         if (shouldBeOn) {
             if (once) {
@@ -116,54 +121,54 @@ export function updateHooks(cleanSlate = false): void {
         activeHooks.clear();
     }
 
-    const gs = game.settings;
-
-    const autoRollDamageAllow = gs.get(MODULENAME, "autoRollDamageAllow");
-    const experimentalToolbeltSaveIntegration = gs.get(MODULENAME, "experimentalToolbeltSaveIntegration");
-    const autoRollDamageForStrike = gs.get(MODULENAME, "autoRollDamageForStrike");
-    const autoRollDamageForSpellAttack = gs.get(MODULENAME, "autoRollDamageForSpellAttack");
-    const autoRollDamageForSpellWhenNotAnAttack = gs.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack");
-    const castPrivateSpell = gs.get(MODULENAME, "castPrivateSpell");
-    const reminderTargeting = gs.get(MODULENAME, "reminderTargeting");
-    const reminderCannotAttack = gs.get(MODULENAME, "reminderCannotAttack");
-    const applyPersistentDamage = gs.get(MODULENAME, "applyPersistentDamage");
-    const applyPersistentHealing = gs.get(MODULENAME, "applyPersistentHealing");
-    const reminderBreathWeapon = gs.get(MODULENAME, "reminderBreathWeapon");
-    const autoGainDyingIfTakingDamageWhenAlreadyDying = String(
-        gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
+    const autoRollDamageAllow = getModuleSetting<string>("autoRollDamageAllow");
+    const experimentalToolbeltSaveIntegration = getModuleSetting<boolean>("experimentalToolbeltSaveIntegration");
+    const autoRollDamageForStrike = getModuleSetting<boolean>("autoRollDamageForStrike");
+    const autoRollDamageForSpellAttack = getModuleSetting<boolean>("autoRollDamageForSpellAttack");
+    const autoRollDamageForSpellWhenNotAnAttack = getModuleSetting<string>("autoRollDamageForSpellWhenNotAnAttack");
+    const castPrivateSpell = getModuleSetting<boolean>("castPrivateSpell");
+    const reminderTargeting = getModuleSetting<string>("reminderTargeting");
+    const reminderCannotAttack = getModuleSetting<string>("reminderCannotAttack");
+    const applyPersistentDamage = getModuleSetting<boolean>("applyPersistentDamage");
+    const applyPersistentHealing = getModuleSetting<boolean>("applyPersistentHealing");
+    const reminderBreathWeapon = getModuleSetting<boolean>("reminderBreathWeapon");
+    const autoGainDyingIfTakingDamageWhenAlreadyDying = getModuleSetting<string>(
+        "autoGainDyingIfTakingDamageWhenAlreadyDying",
     );
-    const autoCollapseItemChatCardContent = String(gs.get(MODULENAME, "autoCollapseItemChatCardContent"));
-    const autoCollapseItemActionChatCardContent = String(gs.get(MODULENAME, "autoCollapseItemActionChatCardContent"));
-    const autoCollapseItemAttackChatCardContent = String(gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent"));
-    const autoExpandDamageRolls = String(gs.get(MODULENAME, "autoExpandDamageRolls"));
-    const heroPointRules = gs.get(MODULENAME, "heroPointRules");
-    const npcScaler = gs.get(MODULENAME, "npcScaler");
-    const npcRoller = gs.get(MODULENAME, "npcRoller");
-    const dropHeldItemsOnBecomingUnconscious = gs.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious");
-    const housepatcher = gs.get(MODULENAME, "housepatcher");
-    const decreaseFrightenedConditionEachTurn = gs.get(MODULENAME, "decreaseFrightenedConditionEachTurn");
-    const actionsReminderAllow = gs.get(MODULENAME, "actionsReminderAllow");
-    const autoReduceStunned = gs.get(MODULENAME, "autoReduceStunned");
-    const npcMystifier = gs.get(MODULENAME, "npcMystifier");
-    const enableAutomaticMove = String(gs.get(MODULENAME, "enableAutomaticMove"));
-    const autoGainDyingAtZeroHP = String(gs.get(MODULENAME, "autoGainDyingAtZeroHP"));
-    const nonLethalIsNotLethal = String(gs.get(MODULENAME, "nonLethalIsNotLethal"));
-    const autoRemoveDyingAtGreaterThanZeroHP = String(gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP"));
-    const autoRemoveUnconsciousAtGreaterThanZeroHP = gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP");
-    const npcMystifyAllPhysicalMagicalItems = gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems");
-    const tokenAnimation = gs.get(MODULENAME, "tokenAnimation");
-    const playerFeatsRarityColour = gs.get(MODULENAME, "playerFeatsRarityColour");
-    const playerFeatsPrerequisiteHint = gs.get(MODULENAME, "playerFeatsPrerequisiteHint");
-    const playerSpellsRarityColour = gs.get(MODULENAME, "playerSpellsRarityColour");
-    const playerAbcdRarityColour = gs.get(MODULENAME, "playerAbcdRarityColour");
-    const playerSpellsChangeSendToChat = gs.get(MODULENAME, "playerSpellsChangeSendToChat");
-    const sheatheHeldItemsAfterEncounter = gs.get(MODULENAME, "sheatheHeldItemsAfterEncounter");
-    const showItemLicenseTags = gs.get(MODULENAME, "showItemLicenseTags");
-    const showCharacterOglTag = gs.get(MODULENAME, "showCharacterOglTag");
+    const autoCollapseItemChatCardContent = getModuleSetting<string>("autoCollapseItemChatCardContent");
+    const autoCollapseItemActionChatCardContent = getModuleSetting<string>("autoCollapseItemActionChatCardContent");
+    const autoCollapseItemAttackChatCardContent = getModuleSetting<string>("autoCollapseItemAttackChatCardContent");
+    const autoExpandDamageRolls = getModuleSetting<string>("autoExpandDamageRolls");
+    const heroPointRules = getModuleSetting<string>("heroPointRules");
+    const npcScaler = getModuleSetting<boolean>("npcScaler");
+    const npcRoller = getModuleSetting<boolean>("npcRoller");
+    const dropHeldItemsOnBecomingUnconscious = getModuleSetting<boolean>("dropHeldItemsOnBecomingUnconscious");
+    const housepatcher = getModuleSetting<string>("housepatcher");
+    const decreaseFrightenedConditionEachTurn = getModuleSetting<boolean>("decreaseFrightenedConditionEachTurn");
+    const actionsReminderAllow = getModuleSetting<string>("actionsReminderAllow");
+    const autoReduceStunned = getModuleSetting<boolean>("autoReduceStunned");
+    const npcMystifier = getModuleSetting<boolean>("npcMystifier");
+    const enableAutomaticMove = getModuleSetting<string>("enableAutomaticMove");
+    const autoGainDyingAtZeroHP = getModuleSetting<string>("autoGainDyingAtZeroHP");
+    const nonLethalIsNotLethal = getModuleSetting<string>("nonLethalIsNotLethal");
+    const autoRemoveDyingAtGreaterThanZeroHP = getModuleSetting<string>("autoRemoveDyingAtGreaterThanZeroHP");
+    const autoRemoveUnconsciousAtGreaterThanZeroHP = getModuleSetting<boolean>(
+        "autoRemoveUnconsciousAtGreaterThanZeroHP",
+    );
+    const npcMystifyAllPhysicalMagicalItems = getModuleSetting<string>("npcMystifyAllPhysicalMagicalItems");
+    const tokenAnimation = getModuleSetting<boolean>("tokenAnimation");
+    const playerFeatsRarityColour = getModuleSetting<boolean>("playerFeatsRarityColour");
+    const playerFeatsPrerequisiteHint = getModuleSetting<boolean>("playerFeatsPrerequisiteHint");
+    const playerSpellsRarityColour = getModuleSetting<boolean>("playerSpellsRarityColour");
+    const playerAbcdRarityColour = getModuleSetting<boolean>("playerAbcdRarityColour");
+    const playerSpellsChangeSendToChat = getModuleSetting<boolean>("playerSpellsChangeSendToChat");
+    const sheatheHeldItemsAfterEncounter = getModuleSetting<boolean>("sheatheHeldItemsAfterEncounter");
+    const showItemLicenseTags = getModuleSetting<boolean>("showItemLicenseTags");
+    const showCharacterOglTag = getModuleSetting<boolean>("showCharacterOglTag");
 
-    const handleDyingRecoveryRoll = gs.get(MODULENAME, "handleDyingRecoveryRoll");
-    const giveWoundedWhenDyingRemoved = gs.get(MODULENAME, "giveWoundedWhenDyingRemoved");
-    const giveUnconsciousIfDyingRemovedAt0HP = gs.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP");
+    const handleDyingRecoveryRoll = getModuleSetting<boolean>("handleDyingRecoveryRoll");
+    const giveWoundedWhenDyingRemoved = getModuleSetting<boolean>("giveWoundedWhenDyingRemoved");
+    const giveUnconsciousIfDyingRemovedAt0HP = getModuleSetting<boolean>("giveUnconsciousIfDyingRemovedAt0HP");
 
     handle("getActorContextOptions", npcScaler, onScaleNPCContextHook);
     handle("renderJournalDirectory", npcRoller, enableNpcRollerButton);
@@ -194,7 +199,7 @@ export function updateHooks(cleanSlate = false): void {
     const toolbeltSaveSpellActive =
         experimentalToolbeltSaveIntegration &&
         autoRollDamageAllow &&
-        ["saveSpell", "anySpell"].includes(String(autoRollDamageForSpellWhenNotAnAttack)) &&
+        ["saveSpell", "anySpell"].includes(autoRollDamageForSpellWhenNotAnAttack) &&
         !!game.modules.get("pf2e-toolbelt")?.active;
 
     handle("pf2e-toolbelt.rollSave", toolbeltSaveSpellActive, pf2eToolbeltRollSaveHook);
@@ -273,9 +278,9 @@ export function updateHooks(cleanSlate = false): void {
 
     handle("renderItemSheet", showItemLicenseTags, renderItemSheetHook);
 
-    const customPauseImage = gs.get(MODULENAME, "customPauseImage");
-    const customPauseText = gs.get(MODULENAME, "customPauseText");
-    const pauseImageNoSpin = gs.get(MODULENAME, "pauseImageNoSpin");
+    const customPauseImage = getModuleSetting<string>("customPauseImage");
+    const customPauseText = getModuleSetting<string>("customPauseText");
+    const pauseImageNoSpin = getModuleSetting<boolean>("pauseImageNoSpin");
     handle(
         "renderGamePause",
         customPauseImage !== "" || customPauseText !== "" || pauseImageNoSpin,
@@ -284,7 +289,8 @@ export function updateHooks(cleanSlate = false): void {
 
     handle(
         "ready",
-        gs.get(MODULENAME, "legacyVariantRuleAncestryParagon") || gs.get(MODULENAME, "legacyVariantRuleDualClass"),
+        getModuleSetting<boolean>("legacyVariantRuleAncestryParagon") ||
+            getModuleSetting<boolean>("legacyVariantRuleDualClass"),
         readyHook,
         true,
     );
@@ -299,9 +305,9 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     registerWorkbenchKeybindings();
 
     await preloadTemplates();
-    handleAsync(registerNpcRollerHandlebarsTemplates(), "registerNpcRollerHandlebarsTemplates");
+    fireAndForget(registerNpcRollerHandlebarsTemplates(), "registerNpcRollerHandlebarsTemplates");
 
-    handleAsync(registerBasicActionMacrosHandlebarsTemplates(), "registerBasicActionMacrosHandlebarsTemplates");
+    fireAndForget(registerBasicActionMacrosHandlebarsTemplates(), "registerBasicActionMacrosHandlebarsTemplates");
 
     registerHandlebarsHelpers();
 
@@ -336,9 +342,8 @@ Hooks.once("ready", () => {
     // Must be in ready
 
     // Make some functions available for macros
-    // noinspection JSUnusedGlobalSymbols
-    // @ts-expect-error Adding new field to game global
-    game.PF2eWorkbench = {
+    // noinspection UnnecessaryLocalVariableJS,JSUnusedGlobalSymbols
+    const api = {
         resetHeroPoints: resetHeroPoints, // game.PF2eWorkbench.resetHeroPoints(1)
         addHeroPoints: addHeroPoints, // game.PF2eWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
         scaleNPCToLevelFromActor: scaleNPCToLevelFromActor, // game.PF2eWorkbench.scaleNPCToLevelFromActor(_token.actor.id, 24);
@@ -352,14 +357,17 @@ Hooks.once("ready", () => {
         hypercognition: hypercognition, // await game.PF2eWorkbench.followTheExpert()
         buildNpcSpellbookJournal: buildNpcSpellbookJournal, // await game.PF2eWorkbench.buildNpcSpellbookJournal()
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
-        mystifyNpcItems: mystifyNpcItems, // @deprecated — use mystifyNpcItemsByRarity instead
         mystifyNpcItemsByRarity: mystifyNpcItemsByRarity, // await game.PF2eWorkbench.mystifyNpcItemsByRarity(actor, usingPartyLevel?, thresholds?)
         getAllFromAllowedPacks: getAllFromAllowedPacks, // await game.PF2eWorkbench.getAllFromAllowedPacks({ type, fields, filter, strictSourcing, fetch})
         npcScaler: npcScaler, // await game.PF2eWorkbench.npcScaler()
-        autoRollDamage: autoRollDamage, // await await game.PF2eWorkbench.autoRollDamage(message)
+        autoRollDamage: autoRollDamage, // await game.PF2eWorkbench.autoRollDamage(message)
     };
+    // @ts-expect-error Adding new field to game global
+    game.PF2eWorkbench = api;
+    // @ts-expect-error Adding new field to game global
+    console.debug(`${MODULENAME} | game.PF2eWorkbench registered`, !!game.PF2eWorkbench);
 
-    const autoRollSpell = game.settings.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack");
+    const autoRollSpell = getModuleSetting<string>("autoRollDamageForSpellWhenNotAnAttack");
     if (game.modules.get("pf2e-toolbelt")?.active && (autoRollSpell === "anySpell" || autoRollSpell === "saveSpell")) {
         registerToolbeltWrappers();
     }
@@ -372,7 +380,7 @@ Hooks.once("ready", () => {
         ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.pf2e-toolbox`));
     }
 
-    const ta = game.settings.get(MODULENAME, "tokenAnimation");
+    const ta = getModuleSetting<boolean>("tokenAnimation");
     const mlt = game.modules.get("multilevel-tokens");
     if (ta && mlt?.active) {
         ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.multilevel-tokens`));
@@ -382,9 +390,9 @@ Hooks.once("ready", () => {
 
     // TODO Instead of opening immediately, add a handler that hooks onto the *first* unpause, and starts then.
     // TODO Check if more than 'timer max' minutes have passed, if so assume new start and reset to 'timer max' minutes.
-    if (isFirstGM() && game.settings.get(MODULENAME, "heroPointHandler")) {
+    if (isFirstGM() && getModuleSetting<boolean>("heroPointHandler")) {
         let remainingMinutes = calcRemainingMinutes(false);
-        if (remainingMinutes > 0 || game.settings.get(MODULENAME, "heroPointHandlerStartTimerOnReady")) {
+        if (remainingMinutes > 0 || getModuleSetting<boolean>("heroPointHandlerStartTimerOnReady")) {
             remainingMinutes = calcRemainingMinutes(true);
             startTimer(remainingMinutes).then(() => {
                 createRemainingTimeMessage(remainingMinutes);

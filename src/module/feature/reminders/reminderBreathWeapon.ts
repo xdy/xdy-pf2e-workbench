@@ -1,6 +1,6 @@
-import { isFirstGM } from "../../utils.js";
-import { ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { getModuleSetting, isFirstGM } from "../../utils.ts";
+import { ActorPF2e, ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
+import { MODULENAME } from "../../constants.ts";
 import * as systems from "../../utils/systems.ts";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e): Promise<void> {
@@ -46,7 +46,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e): Promise<vo
     }
 }
 
-async function getEffectDetails(activeActor, messageContent: string, diceValue) {
+async function getEffectDetails(activeActor: ActorPF2e, messageContent: string, diceValue: number) {
     const titleRetrieved = messageContent.match(/>(.*?) <span class="action-glyph"/);
 
     return {
@@ -73,7 +73,7 @@ async function getEffectDetails(activeActor, messageContent: string, diceValue) 
             rules: [],
             slug: `xdy-breath-weapon-reminder-${fu.randomID()}`,
             unidentified:
-                game.settings.get(MODULENAME, "reminderBreathWeaponHidden") &&
+                getModuleSetting<boolean>("reminderBreathWeaponHidden") &&
                 !game.actors?.party?.members.map((m) => m?.id).includes(activeActor.id),
             traits: {
                 value: [],

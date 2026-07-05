@@ -1,20 +1,19 @@
-import { ActorSystemData, CreaturePF2e, ScenePF2e, TokenDocumentPF2e, TokenPF2e } from "foundry-pf2e";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings/index.js";
-import { generateNameFromTraits } from "./traits-name-generator.js";
-import { heroes, logError } from "../../utils.js";
+import { ActorSystemData, CreaturePF2e, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
+import { MODULENAME } from "../../constants.ts";
+import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings/npc-mystification.ts";
+import { generateNameFromTraits } from "./traits-name-generator.ts";
+import { getModuleFlag, getModuleSetting, heroes } from "../../utils.ts";
+import { logError } from "../../utils/logging.ts";
 import * as systems from "../../utils/systems.ts";
 
-// @ts-expect-error TODO fix
-function shouldSkipRandomProperty(token) {
+function shouldSkipRandomProperty(token: TokenDocumentPF2e<ScenePF2e>): boolean {
     return (
-        game.settings.get(MODULENAME, "npcMystifierRandomPropertySkipForUnique") &&
+        getModuleSetting<boolean>("npcMystifierRandomPropertySkipForUnique") &&
         (<ActorSystemData>token?.actor?.system)?.traits?.rarity === "unique"
     );
 }
 
-// @ts-expect-error TODO fix
-function hasRandomProperty(token) {
+function hasRandomProperty(token: TokenDocumentPF2e<ScenePF2e>): boolean {
     switch (mystifyRandomPropertyType) {
         case "numberPostfix":
         case "wordPrefix":
@@ -25,7 +24,7 @@ function hasRandomProperty(token) {
 }
 
 async function fetchRandomWordPrefix(): Promise<string> {
-    const fixSetting = String(game.settings.get(MODULENAME, "npcMystifierRandomWordPrefixRollTable")).trim();
+    const fixSetting = getModuleSetting<string>("npcMystifierRandomWordPrefixRollTable").trim();
 
     // "null" check is due to a previous bug that may have left invalid data in text fields
     if (fixSetting !== null && fixSetting !== "null" && fixSetting !== "") {
@@ -70,9 +69,9 @@ export async function buildTokenName(
     let tokenName = "";
 
     function getTokenName(): string {
-        const useOriginalTokenName = game.settings.get(MODULENAME, "npcMystifierDemystifyToOriginalTokenName");
+        const useOriginalTokenName = getModuleSetting<boolean>("npcMystifierDemystifyToOriginalTokenName");
         if (useOriginalTokenName) {
-            const originalTokenName = String(token.getFlag(MODULENAME, "originalTokenName"));
+            const originalTokenName = getModuleFlag(token, "originalTokenName", "");
             if (originalTokenName) {
                 return originalTokenName ?? "";
             }
@@ -82,7 +81,7 @@ export async function buildTokenName(
 
     if (token && token.actor) {
         tokenName = token.name;
-        const keep = game.settings.get(MODULENAME, "npcMystifierKeepRandomProperty");
+        const keep = getModuleSetting<boolean>("npcMystifierKeepRandomProperty");
         if (isMystified) {
             if (keep && !shouldSkipRandomProperty(token)) {
                 switch (mystifyRandomPropertyType) {
@@ -100,7 +99,7 @@ export async function buildTokenName(
             }
         } else {
             // Store the original name before mystifying
-            if (!token.getFlag(MODULENAME, "originalTokenName")) {
+            if (!getModuleFlag(token, "originalTokenName")) {
                 await token.setFlag(MODULENAME, "originalTokenName", token.name);
             }
 
@@ -144,7 +143,7 @@ export async function buildTokenName(
     }
 
     // Never return an empty string
-    return tokenName === "" ? String(game.settings.get(MODULENAME, "npcMystifierNoMatch")) : tokenName;
+    return tokenName === "" ? getModuleSetting<string>("npcMystifierNoMatch") : tokenName;
 }
 
 function isMystifyModifierKeyPressed() {
@@ -162,7 +161,7 @@ function isMystifyModifierKeyPressed() {
 }
 
 export async function tokenCreateMystification(token: any): Promise<void> {
-    const key = String(game.settings.get(MODULENAME, "npcMystifierModifierKey"));
+    const key = getModuleSetting<string>("npcMystifierModifierKey");
     if (
         game.user?.isGM &&
         token &&
@@ -207,12 +206,12 @@ function rarityIndex(rarity: string): number {
 }
 
 function shouldUseFullTraitName(token: TokenDocumentPF2e<ScenePF2e>): boolean {
-    const includeRarity = String(game.settings.get(MODULENAME, "npcMystifierIncludeCreaturesOfThisRarityOrGreater"));
+    const includeRarity = getModuleSetting<string>("npcMystifierIncludeCreaturesOfThisRarityOrGreater");
     const creatureRarity = (<ActorSystemData>token.actor?.system)?.traits?.rarity ?? "common";
     const eligibleForRarity = rarityIndex(creatureRarity) >= rarityIndex(includeRarity);
 
-    let includeLevel = Number(game.settings.get(MODULENAME, "npcMystifierIncludeCreaturesOfThisLevelOrGreater"));
-    if (game.settings.get(MODULENAME, "npcMystifierIncludeCreaturesOfThisLevelOrGreaterUsingPartyLevel")) {
+    let includeLevel = Number(getModuleSetting<number>("npcMystifierIncludeCreaturesOfThisLevelOrGreater"));
+    if (getModuleSetting<boolean>("npcMystifierIncludeCreaturesOfThisLevelOrGreaterUsingPartyLevel")) {
         includeLevel = game?.actors?.party?.level ?? includeLevel;
     }
     const eligibleForLevel = includeLevel === -1 || (token.actor as CreaturePF2e).level >= includeLevel;
@@ -234,7 +233,7 @@ export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | unde
     }
 
     if (
-        String(game.settings.get(MODULENAME, "npcMystifierExcludeActorTypes"))
+        getModuleSetting<string>("npcMystifierExcludeActorTypes")
             .split(",")
             .map((t) => t.trim())
             .includes(token.actor?.type)
@@ -244,7 +243,6 @@ export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | unde
 
     const useFullTraitName = shouldUseFullTraitName(token);
 
-    // define array of objects to be updated
     const updates = [
         {
             _id: token.id,
@@ -252,7 +250,7 @@ export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | unde
         },
     ];
 
-    const allOfActor = game.settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor");
+    const allOfActor = getModuleSetting<boolean>("npcMystifierDemystifyAllTokensBasedOnTheSameActor");
     if (active && game.user?.isGM && isTokenMystified(token) && allOfActor) {
         for (const t of canvas.scene.tokens) {
             if (t.id !== token.id && t.actor?.id === token.actor.id && isTokenMystified(t)) {
@@ -264,8 +262,11 @@ export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | unde
         }
     }
     await canvas.scene.updateEmbeddedDocuments("Token", updates, { render: true });
+    renameCombatants(token);
+}
+
+function renameCombatants(token: TokenDocumentPF2e<ScenePF2e>): void {
     for (const combat of game.combats) {
-        // The combat tracker doesn't update the combatant names when the token names change
         const ids = combat.combatants.filter((c) => c.actor?.id === token.actor?.id).map((c) => ({ _id: c.id }));
         if (ids.length > 0) {
             combat.updateEmbeddedDocuments("Combatant", ids, { diff: false, render: true });
@@ -273,40 +274,50 @@ export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | unde
     }
 }
 
-export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement): void {
-    let token: TokenPF2e<TokenDocumentPF2e<ScenePF2e>> | null;
-    if (canvas && canvas.tokens) {
-        token = canvas.tokens.get(<string>data._id) ?? null;
+export function renderNameHud(app: { object?: unknown }, html: HTMLElement): void {
+    const tokenId =
+        (app?.object as { id?: string })?.id ?? (app?.object as { document?: { id?: string } })?.document?.id;
+    if (!tokenId || !canvas?.tokens) return;
+    const token = canvas.tokens.get(tokenId);
+    if (!token) return;
 
-        const title = isTokenMystified(token) ? "Unmystify" : "Mystify";
-        const toggle = document.createElement("div");
-        toggle.className = `control-icon toggle ${isTokenMystified(token) ? "active" : ""}`;
-        toggle.setAttribute("data-action", "mystify");
+    const mystified = isTokenMystified(token);
+    if (!canMystify() || token?.actor?.hasPlayerOwner) return;
 
-        const icon = document.createElement("i");
-        icon.className = String(game.settings.get(MODULENAME, "npcMystifierIcon"));
-        icon.title = title;
-
-        toggle.appendChild(icon);
-
-        if (canMystify() && !token?.actor?.hasPlayerOwner) {
-            toggle.addEventListener("click", async (e) => {
-                const hudElement = e.currentTarget as HTMLElement;
-                const active = hudElement.classList.contains("active");
-                if (token !== null && isTokenMystified(token) === active) {
-                    await doMystification(token?.document, active);
-                }
-                hudElement.classList.toggle("active");
-            });
-
-            const column = html.querySelector("div.col.left");
-            if (column) {
-                column.appendChild(toggle);
-            }
-        }
+    const toggle = createMystifyToggle(mystified, tokenId);
+    const column = html.querySelector("div.col.left");
+    if (column) {
+        column.appendChild(toggle);
     }
 }
 
-export function canMystify() {
+function createMystifyToggle(mystified: boolean, tokenId: string): HTMLDivElement {
+    const title = mystified ? "Unmystify" : "Mystify";
+    const toggle = document.createElement("div");
+    toggle.className = `control-icon toggle ${mystified ? "active" : ""}`;
+    toggle.setAttribute("data-action", "mystify");
+
+    const icon = document.createElement("i");
+    icon.className = getModuleSetting<string>("npcMystifierIcon");
+    icon.title = title;
+    toggle.appendChild(icon);
+
+    toggle.addEventListener("click", createMystifyClickHandler(tokenId));
+    return toggle;
+}
+
+function createMystifyClickHandler(tokenId: string): (e: MouseEvent) => Promise<void> {
+    return async (e: MouseEvent) => {
+        const hudElement = e.currentTarget as HTMLElement;
+        const active = hudElement.classList.contains("active");
+        const updatedToken = canvas?.tokens?.get(tokenId) ?? null;
+        if (updatedToken && isTokenMystified(updatedToken) === active) {
+            await doMystification(updatedToken.document, isTokenMystified(updatedToken));
+        }
+        hudElement.classList.toggle("active");
+    };
+}
+
+export function canMystify(): any {
     return game.user?.isGM && canvas && canvas.tokens;
 }
