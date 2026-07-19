@@ -1,3 +1,10 @@
+## [7.4.14](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.13...v7.4.14) (2026-07-19)
+
+
+### Bug Fixes
+
+* Assorted cleanup, set verified to latest version, update dependencies, keeping up with the macro faeries, reformat code, make tsc happy, make eslint a little happier, improve typing, make typing worse, introduce bugs, fix bugs, etc. ([a5f098d](https://github.com/xdy/xdy-pf2e-workbench/commit/a5f098dc71860c07924761a428cb0c667303d6b7))
+
 ## [7.4.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.12...v7.4.13) (2026-07-05)
 
 
