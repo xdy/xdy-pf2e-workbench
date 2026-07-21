@@ -1,3 +1,10 @@
+# [7.5.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.14...v7.5.0) (2026-07-21)
+
+
+### Features
+
+* Adds optional support for automating learn a spell (including failure), with the option to skip most steps and do it for free without rolling. Works from a dragged in spell or identified scroll (if dragged to spellcasting entry or prepared spells window, dragging to inventory works as usual but pops up a question if you want to learn from scroll.) Optional setting to destroy scroll after learning for sadistically retro gms. ([8db6003](https://github.com/xdy/xdy-pf2e-workbench/commit/8db600375ff385c997e8fd9e20c9fcaeeb40f340))
+
 ## [7.4.14](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.13...v7.4.14) (2026-07-19)
 
 
