@@ -1,66 +1,57 @@
 import { MODULENAME } from "../constants.ts";
+import { Phase, phase } from "../lifecycle.ts";
 
-export const enum LogLevel {
-    Trace = 0,
-    Debug = 1,
-    Info = 2,
-    Warn = 3,
-    Error = 4,
-}
-
-// Bind so each method preserves `this` when called as a standalone function reference.
-const LOG_METHODS: Record<LogLevel, (...args: unknown[]) => void> = {
-    [LogLevel.Trace]: console.trace.bind(console),
-    [LogLevel.Debug]: console.debug.bind(console),
-    [LogLevel.Info]: console.info.bind(console),
-    [LogLevel.Warn]: console.warn.bind(console),
-    [LogLevel.Error]: console.error.bind(console),
-};
-
-let cachedLevel: LogLevel | null = null;
-
-function resolveLogLevel(): LogLevel {
-    try {
-        const raw = game.settings.get(MODULENAME, "logLevel");
-        const level = raw !== null ? (Number(raw) as LogLevel) : LogLevel.Info;
-        return level >= LogLevel.Trace && level <= LogLevel.Error ? level : LogLevel.Info;
-    } catch {
-        // Settings not registered yet (early boot). Fall back to Info until ready.
-        return LogLevel.Info;
-    }
-}
-
-function getLogLevelSetting(): LogLevel {
-    if (cachedLevel !== null) return cachedLevel;
-    cachedLevel = resolveLogLevel();
-    return cachedLevel;
-}
-
-export function resetLogLevelCache(): void {
-    cachedLevel = null;
-}
-
-function log(logLevel: LogLevel, ...args: unknown[]): void {
-    if (logLevel < getLogLevelSetting()) return;
-    LOG_METHODS[logLevel](...args);
-}
+const LogLevel = {
+    TRACE: 0,
+    DEBUG: 1,
+    INFO: 2,
+    WARN: 3,
+    ERROR: 4,
+} as const;
 
 export function logTrace(...args: unknown[]): void {
-    log(LogLevel.Trace, ...args);
+    log(LogLevel.TRACE, ...args);
 }
 
 export function logDebug(...args: unknown[]): void {
-    log(LogLevel.Debug, ...args);
+    log(LogLevel.DEBUG, ...args);
 }
 
 export function logInfo(...args: unknown[]): void {
-    log(LogLevel.Info, ...args);
+    log(LogLevel.INFO, ...args);
 }
 
 export function logWarn(...args: unknown[]): void {
-    log(LogLevel.Warn, ...args);
+    log(LogLevel.WARN, ...args);
 }
 
 export function logError(...args: unknown[]): void {
-    log(LogLevel.Error, ...args);
+    log(LogLevel.ERROR, ...args);
+}
+
+function log(logLevel: number = LogLevel.INFO, ...args: unknown[]): void {
+    let threshold: number = LogLevel.INFO;
+    if (phase >= Phase.READY) {
+        threshold = Number(game.settings.get(MODULENAME, "logLevel")) ?? LogLevel.INFO;
+    }
+
+    if (logLevel < threshold) return;
+
+    switch (logLevel) {
+        case LogLevel.TRACE:
+            console.trace(...args);
+            break;
+        case LogLevel.DEBUG:
+            console.debug(...args);
+            break;
+        case LogLevel.INFO:
+            console.info(...args);
+            break;
+        case LogLevel.WARN:
+            console.warn(...args);
+            break;
+        case LogLevel.ERROR:
+            console.error(...args);
+            break;
+    }
 }

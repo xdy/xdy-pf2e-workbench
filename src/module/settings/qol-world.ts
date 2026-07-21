@@ -217,6 +217,40 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => updateHooks(),
             },
+            enableGeneralLearnSpell: {
+                name: `${MODULENAME}.SETTINGS.enableGeneralLearnSpell.name`,
+                hint: `${MODULENAME}.SETTINGS.enableGeneralLearnSpell.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+            },
+            learnSpellDcAdjustment: {
+                name: `${MODULENAME}.SETTINGS.learnSpellDcAdjustment.name`,
+                hint: `${MODULENAME}.SETTINGS.learnSpellDcAdjustment.hint`,
+                scope: "world",
+                config: true,
+                default: 0,
+                type: Number,
+            },
+            learnSpellDestroyScroll: {
+                name: `${MODULENAME}.SETTINGS.learnSpellDestroyScroll.name`,
+                hint: `${MODULENAME}.SETTINGS.learnSpellDestroyScroll.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+            },
+            allowDebtItems: {
+                name: `${MODULENAME}.SETTINGS.allowDebtItems.name`,
+                hint: `${MODULENAME}.SETTINGS.allowDebtItems.hint`,
+                scope: "world",
+                config: true,
+                default: true,
+                type: Boolean,
+            },
         };
     }
 }

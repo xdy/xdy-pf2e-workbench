@@ -45,11 +45,11 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number): Promise
     const folderName = `Level ${newLevel}`;
     const folder =
         getFolderInFolder(folderName, rootFolder?.name as string) ??
-        (await Folder.create({
+        ((await Folder.create({
             name: folderName,
             type: "Actor",
             parent: rootFolder ? rootFolder.id : "",
-        }) as Folder);
+        })) as Folder);
 
     const system: NPCSystemData = <NPCSystemData>actor.system;
     const oldLevel = system.details.level.value;

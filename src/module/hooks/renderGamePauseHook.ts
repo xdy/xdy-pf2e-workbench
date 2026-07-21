@@ -1,4 +1,4 @@
-import { phase, Phase } from "../xdy-pf2e-workbench.ts";
+import { phase, Phase } from "../lifecycle.ts";
 import { getModuleSetting } from "../utils.ts";
 
 function encodeUriPathSegment(text: string): string {

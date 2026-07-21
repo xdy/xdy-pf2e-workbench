@@ -1,6 +1,5 @@
 import { MODULENAME } from "../constants.ts";
 import { getModuleSetting } from "../utils.ts";
-import { resetLogLevelCache } from "../utils/logging.ts";
 
 import * as systems from "../utils/systems.ts";
 
@@ -28,7 +27,6 @@ function ensureSection(
 }
 
 export function readyHook(): void {
-    resetLogLevelCache();
     const legacyVariantRuleAncestryParagon = getModuleSetting<boolean>("legacyVariantRuleAncestryParagon");
     const legacyVariantRuleDualClass = getModuleSetting<boolean>("legacyVariantRuleDualClass");
 

@@ -13,9 +13,8 @@ import "../styles/xdy-pf2e-workbench.scss";
 // TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
 import { registerWorkbenchKeybindings } from "./keybinds.ts";
 import { ActorPF2e } from "foundry-pf2e";
-
-import { fireAndForget, getModuleSetting, isFirstGM } from "./utils.ts";
-import { logInfo } from "./utils/logging.ts";
+import { fireAndForget, getModuleSetting, isFirstGM } from "./utils.js";
+import { logInfo } from "./utils/logging.js";
 import * as systems from "./utils/systems.ts";
 import {
     enableNpcRollerButton,
@@ -73,22 +72,14 @@ import { initCanvasPointer } from "./feature/canvas-pointer/index.ts";
 import { registerHandlebarsHelpers } from "./utils/handlebarsHelpers.ts";
 import { registerToolbeltWrappers } from "./feature/damageHandler/toolbeltIntegration.ts";
 import { MODULENAME } from "./constants.ts";
+import { phase, Phase, setPhase } from "./lifecycle.ts";
+
+export { Phase } from "./lifecycle.ts";
 
 export const NPC_TYPE = "npc";
 export const CHARACTER_TYPE = "character";
 
 const activeHooks = new Set<string>();
-
-// Enum for phases
-export enum Phase {
-    DOWN = 0, // Before init, not sure if it has a name in foundry
-    INIT = 10,
-    SETUP = 20,
-    READY = 30,
-    ACTIVE = 40, // After ready, not sure if it has a name in foundry
-}
-
-export let phase: Phase = Phase.DOWN;
 
 function handle(
     hookName: string,
@@ -165,6 +156,7 @@ export function updateHooks(cleanSlate = false): void {
     const sheatheHeldItemsAfterEncounter = getModuleSetting<boolean>("sheatheHeldItemsAfterEncounter");
     const showItemLicenseTags = getModuleSetting<boolean>("showItemLicenseTags");
     const showCharacterOglTag = getModuleSetting<boolean>("showCharacterOglTag");
+    const enableGeneralLearnSpell = getModuleSetting<boolean>("enableGeneralLearnSpell");
 
     const handleDyingRecoveryRoll = getModuleSetting<boolean>("handleDyingRecoveryRoll");
     const giveWoundedWhenDyingRemoved = getModuleSetting<boolean>("giveWoundedWhenDyingRemoved");
@@ -222,7 +214,7 @@ export function updateHooks(cleanSlate = false): void {
         renderChatMessageHook,
     );
 
-    handle("preCreateItem", dropHeldItemsOnBecomingUnconscious, preCreateItemHook);
+    handle("preCreateItem", enableGeneralLearnSpell || dropHeldItemsOnBecomingUnconscious, preCreateItemHook);
 
     handle("deleteItem", giveWoundedWhenDyingRemoved || giveUnconsciousIfDyingRemovedAt0HP, deleteItemHook);
 
@@ -299,7 +291,7 @@ export function updateHooks(cleanSlate = false): void {
 // Initialize module
 Hooks.once("init", async (_actor: ActorPF2e) => {
     logInfo(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
-    phase = Phase.INIT;
+    setPhase(Phase.INIT);
 
     registerWorkbenchSettings();
     registerWorkbenchKeybindings();
@@ -327,7 +319,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 // Setup module
 Hooks.once("setup", async () => {
     logInfo(`${MODULENAME} | Setting up`);
-    phase = Phase.SETUP;
+    setPhase(Phase.SETUP);
     // Do anything after initialization but before ready
 
     // General module setup
@@ -337,7 +329,7 @@ Hooks.once("setup", async () => {
 Hooks.once("ready", () => {
     // Do anything once the module is ready
     logInfo(`${MODULENAME} | Ready`);
-    phase = Phase.READY;
+    setPhase(Phase.READY);
 
     // Must be in ready
 
@@ -419,6 +411,6 @@ Hooks.once("ready", () => {
         }
     });
 
-    phase = Phase.ACTIVE;
+    setPhase(Phase.ACTIVE);
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });

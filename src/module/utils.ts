@@ -114,12 +114,28 @@ export const NOT_MYSTIFIED_VALUE = "999";
 
 export const MAX_ABSOLUTE_LEVEL = 20;
 
+type Result<T> = { ok: true; value: T } | { ok: false };
+
 /**
  * Fire-and-forget a promise with error logging.
  * Use when there is no result or it does not matter.
  */
 export function fireAndForget(promise: Promise<unknown>, context: string): void {
     promise.catch((err) => logError(`${MODULENAME} | ${context}:`, err));
+}
+
+async function tryWithLogging<T>(fn: () => Promise<T>, context: string): Promise<Result<T>> {
+    try {
+        return { ok: true, value: await fn() };
+    } catch (err) {
+        logError(`${MODULENAME} | ${context}:`, err);
+        return { ok: false };
+    }
+}
+
+export async function tryOrDefault<T>(fn: () => Promise<T>, fallback: T, context: string): Promise<T> {
+    const result = await tryWithLogging(fn, context);
+    return result.ok ? result.value : fallback;
 }
 
 export function shouldIHandleThis(actor: ActorPF2e | null): boolean | null {
@@ -139,7 +155,7 @@ export function pushNotification(type: string, message: string): void {
     game.socket.emit("module." + MODULENAME, { operation: "notification", args: [type, message] });
 }
 
-export function unflatten(object: Record<string, unknown>): Record<string, unknown> {
+function unflatten(object: Record<string, unknown>): Record<string, unknown> {
     const result: Record<string, unknown> = {};
     for (const key of Object.keys(object)) {
         setValue(result, key, object[key]);
@@ -147,13 +163,13 @@ export function unflatten(object: Record<string, unknown>): Record<string, unkno
     return result;
 }
 
-export function setValue(object: Record<string, unknown>, path: string, value: unknown): void {
+function setValue(object: Record<string, unknown>, path: string, value: unknown): void {
     const split = path.split(".");
     const top = split.pop();
 
     if (top !== undefined) {
-        // @ts-expect-error TODO Fix typing
-        split.reduce(function (o: Record<string, unknown>, k, i, kk) {
+        // @ts-expect-error TODO fix typing
+        split.reduce(function (o, k, i, kk) {
             return (o[k] = o[k] || (isFinite(i + 1 in kk ? Number(kk[i + 1]) : Number(top)) ? [] : {}));
         }, object)[top] = value;
     }
@@ -242,10 +258,6 @@ export function getModuleFlag<T>(
 ): T | undefined {
     const raw = doc?.getFlag?.(MODULENAME, flag) as T | undefined;
     return raw !== undefined && raw !== null ? raw : fallback;
-}
-
-export function setFlag(doc: foundry.abstract.Document, flag: string, value: unknown): Promise<unknown> {
-    return doc.setFlag(MODULENAME, flag, value);
 }
 
 /**
