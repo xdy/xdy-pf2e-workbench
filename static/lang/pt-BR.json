@@ -8,40 +8,40 @@
       "actionsReminderAllow": {
         "all": "Todos",
         "gm": "MJ",
-        "hint": "Mostra um lembrete de número de ações como uma mensagem de chat para os usuários escolhidos.",
-        "name": "Lembrete de Número de Ações",
+        "hint": "Marque para mostrar um lembrete do número de ações como uma mensagem no chat.",
+        "name": "Quem recebe um lembrete de ações",
         "none": "Ninguém",
         "players": "Jogadores"
       },
       "addUserTargets": {
-        "addFor": "Adicionar Alvos para",
-        "clearFor": "Remover",
-        "hint": "Marca os tokens selecionados e cujo mouse esteja em cima como alvos do usuário escolhido.",
-        "name": "Adicionar Alvos",
-        "title": "Selecione o usuário que marcará os alvos"
+        "addFor": "Adicionar alvos para",
+        "clearFor": "Remover alvos para",
+        "hint": "Atalho para adicionar tokens selecionados ou sob o cursor aos alvos do usuário escolhido.",
+        "name": "Adicionar alvos do usuário",
+        "title": "Selecionar usuário ao qual serão adicionados os alvos"
       },
       "applyPersistentDamage": {
-        "hint": "Automaticamente aplica dano persistente.",
-        "name": "Aplicar dano persistente",
+        "hint": "Configuração global para aplicar dano persistente automaticamente.",
+        "name": "Aplicar dano persistente automaticamente.",
         "wasDamaged": "{damage} de dano foi aplicado automaticamente"
       },
       "applyPersistentHealing": {
-        "hint": "Automaticamente aplica cura persistente. Salve a configuração para mostrar/ocultar opções adicionais.",
-        "name": "Aplicar cura persistente",
+        "hint": "Configuração global para aplicar automaticamente a cura persistente rolada pelo sistema.",
+        "name": "Aplicar automaticamente a cura persistente rolada pelo sistema.",
         "wasHealed": "{healing} de cura foi aplicado automaticamente."
       },
       "autoCollapseItemChatCardContent": {
-        "collapsedDefault": "Recolher por padrão, clicar no título para expandir",
-        "hint": "Recolhe automaticamente o conteúdo de cartões de chat (excluindo ações e ataques).",
-        "name": "Recolher conteúdo de cartão de chat de itens",
-        "noCollapse": "Nunca recolher",
-        "nonCollapsedDefault": "Expandido por padrão, clicar no título para recolher"
+        "collapsedDefault": "Compacto por padrão, clique no título para expandir.",
+        "hint": "Configuração local para compactar automaticamente o conteúdo da mensagem do item no chat (excluindo ações e ataques, veja abaixo).",
+        "name": "Compactar automaticamente o conteúdo da mensagem do item no chat.",
+        "noCollapse": "Nunca compactar",
+        "nonCollapsedDefault": "Expandido por padrão, clique no título para compactar."
       },
       "autoExpandDamageRolls": {
-        "collapsedAll": "Rolagens de dano recolhidas (padrão do Foundry)",
-        "expandedAll": "Rolagens de dano expandidas",
-        "expandedNew": "Novas rolagens de dano são expandidas, e expande as últimas 3 rolagens ao recarregar.",
-        "expandedNewest": "Novas rolagens de dano são expandidas, e expande a última rolagem ao recarregar.",
+        "collapsedAll": "Todas as rolagens de dano se compactam (padrão do Foundry).",
+        "expandedAll": "Todas as rolagens de dano se expandem.",
+        "expandedNew": "Novas rolagens de dano se expandem (também expande as últimas 3 rolagens de dano ao recarregar).",
+        "expandedNewest": "Novas rolagens de dano se expandem (também expande a última rolagem de dano ao recarregar).",
         "hint": "Automaticamente expande ou recolhe rolagens de dano. Clique nas rolagens de dado para expandir ou recolher.",
         "name": "Comportamento de Rolagens de Dano"
       },
@@ -354,31 +354,31 @@
         "name": "... e aumente a condição morrendo se sofrer dano crítico de um inimigo."
       },
       "applyPersistentDamageRecoveryRoll": {
-        "name": "... Rolar Recuperação automaticamente.",
-        "hint": "Rola recuperação automaticamente. Requer que a configuração acima esteja ativada."
+        "name": "…e em seguida rolar recuperação automaticamente.",
+        "hint": "…e em seguida rolar recuperação automaticamente. Requer que a configuração acima esteja ativada."
       },
       "autoCollapseItemChatCardMoveEffectLinks": {
-        "hint": "... mas mova todos os links para itens de efeito para fora da parte recolhida do cartão quando recolhido por padrão",
-        "name": "... mas mostrar links de efeito"
+        "hint": "…mas mova todos os links para itens de efeito para fora da parte compactada da mensagem quando compactada por padrão",
+        "name": "…mas mostre links de efeitos"
       },
       "autoCollapseItemActionChatCardContent": {
-        "name": "Recolha automaticamente o conteúdo da ação.",
-        "hint": "Configuração do cliente para recolher automaticamente o conteúdo da ação no chat.",
-        "noCollapse": "Nunca recolher",
-        "collapsedDefault": "Recolher por padrão, clicar no título para expandir",
-        "nonCollapsedDefault": "Expandido por padrão, clique no título para recolher."
+        "name": "Compactar automaticamente o conteúdo da mensagem da ação no chat.",
+        "hint": "Configuração local para compactar automaticamente o conteúdo da mensagem da ação no chat.",
+        "noCollapse": "Nunca compactar",
+        "collapsedDefault": "Compactar por padrão, clique no título para expandir.",
+        "nonCollapsedDefault": "Expandido por padrão, clique no título para compactar."
       },
       "dropHeldItemsOnBecomingUnconscious": {
-        "name": "Personagens largam itens ao ficarem inconscientes.",
+        "name": "Personagens automaticamente largam itens segurados ao ficarem inconscientes.",
         "message": "{name} largou: {itens}",
-        "hint": "Personagens automaticamente largam os itens segurados ao ficarem inconscientes (exceto escudos, que se tornam vestidos em vez de segurados)."
+        "hint": "Personagens automaticamente largam itens segurados ao ficarem inconscientes (exceto escudos, que se tornam vestidos ao invés de segurados)."
       },
       "autoCollapseItemAttackChatCardContent": {
-        "noCollapse": "Nunca recolher",
-        "nonCollapsedDefault": "Expandido por padrão, clique no título para recolher.",
-        "collapsedDefault": "Recolher por padrão, clicar no título para expandir",
-        "hint": "Recolhe automaticamente o conteúdo de ataques no chat.",
-        "name": "Recolha automaticamente o conteúdo do ataque."
+        "noCollapse": "Nunca compactar",
+        "nonCollapsedDefault": "Expandido por padrão, clique no título para compactar.",
+        "collapsedDefault": "Compacto por padrão, clique no título para expandir.",
+        "hint": "Configuração local para compactar automaticamente o conteúdo da mensagem do ataque no chat.",
+        "name": "Compacta automaticamente o conteúdo da mensagem do ataque no chat."
       },
       "autoGainDyingIfTakingDamageWhenAlreadyDying": {
         "name": "... e aumentar morrendo se estiver receber dano se já estiver morrendo.",
@@ -398,6 +398,15 @@
         "yesForNpcs": "Sim, para npcs",
         "yes": "Sim, para todos",
         "yesForCharacters": "Sim, para personagens+familiares"
+      },
+      "sheatheHeldItemsAfterEncounter": {
+        "name": "Personagens automaticamente guardam armas seguradas após encontros.",
+        "message": "{name} guardou: {items}",
+        "hint": "Personagens automaticamente guardam armas seguradas após encontros. Quando ativo, configurações adicionais aparecerão."
+      },
+      "sheatheHeldItemsAfterEncounterTypes": {
+        "name": "…mas apenas para esses tipos de itens",
+        "hint": "Lista separada por vírgula de tipos de itens para guardar após encontros (ex.: 'armadura,mochila,livro,consumível,equipamento,escudo,tesouro,arma')"
       }
     },
     "npcRoller": {
@@ -419,23 +428,23 @@
     },
     "spellCardNotFound": "A mensagem da magia não foi encontrada. Conjurando {spell} no nível mínimo da magia.",
     "effects": {
-      "orcFerocityUsed": "Ferocidade de Orc utilizada",
-      "bounceBackUsed": "Recuperar-se usado",
-      "numbToDeathUsed": "Entorpecido pela Morte usado",
-      "deliberateDeathUsed": "Morte Deliberada Usado"
+      "orcFerocityUsed": "Usado: Ferocidade de Orc",
+      "bounceBackUsed": "Usado: Recuperar-se",
+      "numbToDeathUsed": "Usado: Entorpecido pela Morte",
+      "deliberateDeathUsed": "Usado: Morte Deliberada"
     },
     "modules": {
-      "multilevel-tokens": "O módulo Multilevel Tokens( e provavelmente outros módulos de telporte de tokens) podem ocorrer problemas com o teleporte se você ativar a opção do Workbench para mudar a animação do token.",
-      "pf2e-sheet-skill-actions": "O módulo pf2e-sheet-skill-actions foi descontinuado, todas suas funções agora estão incluidas no Workbench, por favor desative este módulo.",
-      "pf2e-toolbox": "O módulo pf2e-toolbox foi descontinuado, todas suas funções agora estão incluidas no Workbench, por favor desative este módulo."
+      "multilevel-tokens": "O módulo Multilevel Tokens (e provavelmente outros módulos que teletransportam tokens) podem ter problemas com o teletransporte porque você ativou no Workbench a configuração opcional de alterar a animação dos tokens.",
+      "pf2e-sheet-skill-actions": "O módulo pf2e-sheet-skill-actions foi descontinuado. Todas as suas funções fazem parte do Workbench. Por favor, desative esse módulo.",
+      "pf2e-toolbox": "O módulo pf2e-toolbox foi descontinuado. Todas as suas funções fazem parte do Workbench. Por favor, desative esse módulo."
     },
     "macros": {
       "basicActionMacros": {
         "actions": {
-          "CreateADiversionGesture": "Criar uma Distração - Gesto",
-          "AidToggle": "Auxiliar",
-          "AvoidNotice": "Evitar Ser Percebido",
-          "Balance": "Equilibrar",
+          "CreateADiversionGesture": "Criar Distração - Gesto",
+          "AidToggle": "Auxiliar (on/off)",
+          "AvoidNotice": "Evitar Detecção",
+          "Balance": "Equilibrar-se",
           "Climb": "Escalar",
           "Coerce": "Coagir",
           "CommandAnAnimal": "Comandar um Animal",
@@ -443,30 +452,30 @@
           "DecipherWritingOccultism": "Decifrar Escrita - Ocultismo",
           "Demoralize": "Desmoralizar",
           "Trip": "Derrubar",
-          "AdministerFirstAidStabilize": "Administrar Primeiros Socorros - Estabilizar",
-          "AdministerFirstAidStopBleeding": "Administrar Primeiros Socorros - Para Sangramento",
-          "ConcealAnObject": "Ocultar um Objeto",
-          "CreateADiversionTrick": "Criar uma Distração - Truque",
+          "AdministerFirstAidStabilize": "Prestar Primeiros Socorros - Estabilizar",
+          "AdministerFirstAidStopBleeding": "Prestar Primeiros Socorros - Estancar Sangramento",
+          "ConcealAnObject": "Ocultar Objeto",
+          "CreateADiversionTrick": "Criar Distração - Truque",
           "CreateForgery": "Criar Falsificação",
           "DecipherWritingArcana": "Decifrar Escrita - Arcana",
           "DecipherWritingReligion": "Decifrar Escrita - Religião",
           "DisableDevice": "Desabilitar Dispositivo",
           "Disarm": "Desarmar",
           "Feint": "Fintar",
-          "FollowTheExpertToggle": "Seguir o Especialista (LIG/DES)",
+          "FollowTheExpertToggle": "Seguir o Especialista (on/off)",
           "ForceOpen": "Forçar",
           "GatherInformation": "Obter Informação",
           "Grapple": "Agarrar",
-          "Hide": "Esconder",
+          "Hide": "Esconder-se",
           "Impersonate": "Personificar",
           "JumpHigh": "Salto em Altura",
           "JumpLong": "Salto em Distância",
           "Lie": "Mentir",
           "MakeAnImpression": "Impressionar",
           "ManeuverInFlight": "Manobrar em Voo",
-          "PalmAnObject": "Empalmar um Objeto",
+          "PalmAnObject": "Empalmar Objeto",
           "Perform": "Performar",
-          "RaiseAShieldToggle": "Erguer um Escudo (Lig/Des)",
+          "RaiseAShieldToggle": "Erguer Escudo (on/off)",
           "RecallKnowledge": "Recordar Conhecimento",
           "Repair": "Reparar",
           "Request": "Pedir",
@@ -474,42 +483,43 @@
           "SenseDirection": "Intuir Direção",
           "SenseMotive": "Sentir Motivação",
           "Shove": "Empurrar",
-          "Sneak": "Esgueirar",
+          "Sneak": "Esgueirar-se",
           "Squeeze": "Espremer-se",
           "Steal": "Furtar",
           "SubsistSociety": "Subsistir - Sociedade",
           "SubsistSurvival": "Subsistir - Sobrevivência",
           "Swim": "Nadar",
           "Track": "Rastrear",
-          "TreatDisease": "Tratar Doenças",
-          "TreatPoison": "Tratar Venenos",
+          "TreatDisease": "Tratar Doença",
+          "TreatPoison": "Tratar Veneno",
           "TreatWounds": "Tratar Ferimentos",
           "TumbleThrough": "Atravessar Acrobaticamente",
           "DecipherWritingSociety": "Decifrar Escrita - Sociedade",
-          "PickALock": "Abrir uma Fechadura",
-          "TakeCoverToggle": "Obter Cobertura (Lig/Des)",
+          "PickALock": "Abrir Fechadura",
+          "TakeCoverToggle": "Obter Cobertura (on/off)",
           "Reposition": "Reposicionar",
           "Escape": "Escapar",
-          "AidASE": "Auxliar (Macro do ASE)",
-          "CreateADiversionDistractingWords": "Criar uma Distração - Palavras Distrativas"
+          "AidASE": "Auxiliar (macro do ASE)",
+          "CreateADiversionDistractingWords": "Criar Distração - Palavras Distrativas",
+          "AidPF2eMacros": "Auxiliar (macros do PF2e)"
         },
         "macroNotFound": "Macro {macroName} não encontrado",
-        "compendiumNotFound": "Compendium {compendiumName} não encontrado",
-        "YouAreTheBestInYourParty": "Você é o Melhor do Grupo",
-        "noActorSelected": "Nenhum PJ, PDM ou familiar está selecionado",
+        "compendiumNotFound": "Compêndio {compendiumName} não encontrado",
+        "YouAreTheBestInYourParty": "Você é o melhor do seu grupo",
+        "noActorSelected": "Nenhum PdJ, PdM ou familiar está selecionado",
         "cancel": "Cancelar",
         "agileTrait": "(Ágil)",
         "settings": {
           "showBestBonus": {
-            "name": "MAB: Mostrar se é melhor na Macro de Ações Básicas",
-            "hint": "Mostrar se o ator selecionado tem o melhor bônus na caixa de diálogo Macros de ação básica"
+            "name": "MAB: Mostrar se é melhor em Macro de Ações Básicas",
+            "hint": "Mostrar ou não se o ator selecionado tem o melhor bônus na janela de Macros de Ação Básica"
           }
         },
         "title": "Ações ({name})",
-        "gmMustImport": "O GM deve clicar com o botão direito do mouse no compêndio xdy-pf2e-workbench-macros e selecionar 'Importar Todo Conteudo' e certificar-se de marcar 'Manter IDs de documentos' ao importar.",
+        "gmMustImport": "O MJ deve clicar com o botão direito do mouse no compêndio xdy-pf2e-workbench-macros, selecionar 'Importar Todo Conteúdo' e certificar-se de marcar 'Manter IDs de Documento' ao importar.",
         "bamTabview": {
-          "name": "MAB: Usar layout com abas",
-          "hint": "Usar um layout com abas para a Macro de Ações Básicas."
+          "name": "MAB: Usar leiaute com abas",
+          "hint": "Usar leiaute com abas para a janela de Macro de Ações Básicas."
         },
         "bamShowUnusable": {
           "name": "MAB: Mostrar ações que não podem ser usadas.",
@@ -522,20 +532,29 @@
       },
       "buildNpcSpellbookJournal": {
         "generatedSpellbookFor": "Grimório gerado para {name}",
-        "noSpellcastingEntry": "Você deve ter uma ficha de personagem NPC aberta e selecionada ou um único token NPC selecionado. Além disso, o NPC referente deve ter uma entrada de conjuração.",
-        "title": "Criar um Jornal de Grmório"
+        "noSpellcastingEntry": "Você deve ter uma ficha de PdM aberta e selecionada ou um único token de PdM selecionado. Além disso, esse PdM deve ter uma entrada de conjuração.",
+        "title": "Criar Diário de Grimório de PnJ"
       },
       "refocus": {
-        "regains": "Recuperou {focus} pontos de foco.",
-        "disabled": "Desativado devido a nenhuma capacidade de recuperar mais de 1 ponto de foco.",
-        "enabled": "Recupere {regain} pontos de foco.<br/>Clique em <b>APENAS</b> se você tiver {details} desde o último Refocar.",
-        "one": "Um",
+        "regains": "Recupera {focus} pontos de foco.",
+        "disabled": "Desabilitado por não ser capaz de recuperar mais de 1 ponto de foco.",
+        "enabled": "Recuperar {regain} pontos de foco.<br/>Clique <b>APENAS</b> se tiver {details} desde o último Refocar.",
+        "one": "um",
         "selectOneActor": "Você deve selecionar um ator.",
-        "notPsychic": "Gastou pelo menos {regain} pontos de foco",
-        "regainOne": "Recuperou 1 ponto de foco.",
-        "isPsychic": "Pontos de Foco gastos apenas para amplificar truques psi ou alimentar habilidades psíquicas"
+        "notPsychic": "gastou pelo menos {regain} pontos de foco",
+        "regainOne": "Recuperar 1 ponto de foco.",
+        "isPsychic": "gastou pontos de foco apenas para amplificar truques psíquicos ou alimentar habilidades psíquicas"
+      },
+      "recallKnowledge": {
+        "breakdown": {
+          "name": "Recordar Conhecimento: Mostrar detalhamentos da rolagem",
+          "hint": "Mostrar detalhamento dos modificadores aplicados a cada perícia numa linha abaixo do resultado.",
+          "all": "Todos os modificadores",
+          "extra": "Modificadores extras; omitir perícia e proficiência",
+          "none": "Não mostrar nenhum modificador"
+        }
       }
     },
-    "effectItem": "Item de efeito"
+    "effectItem": "Item de Efeito"
   }
 }
