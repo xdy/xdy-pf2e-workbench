@@ -38,6 +38,16 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
+                onChange: () => {
+                    game.settings.set(
+                        "pf2e",
+                        "campaignFeatSections",
+                        game.settings
+                            .get("pf2e", "campaignFeatSections")
+                            .filter((section) => section.id !== "xdy_ancestryparagon"),
+                    );
+                    updateHooks();
+                },
             },
             legacyVariantRuleDualClass: {
                 name: `${MODULENAME}.SETTINGS.legacyVariantRuleDualClass.name`,
@@ -46,6 +56,16 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
+                onChange: () => {
+                    game.settings.set(
+                        "pf2e",
+                        "campaignFeatSections",
+                        game.settings
+                            .get("pf2e", "campaignFeatSections")
+                            .filter((section) => section.id !== "xdy_dualclass"),
+                    );
+                    updateHooks();
+                },
             },
             housepatcher: {
                 name: `${MODULENAME}.SETTINGS.housepatcher.name`,
