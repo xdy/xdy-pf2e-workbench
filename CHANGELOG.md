@@ -1,3 +1,10 @@
+## [7.5.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.5.0...v7.5.1) (2026-07-23)
+
+
+### Bug Fixes
+
+* Unbreak Ancestry Paragon and Dual Class feat slots. You may need to disable the settings, refresh and enable them again to get them working again. ([675f643](https://github.com/xdy/xdy-pf2e-workbench/commit/675f64371c8cbec646949ebb5b6206fe9ce9ced7))
+
 # [7.5.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.14...v7.5.0) (2026-07-21)
 
 
