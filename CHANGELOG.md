@@ -1,3 +1,10 @@
+## [7.5.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.5.1...v7.5.2) (2026-07-23)
+
+
+### Bug Fixes
+
+* You can again disable Ancestry Paragon and Dual Class feat slots if you have previously enabled them. Any feats in these sections will move down to Bonus Feats. ([0230c03](https://github.com/xdy/xdy-pf2e-workbench/commit/0230c031138c67189dca3b7d77cfed52ff85092f))
+
 ## [7.5.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.5.0...v7.5.1) (2026-07-23)
 
 
