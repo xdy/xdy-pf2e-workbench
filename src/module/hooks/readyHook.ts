@@ -1,63 +1,76 @@
 import { MODULENAME } from "../constants.ts";
-import { getModuleSetting } from "../utils.ts";
 
 import * as systems from "../utils/systems.ts";
 
-interface CampaignFeatSection {
-    id: string;
-    label: string;
-    supported: string[];
-    slots: number[];
-}
-
-function ensureSection(
-    sections: CampaignFeatSection[],
-    enabled: boolean,
-    id: string,
-    label: string,
-    supported: string[],
-    slots: number[],
-): void {
-    const exists = sections.find((section) => section.id === id);
-    if (enabled && !exists) {
-        sections.push({ id, label, supported, slots });
-    } else if (!enabled && exists) {
-        sections.splice(sections.indexOf(exists), 1);
-    }
-}
-
 export function readyHook(): void {
-    const legacyVariantRuleAncestryParagon = getModuleSetting<boolean>("legacyVariantRuleAncestryParagon");
-    const legacyVariantRuleDualClass = getModuleSetting<boolean>("legacyVariantRuleDualClass");
+    const legacyVariantRuleAncestryParagon = game.settings.get(MODULENAME, "legacyVariantRuleAncestryParagon");
+    const legacyVariantRuleDualClass = game.settings.get(MODULENAME, "legacyVariantRuleDualClass");
 
+    // Add campaign feat sections if enabled
     if (legacyVariantRuleDualClass || legacyVariantRuleAncestryParagon) {
-        const campaignFeatSections = systems.getSetting<CampaignFeatSection[]>("campaignFeatSections");
-        ensureSection(
-            campaignFeatSections,
-            legacyVariantRuleAncestryParagon,
-            "xdy_ancestryparagon",
-            game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.title`),
-            ["ancestry"],
-            [1, 3, 7, 11, 15, 19],
-        );
-        ensureSection(
-            campaignFeatSections,
-            legacyVariantRuleDualClass,
-            "xdy_dualclass",
-            game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleDualClass.title`),
-            ["class"],
-            [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+        const campaignFeatSections = systems.getSetting<
+            {
+                id: string;
+                label: string;
+                supported: string[];
+                slots: number[];
+            }[]
+        >("campaignFeatSections");
+        if (legacyVariantRuleAncestryParagon) {
+            if (!campaignFeatSections.find((section) => section.id === "xdy_ancestryparagon")) {
+                campaignFeatSections.push({
+                    id: "xdy_ancestryparagon",
+                    label: game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.title`),
+                    supported: ["ancestry"],
+                    slots: [1, 3, 7, 11, 15, 19],
+                });
+            }
+        }
+
+        if (legacyVariantRuleDualClass) {
+            if (!campaignFeatSections.find((section) => section.id === "xdy_dualclass")) {
+                campaignFeatSections.push({
+                    id: "xdy_dualclass",
+                    label: game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleDualClass.title`),
+                    supported: ["class"],
+                    slots: [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+                });
+            }
+        }
+
+        systems.setSetting("campaignFeatSections", campaignFeatSections);
+    }
+
+    const campaignFeatSections = systems.getSetting<
+        {
+            id: string;
+            label: string;
+            supported: string[];
+            slots: number[];
+        }[]
+    >("campaignFeatSections");
+    // ... or remove it if disabled.
+    if (
+        campaignFeatSections &&
+        !legacyVariantRuleDualClass &&
+        campaignFeatSections.find((section) => section.id === "xdy_dualclass")
+    ) {
+        campaignFeatSections.splice(
+            campaignFeatSections.findIndex((section) => section.id === "xdy_dualclass"),
+            1,
         );
         systems.setSetting("campaignFeatSections", campaignFeatSections);
     }
 
-    const campaignFeatSections = systems.getSetting<CampaignFeatSection[]>("campaignFeatSections");
-    if (campaignFeatSections) {
-        const before = campaignFeatSections.length;
-        ensureSection(campaignFeatSections, legacyVariantRuleDualClass, "xdy_dualclass", "", [], []);
-        ensureSection(campaignFeatSections, legacyVariantRuleAncestryParagon, "xdy_ancestryparagon", "", [], []);
-        if (campaignFeatSections.length !== before) {
-            systems.setSetting("campaignFeatSections", campaignFeatSections);
-        }
+    if (
+        campaignFeatSections &&
+        !legacyVariantRuleAncestryParagon &&
+        campaignFeatSections.find((section) => section.id === "xdy_ancestryparagon")
+    ) {
+        campaignFeatSections.splice(
+            campaignFeatSections.findIndex((section) => section.id === "xdy_ancestryparagon"),
+            1,
+        );
+        systems.setSetting("campaignFeatSections", campaignFeatSections);
     }
 }
