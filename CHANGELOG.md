@@ -1,3 +1,10 @@
+## [7.5.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.5.2...v7.5.3) (2026-07-27)
+
+
+### Bug Fixes
+
+* Frighten reduction works with feat Calm And Centered ([3ab56ec](https://github.com/xdy/xdy-pf2e-workbench/commit/3ab56ecf991f31c69257f47b9db8f2853ccc2067))
+
 ## [7.5.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.5.1...v7.5.2) (2026-07-23)
 
 
