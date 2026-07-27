@@ -12,9 +12,13 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
         const minimumFrightened = getModuleFlag(actor, "condition.frightened.min", 0);
         const frightened = actor.getCondition("frightened");
         const currentFrightened = frightened?.value ?? 0;
+        const doubleFrightenReductionSlugs: string[] = [
+            "dwarven-doughtiness",
+            "calm-and-centered"
+        ]
 
         if (frightened && currentFrightened > 0 && !frightened.isLocked) {
-            const reduceBy = actorHasItemBySlug(actor, "dwarven-doughtiness") ? 2 : 1;
+            const reduceBy = doubleFrightenReductionSlugs.some((slug) => actorHasItemBySlug(actor, slug)) ? 2 : 1;
 
             for (let i = 0; i < reduceBy && currentFrightened - i > minimumFrightened; i++) {
                 await actor.decreaseCondition("frightened");
