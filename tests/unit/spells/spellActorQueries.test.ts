@@ -110,6 +110,13 @@ describe("pickSpellcastingEntryForActor", () => {
             undefined,
             "a",
         ],
+        [
+            "no traditions matches any entry with a tradition",
+            [makeEntryStub({ id: "d", tradition: "divine" })],
+            [],
+            undefined,
+            "d",
+        ],
     ])("%s", ([_desc, entries, traditions, preferred, expected]) => {
         const actor = makeActorWithSpellcasting(entries as SpellcastingEntryPF2e[]);
         const result = pickSpellcastingEntryForActor(actor, traditions as string[], preferred as string | undefined);

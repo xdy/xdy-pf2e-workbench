@@ -67,6 +67,10 @@ function getEntriesWithTradition(actor: ActorPF2e): { item: SpellcastingEntryPF2
     return entries;
 }
 
+function entryMatchesTradition(tradition: string, spellTraditions: string[]): boolean {
+    return spellTraditions.length === 0 || spellTraditions.includes(tradition);
+}
+
 export function pickSpellcastingEntryForActor(
     actor: ActorPF2e,
     spellTraditions: string[],
@@ -76,11 +80,11 @@ export function pickSpellcastingEntryForActor(
     if (entries.length === 0) return null;
     if (preferredEntryId) {
         const preferred = entries.find((e) => e.item.id === preferredEntryId);
-        if (preferred && spellTraditions.includes(preferred.tradition)) return preferred.item;
+        if (preferred && entryMatchesTradition(preferred.tradition, spellTraditions)) return preferred.item;
         if (preferred) return null;
     }
 
-    const matchTrad = entries.find((e) => spellTraditions.includes(e.tradition));
+    const matchTrad = entries.find((e) => entryMatchesTradition(e.tradition, spellTraditions));
     return matchTrad?.item ?? null;
 }
 
@@ -93,11 +97,11 @@ export async function pickSpellcastingEntryWithDialog(
     if (entries.length === 0) return null;
     if (preferredEntryId) {
         const preferred = entries.find((e) => e.item.id === preferredEntryId);
-        if (preferred && spellTraditions.includes(preferred.tradition)) return preferred.item;
+        if (preferred && entryMatchesTradition(preferred.tradition, spellTraditions)) return preferred.item;
         if (preferred) return null;
     }
 
-    const matches = entries.filter((e) => spellTraditions.includes(e.tradition));
+    const matches = entries.filter((e) => entryMatchesTradition(e.tradition, spellTraditions));
     if (matches.length === 0) return null;
     if (matches.length === 1) return matches[0].item;
 
