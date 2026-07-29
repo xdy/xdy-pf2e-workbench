@@ -1,3 +1,10 @@
+## [7.5.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.5.3...v7.5.4) (2026-07-29)
+
+
+### Bug Fixes
+
+* Allow learning of spells with zero traditions. ([4c88762](https://github.com/xdy/xdy-pf2e-workbench/commit/4c88762200126687b9d62883bb8b417bb5903461))
+
 ## [7.5.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.5.2...v7.5.3) (2026-07-27)
 
 
