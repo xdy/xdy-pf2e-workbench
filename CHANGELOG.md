@@ -1,3 +1,10 @@
+# [7.6.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.5.4...v7.6.0) (2026-08-26)
+
+
+### Features
+
+* Add optional support for selecting current combatant and clearing/remembering targets. Move destroy scroll on learn to houserules and change to dropdown with on success/on use/no. Fix private spell name hiding. Fix the gm's ability to set player targets. Assorted boyscouting/refactoring in spell learning, toolbelt auto-roll integration, settings, css, foundry deprecations, etc. ([0e9ee0b](https://github.com/xdy/xdy-pf2e-workbench/commit/0e9ee0bbb8ca6f0e1d9bab6eb556abe85eed8c9a)), closes [#1777](https://github.com/xdy/xdy-pf2e-workbench/issues/1777) [#1782](https://github.com/xdy/xdy-pf2e-workbench/issues/1782)
+
 ## [7.5.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.5.3...v7.5.4) (2026-07-29)
 
 
