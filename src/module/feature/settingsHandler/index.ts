@@ -1,9 +1,14 @@
 import type { MenuTemplateData } from "../../settings/menu.ts";
 import { getModuleSetting } from "../../utils.ts";
+import { isAllowedFor } from "../../utils/settings.ts";
 
 function setFormGroupVisibility(html: HTMLElement, selector: string, visible: boolean) {
     const el = html.querySelector<HTMLElement>(selector)?.closest<HTMLElement>(".form-group");
-    if (el) el.style.display = visible ? "" : "none";
+    if (el) el.classList.toggle("hidden", !visible);
+}
+
+function visibleByRole(allowSettingKey: string): boolean {
+    return isAllowedFor(allowSettingKey, game.user?.isGM ? "gm" : "player");
 }
 
 export function toggleMenuSettings(html: HTMLElement, settings: MenuTemplateData): void {
@@ -12,22 +17,11 @@ export function toggleMenuSettings(html: HTMLElement, settings: MenuTemplateData
             const settingName = settingElement.key;
 
             if (settingName !== `handleDyingRecoveryRollAllow` && settingName.startsWith("handleDyingRecoveryRoll")) {
-                const applyToggle = !(
-                    getModuleSetting<string>("handleDyingRecoveryRollAllow") === "none" ||
-                    (game.user?.isGM
-                        ? getModuleSetting<string>("handleDyingRecoveryRollAllow") === "players"
-                        : getModuleSetting<string>("handleDyingRecoveryRollAllow") === "gm")
-                );
+                const applyToggle = visibleByRole("handleDyingRecoveryRollAllow");
                 setFormGroupVisibility(html, `input[name="${settingName}"]`, applyToggle);
             }
             if (settingName !== `autoRollDamageAllow` && settingName.startsWith(`autoRollDamage`)) {
-                const applyToggle = !(
-                    getModuleSetting<string>("autoRollDamageAllow") === "none" ||
-                    (game.user?.isGM
-                        ? getModuleSetting<string>("autoRollDamageAllow") === "players"
-                        : getModuleSetting<string>("autoRollDamageAllow") === "gm")
-                );
-
+                const applyToggle = visibleByRole("autoRollDamageAllow");
                 setFormGroupVisibility(html, `input[name="${settingName}"]`, applyToggle);
                 setFormGroupVisibility(html, `select[name="${settingName}"]`, applyToggle);
             }

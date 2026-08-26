@@ -1,0 +1,76 @@
+/* NPC Roller */
+
+.roll-app {
+    display: grid;
+    grid-template-columns: 128px 1fr;
+}
+
+.roll-app .roll-app-body .tab:not(.active) {
+    display: none;
+}
+
+.roll-app nav.roll-app-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+%roll-app-btn-reset {
+    all: revert-layer;
+    font-family: var(--font-primary), sans-serif;
+    font-size: var(--font-size-14);
+    cursor: pointer;
+}
+
+.roll-app-nav button {
+    @extend %roll-app-btn-reset;
+    padding: var(--spacer-4) var(--spacer-8);
+    text-align: left;
+}
+
+.roll-app-nav button.active {
+    font-weight: bold;
+}
+
+.roll-app .roll-app-table {
+    margin: 0;
+}
+
+.roll-app .roll-app-table tbody tr,
+.roll-app .roll-app-table thead tr {
+    text-align: center;
+}
+
+.roll-app .roll-app-table tbody tr.selected {
+    background: var(--color-cool-5-75);
+    color: var(--color-text-light-0);
+}
+
+.roll-app .roll-app-table tbody tr.selected button.rollable {
+    color: var(--color-text-light-0);
+}
+
+.roll-app .roll-app-table tbody tr:nth-child(2n) {
+    background: rgb(0 0 0 / 0.2);
+}
+
+.roll-app .roll-app-table tbody tr:nth-child(2n):hover {
+    background: rgb(0 0 0 / 0.3);
+}
+
+.roll-app .roll-app-table tbody tr:not(.selected):hover {
+    background: rgb(0 0 0 / 0.1);
+}
+
+.roll-app .roll-app-table tbody button {
+    @extend %roll-app-btn-reset;
+    width: unset;
+    display: block;
+    padding: 0 var(--spacer-32, 2rem);
+    margin: 0 auto;
+}
+
+.roll-app .roll-app-table tbody button:hover {
+    font-weight: bold;
+}

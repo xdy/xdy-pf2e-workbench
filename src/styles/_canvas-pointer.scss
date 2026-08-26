@@ -1,0 +1,22 @@
+#xdy-pf2e-workbench-pointer-overlay,
+.xdy-pf2e-workbench-pointer-remote {
+    position: fixed;
+    pointer-events: none;
+    z-index: var(--z-index-notification);
+    font-size: var(--font-size-48);
+    transform: translate(-50%, -50%);
+    text-shadow:
+        0 0 var(--space-8) var(--color-shadow-dark),
+        0 0 var(--spacer-12) var(--color-shadow-dark);
+    will-change: transform;
+}
+
+.xdy-pf2e-workbench-pointer-active #board {
+    cursor: none !important;
+}
+
+.xdy-pf2e-workbench-pointer-active canvas,
+.xdy-pf2e-workbench-pointer-active .token,
+.xdy-pf2e-workbench-pointer-active .tile {
+    cursor: none !important;
+}

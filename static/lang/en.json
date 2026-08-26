@@ -160,7 +160,8 @@
                 "clearFor": "Clear targets for",
                 "hint": "Keybind to add selected and hovered tokens to the chosen user's targets.",
                 "name": "Add user targets",
-                "title": "Select user to add targets for"
+                "title": "Select user to add targets for",
+                "userLabel": "User"
             },
             "applyPersistentDamage": {
                 "hint": "World setting to automatically apply persistent damage.",
@@ -428,6 +429,18 @@
                 "hint": "Client setting to automatically decrease the frightened condition each turn for characters, npcs and familiars.",
                 "name": "Automatically decrease the frightened condition each turn."
             },
+            "selectCurrentCombatantOnTurnStart": {
+                "hint": "Client setting to automatically select the current combatant's token on the start of its turn.",
+                "name": "Automatically select the current combatant on turn start"
+            },
+            "clearCombatantTargetsOnTurnEnd": {
+                "hint": "Client setting to automatically clear the current combatant's targets at the end of its turn.",
+                "name": "Automatically clear combatant's targets on turn end"
+            },
+            "rememberAndReaddCombatantTargets": {
+                "hint": "Client setting to remember the current combatant's targets and automatically re-add them at the start of its next turn.",
+                "name": "Remember combatant's targets and restore them on next turn start"
+            },
             "dropHeldItemsOnBecomingUnconscious": {
                 "hint": "Characters automatically drop held items on becoming unconscious (except shields, that become worn instead of held).",
                 "message": "{name} lost their grip on: {items}",
@@ -443,10 +456,6 @@
             "enableGeneralLearnSpell": {
                 "hint": "When any character adds a spell, prompt to use Learn a Spell rules (with skill check, material cost, and spellbook integration for prepared casters). Skips level-1 characters at 0 XP.",
                 "name": "Enable General Learn a Spell"
-            },
-            "enableSpellbookHandler": {
-                "hint": "Help prepared casters handle their spellbooks.",
-                "name": "Enable Spellbook Handler"
             },
             "experimentalToolbeltSaveIntegration": {
                 "hint": "Experimental: Enable integration with PF2e Toolbelt Target Helper for save-spell autoroll damage. (Requires that you have PF2e Toolbelt's Target Helper enabled and have enabled the  workbench client setting to autoroll damage for save spells.)",
@@ -565,8 +574,11 @@
                 "name": "Learn a Spell DC Adjustment"
             },
             "learnSpellDestroyScroll": {
-                "hint": "When learning a spell from a scroll, destroy the scroll after learning.",
-                "name": "Destroy Scroll on Learn"
+                "hint": "When learning a spell from a scroll, destroy the scroll. 'On use' destroys the scroll regardless of success, 'On success' only destroys on a successful Learn a Spell check.",
+                "name": "Destroy Scroll on Learn",
+                "onSuccess": "On success",
+                "onUse": "On use",
+                "no": "No"
             },
             "legacyVariantRuleAncestryParagon": {
                 "hint": "Requires the system setting 'Campaign Feats' to be enabled. Adds a Campaign Feats section for Ancestry Paragon but does *not* automatically migrate feats from the previous section or Bonus Feats.",
@@ -859,25 +871,6 @@
                 "hint": "World setting to show a LICENSE:ORC or LICENSE:OGL tag in the details section of item sheets.",
                 "name": "Show license tags on item sheets."
             },
-            "spellCollectionPriceFormula": {
-                "formulaCost": "Formula cost (Table 6-13)",
-                "hint": "Choose how to calculate a spellbook's price when updating. Uses the base spellbook cost plus the selected formula cost for each spell.",
-                "learnSpell": "Learn a Spell cost (Table 4-3)",
-                "name": "Spellbook Price Formula",
-                "no": "Don't calculate price"
-            },
-            "suppressBatchLearnChatMessages": {
-                "hint": "When using Add All Prepared Spells or Update Spellbook, suppress individual spell learning messages and only show the summary.",
-                "name": "Suppress individual batch learn messages"
-            },
-            "spellCollectionPreviewMaxInlineUuids": {
-                "hint": "Maximum number of spell UUID links to inline in the spellbook description table in the preview. Set to 0 for unlimited.",
-                "name": "Spellbook Description Max Inline UUIDs in preview"
-            },
-            "spellCollectionDescriptionMaxInlineUuids": {
-                "hint": "Maximum number of spell UUID links to inline in the spellbook description table. Set to 0 for unlimited.",
-                "name": "Spellbook Description Max Inline UUIDs"
-            },
             "tokenAnimation": {
                 "hint": "Enable to alter token movement animation. This may cause problems with the module Multilevel Tokens.",
                 "name": "Enable to alter token movement animation."
@@ -891,49 +884,65 @@
                 "name": "Workbench migration version"
             }
         },
-        "spellLearn": {
+        "spellShared": {
             "alreadyKnown": "{name} is already known by this character.",
-            "batchLearnSingleError": "Failed to process {spellName}. Check the console (F12) for details.",
+            "currencyCredits": "{amount} credit(s)",
+            "currencyGp": "{amount} gp",
             "debtItemCreated": "<strong>{actor}</strong> incurred a debt of {amount} for spell-learning materials to learn <em>{spellName}</em>.",
-            "debtItemDescription": "Owes {amount} for spell-learning materials to add the spells {spells} to the spellbook {collectionName}.",
             "debtItemDescriptionForSpell": "Owes {amount} for spell-learning materials to learn <em>{spellName}</em>.",
-            "debtItemDescriptionNoSpells": "Owes {amount} for spell-learning materials for the spellbook {collectionName}.",
             "debtItemDescriptionNoSpellbook": "Owes {amount} for spell-learning materials.",
             "debtItemName": "Debt {amount}",
             "insufficientFundsForLearn": "<strong>{actor}</strong> cannot afford the {cost} required to learn {spellName}. Spell learning is not possible.",
+            "learnAnywayNo": "Do not learn it",
+            "learnAnywayYes": "Learn it anyway",
             "learnFailureOverridden": "<strong>{actor}</strong> overrode a previous learn failure and added <em>{spellName}</em>.",
             "learnNoCompatibleEntry": "No compatible spellcasting entry found.",
             "learnNoSkill": "Could not find skill for the entry tradition.",
-            "learnResultCriticalFailure": "<strong>Critical Failure!</strong> {actor} expends half the materials ({cost}) and fails to learn {spellName}. {hours} hour(s) were spent. You may try again after gaining a level.",
-            "learnResultCriticalSuccess": "<strong>Critical Success!</strong> {actor} expends half the materials ({cost}) and learns {spellName}. Time spent: {hours} hour(s).",
-            "learnResultFailure": "<strong>Failure.</strong> {actor} fails to learn {spellName}. No materials expended, but {hours} hour(s) were spent. You may try again after gaining a level.",
-            "learnResultSuccess": "<strong>Success!</strong> {actor} expends the materials ({cost}) and learns {spellName}. Time spent: {hours} hour(s).",
+            "learnResultCriticalFailure": "<strong>Critical Failure!</strong> {actor} expends half the materials ({cost}) and fails to learn {spellName}. {hours} were spent. This cost has already been subtracted. You may try again after gaining a level.",
+            "learnResultCriticalSuccess": "<strong>Critical Success!</strong> {actor} expends half the materials ({cost}) and learns {spellName}. Time spent: {hours}. This cost has already been subtracted.",
+            "learnResultFailure": "<strong>Failure.</strong> {actor} fails to learn {spellName}. No materials expended, but {hours} were spent. You may try again after gaining a level.",
+            "learnResultSuccess": "<strong>Success!</strong> {actor} expends the materials ({cost}) and learns {spellName}. Time spent: {hours}. This cost has already been subtracted.",
             "learnSpellAddPrevented": "The spell could not be added automatically. Please drag it to your character sheet manually.",
+            "learnSpellBatchDialogMessage": "Do you want to use the Learn a Spell rules for {count} spells? Estimated total cost: {cost}, total time: {time} if all skill checks succeed.",
+            "learnSpellBatchDialogTitle": "Learn Spells?",
+            "learnSpellBatchLearnAlreadyKnown": "(already known)",
             "learnSpellCancel": "Cancel",
             "learnSpellDialogMessage": "Do you want to use the Learn a Spell rules for {spellName}? Estimated cost: {cost}, time: {time} if all skill checks succeed.",
             "learnSpellDialogTitle": "Learn a Spell?",
-            "learnSpellDialogEntry": "Spell will be added to <strong>{entryName}</strong> ({tradition}, {type}).",
             "learnSpellFailed": "Failed to process Learn a Spell for <em>{name}</em>. Check the console (F12) for details.",
             "learnSpellInvalidRank": "Could not determine the rank of this spell. The spell data may be incomplete.",
             "learnSpellNo": "Skip Check & Cost",
             "learnSpellSkipped": "<strong>{actor}</strong> adds <em>{spellName}</em> without a skill check or material cost.",
-            "learnSpellYes": "Learn a Spell",
             "learnSpellTime10Minutes": "{minutes} minutes",
             "learnSpellTimeHours": "{hours} hour(s)",
+            "learnSpellTimeHoursMinutes": "{hours}h {minutes}m",
+            "learnSpellYes": "Learn a Spell",
+            "no": "No",
+            "spellNotEligible": "{spellName} does not meet the feat-based eligibility requirements for this spellcasting entry.",
+            "traditionMismatch": "{spellName} has the {traditions} tradition(s). Your character does not have a matching spellcasting entry.",
+            "traditionMismatchOverride": "{spellName} has the {traditions} tradition(s). Your character does not have a matching spellcasting entry. Learn it anyway?",
+            "traditionOverrideChat": "<strong>{actorName}</strong> overrides the tradition restriction and learns <em>{spellName}</em> ({traditions}).",
+            "yes": "Yes"
+        },
+        "spellLearn": {
+            "batchLearnSingleError": "Failed to process {spellName}. Check the console (F12) for details.",
+            "learnSpellDialogEntry": "Spell will be added to <strong>{entryName}</strong> ({tradition}, {type}).",
             "noTradition": "no",
             "overrideLearnFailureMessage": "You failed to learn \"{spellName}\" at level {level}. Do you want to override the flag and learn it now?",
+            "overrideLearnFailureBatchMessage": "You previously failed to learn one or more of these spells at your current level: {spellName}. Override these flags and learn them now?",
             "overrideLearnFailureNo": "No, keep flag",
             "overrideLearnFailureTitle": "Override Learn Failure",
             "overrideLearnFailureYes": "Yes, learn now",
-            "learnSpellBatchLearnAlreadyKnown": "(already known)",
-            "traditionMismatch": "{spellName} has the {traditions} tradition(s). Your character does not have a matching spellcasting entry.",
-            "yes": "Yes",
-            "no": "No",
             "learnFromScrollTitle": "Learn from Scroll?",
             "learnFromScrollMessage": "Do you want to learn the spell {spellName} from this scroll?",
             "scrollMystified": "This scroll has not been identified. Identify it first before attempting to learn its spell.",
             "pickEntryTitle": "Select Spellcasting Entry",
-            "pickEntryMessage": "Multiple compatible spellcasting entries found. Which one should this spell be added to?"
+            "pickEntryMessage": "Multiple compatible spellcasting entries found. Which one should this spell be added to?",
+            "learnFromScrollButton": "Learn Spell from Scroll",
+            "entryTypeFocus": "focus",
+            "entryTypeSpontaneous": "spontaneous",
+            "entryTypePrepared": "prepared",
+            "entryTypeSpellcasting": "spellcasting"
         },
         "spellCardNotFound": "The spell card could not be found. Casting {spell} at minimum level for that spell."
     }

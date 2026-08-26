@@ -80,6 +80,7 @@ export function registerWorkbenchSettings(): void {
         config: true,
         default: true,
         type: Boolean,
+        onChange: () => updateHooks(),
     });
 
     game.settings.register(MODULENAME, "bamShowUnusable", {
@@ -114,6 +115,7 @@ export function registerWorkbenchSettings(): void {
             extra: game.i18n.localize(`${MODULENAME}.macros.recallKnowledge.breakdown.extra`),
             none: game.i18n.localize(`${MODULENAME}.macros.recallKnowledge.breakdown.none`),
         },
+        onChange: () => updateHooks(),
     });
 
     game.settings.register(MODULENAME, "logLevel", {

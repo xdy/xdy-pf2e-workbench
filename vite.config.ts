@@ -45,7 +45,6 @@ export default defineConfig(async ({ command }) => {
                 fileName: "xdy-pf2e-workbench",
             },
             rolldownOptions: {
-                external: ["luxon"],
                 watch: { buildDelay: 100 },
             },
             target: "esnext",

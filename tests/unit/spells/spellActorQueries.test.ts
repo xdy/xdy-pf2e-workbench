@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import {
+    getEntryDisplayInfo,
     getEntryTradition,
     getSkillCheckForEntry,
     hasCompatibleTradition,
@@ -10,24 +11,28 @@ import type { ActorPF2e, SpellcastingEntryPF2e } from "foundry-pf2e";
 function makeEntryStub(
     overrides: Partial<{
         id: string;
+        name?: string;
         tradition: string | null;
+        isFocusPool?: boolean;
+        isSpontaneous?: boolean;
+        isPrepared?: boolean;
         system: { tradition?: { value?: string } };
     }> = {},
 ): SpellcastingEntryPF2e {
     return {
         id: overrides.id ?? "entry1",
+        name: overrides.name ?? "Test Entry",
         spells: null,
         tradition: overrides.tradition ?? null,
-        isSpontaneous: false,
-        isPrepared: false,
+        isFocusPool: overrides.isFocusPool ?? false,
+        isSpontaneous: overrides.isSpontaneous ?? false,
+        isPrepared: overrides.isPrepared ?? false,
         system: (overrides.system ?? {}) as unknown as object,
     } as unknown as SpellcastingEntryPF2e;
 }
 
 function makeActorWithSpellcasting(entries: SpellcastingEntryPF2e[]): ActorPF2e {
-    return {
-        spellcasting: [...entries],
-    } as unknown as ActorPF2e;
+    return { spellcasting: [...entries] } as unknown as ActorPF2e;
 }
 
 describe("getEntryTradition", () => {
@@ -73,8 +78,7 @@ describe("hasCompatibleTradition", () => {
     test("matches first compatible entry among several", () => {
         const divine = makeEntryStub({ id: "d", tradition: "divine" });
         const arcane = makeEntryStub({ id: "a", tradition: "arcane" });
-        const actor = makeActorWithSpellcasting([divine, arcane]);
-        expect(hasCompatibleTradition(actor, ["arcane"])).toBe(true);
+        expect(hasCompatibleTradition(makeActorWithSpellcasting([divine, arcane]), ["arcane"])).toBe(true);
     });
 });
 
@@ -141,8 +145,40 @@ describe("getSkillCheckForEntry", () => {
     });
 
     test("returns null when actor has no skills property", () => {
-        const entry = makeEntryStub({ tradition: "arcane" });
-        const actor = {} as unknown as ActorPF2e;
-        expect(getSkillCheckForEntry(actor, entry)).toBeNull();
+        expect(getSkillCheckForEntry({} as unknown as ActorPF2e, makeEntryStub({ tradition: "arcane" }))).toBeNull();
+    });
+});
+
+describe("getEntryDisplayInfo", () => {
+    test("focus pool entry", () => {
+        expect(getEntryDisplayInfo(makeEntryStub({ tradition: "divine", isFocusPool: true }))).toEqual({
+            name: "Test Entry",
+            tradition: "divine",
+            type: game.i18n.localize("xdy-pf2e-workbench.spellLearn.entryTypeFocus"),
+        });
+    });
+
+    test("spontaneous entry", () => {
+        expect(getEntryDisplayInfo(makeEntryStub({ tradition: "occult", isSpontaneous: true }))).toEqual({
+            name: "Test Entry",
+            tradition: "occult",
+            type: game.i18n.localize("xdy-pf2e-workbench.spellLearn.entryTypeSpontaneous"),
+        });
+    });
+
+    test("prepared entry", () => {
+        expect(getEntryDisplayInfo(makeEntryStub({ tradition: "arcane", isPrepared: true }))).toEqual({
+            name: "Test Entry",
+            tradition: "arcane",
+            type: game.i18n.localize("xdy-pf2e-workbench.spellLearn.entryTypePrepared"),
+        });
+    });
+
+    test("fallback when none of the special flags set", () => {
+        expect(getEntryDisplayInfo(makeEntryStub({ tradition: "primal" }))).toEqual({
+            name: "Test Entry",
+            tradition: "primal",
+            type: game.i18n.localize("xdy-pf2e-workbench.spellLearn.entryTypeSpellcasting"),
+        });
     });
 });

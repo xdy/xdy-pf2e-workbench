@@ -151,6 +151,59 @@ export function shouldIHandleThis(actor: ActorPF2e | null): boolean | null {
     return game.user.id === updater?.id;
 }
 
+export function isActorAssignedToCurrentUser(actor: ActorPF2e | null): boolean {
+    if (!actor) return false;
+    if (game.user.character?.id === actor.id) return true;
+    if (game.user.isGM && !game.users.players.some((u) => u.character?.id === actor.id)) return true;
+    return false;
+}
+
+export function getOwningUserId(actor: ActorPF2e | null): string | null {
+    if (!actor) return null;
+    const assignedPlayer = game.users.players.find((u) => u.character?.id === actor.id);
+    if (assignedPlayer) return assignedPlayer.id;
+    if (game.users.activeGM) return game.users.activeGM.id;
+    return null;
+}
+
+export function addTargetsLocally(tokenIds: string[]): void {
+    for (let i = 0; i < tokenIds.length; i++) {
+        const token = canvas.tokens?.get(tokenIds[i]!);
+        if (token) {
+            const isLast = i === tokenIds.length - 1;
+            token.setTarget(true, { user: game.user, releaseOthers: isLast });
+        }
+    }
+}
+
+export function clearTargetsLocally(): void {
+    game.user.clearTargets();
+}
+
+export function saveTargetsLocally(combatantId: string): void {
+    const currentTargets = [...game.user.targets].map((t) => t.id);
+    const remembered =
+        (game.user.getFlag(MODULENAME, "rememberedTargets") as Record<string, string[]> | undefined) ?? {};
+    remembered[combatantId] = currentTargets;
+    game.user.setFlag(MODULENAME, "rememberedTargets", remembered);
+}
+
+export function restoreTargetsLocally(combatantId: string): void {
+    const remembered = game.user.getFlag(MODULENAME, "rememberedTargets") as Record<string, string[]> | undefined;
+    const tokenIds = remembered?.[combatantId];
+    if (tokenIds?.length) {
+        addTargetsLocally(tokenIds);
+    }
+}
+
+export function selectCombatantLocally(combatantId: string): void {
+    const token = game.combat?.combatants.get(combatantId)?.token?.object;
+    if (token) {
+        canvas.tokens?.releaseAll();
+        token.control({ releaseOthers: false });
+    }
+}
+
 export function pushNotification(type: string, message: string): void {
     game.socket.emit("module." + MODULENAME, { operation: "notification", args: [type, message] });
 }

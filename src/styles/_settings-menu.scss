@@ -1,0 +1,22 @@
+.xdy-pf2e-workbench {
+    &.settings-menu {
+        padding: 0;
+        overflow: hidden;
+
+        section.content {
+            flex: 1 1 auto;
+            min-height: 0;
+            padding: var(--spacer-16);
+            overflow: hidden auto;
+        }
+
+        .form-footer {
+            flex: 0 0 auto;
+            padding: var(--spacer-8) var(--spacer-16);
+        }
+
+        .form-group.hidden {
+            display: none;
+        }
+    }
+}

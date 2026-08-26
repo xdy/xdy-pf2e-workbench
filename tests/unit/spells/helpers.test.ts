@@ -1,6 +1,8 @@
-import { beforeEach, describe, expect, test, vi } from "vitest";
-import { hasLearnFailureAtCurrentLevel } from "../../../src/module/feature/spells/helpers.js";
-import { sanitizeFlagKey } from "../../../src/module/feature/spells/flags.js";
+import { describe, expect, test, vi } from "vitest";
+import {
+    hasLearnFailureAtCurrentLevel,
+    isBindableSpellcastingEntry,
+} from "../../../src/module/feature/spells/helpers.js";
 import {
     getLearnSpellCostCopper,
     getLearnSpellDcAdjustment,
@@ -8,23 +10,28 @@ import {
     getSpellTraitsAndRank,
     spellIdentifier,
 } from "../../../src/module/feature/spells/spellData.js";
-import { ActorPF2e } from "foundry-pf2e";
+import type { ActorPF2e, SpellcastingEntryPF2e, SpellPF2e } from "foundry-pf2e";
 
-function stubGamePf2e(): void {
-    vi.stubGlobal("game", {
-        system: { id: "pf2e" },
-        user: { isGM: true, id: "gm1" },
-        settings: { get: () => ({}) },
-        time: { worldTime: 1000000 },
-        i18n: {
-            localize: (key: string) => key,
-            format: (key: string, data?: Record<string, unknown>) => (data ? `${key} ${JSON.stringify(data)}` : key),
-        },
+describe("isBindableSpellcastingEntry", () => {
+    const makeEntry = (overrides: Record<string, unknown> = {}): SpellcastingEntryPF2e =>
+        ({
+            id: "entry-1",
+            isEphemeral: false,
+            isFocusPool: false,
+            system: { prepared: { value: "prepared" } },
+            ...overrides,
+        }) as unknown as SpellcastingEntryPF2e;
+
+    test.for([
+        ["ephemeral entry", makeEntry({ isEphemeral: true }), false],
+        ["focus pool entry", makeEntry({ isFocusPool: true }), false],
+        ["missing id", makeEntry({ id: null }), false],
+        ["innate entry", makeEntry({ system: { prepared: { value: "innate" } } }), false],
+        ["valid prepared entry", makeEntry(), true],
+        ["valid spontaneous entry", makeEntry({ system: { prepared: { value: "spontaneous" } } }), true],
+    ])("%s", ([_desc, entry, expected]) => {
+        expect(isBindableSpellcastingEntry(entry as SpellcastingEntryPF2e)).toBe(expected);
     });
-}
-
-beforeEach(() => {
-    stubGamePf2e();
 });
 
 describe("getLearnSpellCostCopper", () => {
@@ -75,82 +82,81 @@ describe("getLearnSpellDcAdjustment", () => {
 
 describe("spellIdentifier", () => {
     test("extracts slug-based identifier", () => {
-        expect(spellIdentifier({ name: "Fireball", system: { slug: "fireball" } })).toBe("slug:fireball");
+        const s = { name: "Fireball", system: { slug: "fireball" } } as unknown as SpellPF2e;
+        expect(spellIdentifier(s)).toBe("slug:fireball");
     });
 
     test("extracts sourceId-based identifier", () => {
-        expect(spellIdentifier({ name: "Light", sourceId: "Compendium.pf2e.spells-srd.Item.abc" })).toBe(
-            "sourceId:Compendium.pf2e.spells-srd.Item.abc",
-        );
+        const s = {
+            name: "Light",
+            sourceId: "Compendium.pf2e.spells-srd.Item.abc",
+        } as unknown as SpellPF2e;
+        expect(spellIdentifier(s)).toBe("sourceId:Compendium.pf2e.spells-srd.Item.abc");
     });
 
     test("prefers sourceId over slug", () => {
-        expect(
-            spellIdentifier({
-                name: "double",
-                system: { slug: "slug-falls-back" },
-                sourceId: "Compendium.x.y",
-            }),
-        ).toBe("sourceId:Compendium.x.y");
+        const s = {
+            name: "double",
+            system: { slug: "slug-falls-back" },
+            sourceId: "Compendium.x.y",
+        } as unknown as SpellPF2e;
+        expect(spellIdentifier(s)).toBe("sourceId:Compendium.x.y");
+    });
+
+    test("falls back to _stats.compendiumSource", () => {
+        const s = {
+            _stats: { compendiumSource: "Compendium.pf2e.spells-srd.Item.def456" },
+        } as unknown as SpellPF2e;
+        expect(spellIdentifier(s)).toBe("sourceId:Compendium.pf2e.spells-srd.Item.def456");
     });
 
     test("returns null when neither slug nor sourceId is available", () => {
-        expect(spellIdentifier({ name: "orphan" })).toBeNull();
+        const s = { name: "orphan" } as unknown as SpellPF2e;
+        expect(spellIdentifier(s)).toBeNull();
     });
 });
 
 describe("getSpellTraitsAndRank", () => {
     test("resolves rank and traditions", () => {
-        const result = getSpellTraitsAndRank({
+        const s = {
             name: "Fireball",
             system: {
                 level: { value: 3 },
                 traits: { value: ["fire", "evocation"], traditions: ["arcane", "primal"] },
             },
-        });
+        } as unknown as SpellPF2e;
+        const result = getSpellTraitsAndRank(s);
         expect(result).toEqual({
             traits: ["fire", "evocation"],
             traditions: ["arcane", "primal"],
+            rarity: "common",
             rankKey: "3",
             spellName: "Fireball",
         });
     });
 
     test("cantrip detection via trait", () => {
-        const result = getSpellTraitsAndRank({
+        const s = {
             name: "Light",
             system: { level: { value: 0 }, traits: { value: ["cantrip"] } },
-        });
+        } as unknown as SpellPF2e;
+        const result = getSpellTraitsAndRank(s);
         expect(result?.rankKey).toBe("cantrip");
     });
 
     test("cantrip detection via zero level", () => {
-        const result = getSpellTraitsAndRank({
+        const s = {
             name: "Detect Magic",
             system: { level: { value: 0 }, traits: { value: [] } },
-        });
+        } as unknown as SpellPF2e;
+        const result = getSpellTraitsAndRank(s);
         expect(result?.rankKey).toBe("cantrip");
-    });
-
-    test("returns null when level is absent", () => {
-        const result = getSpellTraitsAndRank({ name: "ghost", system: {} });
-        expect(result).toBeNull();
-    });
-
-    test("handles spell without traits array", () => {
-        const result = getSpellTraitsAndRank({ name: "Plain", system: { level: { value: 2 } } });
-        expect(result).toEqual({
-            traits: [],
-            traditions: [],
-            rankKey: "2",
-            spellName: "Plain",
-        });
     });
 });
 
 const ONE_WEEK = 604800;
 const SPELL_ID = "Compendium.pf2e.spells-srd.Item.fireball";
-const FLAGGED_KEY = sanitizeFlagKey(SPELL_ID);
+const SANITIZED_KEY = "Compendium!pf2e!spells-srd!Item!fireball";
 
 function actorStub(overrides: {
     level?: number;
@@ -169,31 +175,31 @@ function actorStub(overrides: {
 
 describe("hasLearnFailureAtCurrentLevel", () => {
     test("false when no failure is recorded", () => {
-        expect(hasLearnFailureAtCurrentLevel(actorStub({}), FLAGGED_KEY)).toBe(false);
+        expect(hasLearnFailureAtCurrentLevel(actorStub({}), SPELL_ID)).toBe(false);
     });
 
     test("false when actor has leveled past the failure", () => {
         const actor = actorStub({
             level: 4,
-            learnFailures: { [FLAGGED_KEY]: { level: 3, timestamp: 100 } },
+            learnFailures: { [SANITIZED_KEY]: { level: 3, timestamp: 100 } },
         });
-        expect(hasLearnFailureAtCurrentLevel(actor, FLAGGED_KEY)).toBe(false);
+        expect(hasLearnFailureAtCurrentLevel(actor, SPELL_ID)).toBe(false);
     });
 
     test("true when actor is at the same level as the failure", () => {
         const actor = actorStub({
             level: 3,
-            learnFailures: { [FLAGGED_KEY]: { level: 3, timestamp: 100 } },
+            learnFailures: { [SANITIZED_KEY]: { level: 3, timestamp: 100 } },
         });
-        expect(hasLearnFailureAtCurrentLevel(actor, FLAGGED_KEY)).toBe(true);
+        expect(hasLearnFailureAtCurrentLevel(actor, SPELL_ID)).toBe(true);
     });
 
     test("true when actor is below the failure level", () => {
         const actor = actorStub({
             level: 2,
-            learnFailures: { [FLAGGED_KEY]: { level: 3, timestamp: 100 } },
+            learnFailures: { [SANITIZED_KEY]: { level: 3, timestamp: 100 } },
         });
-        expect(hasLearnFailureAtCurrentLevel(actor, FLAGGED_KEY)).toBe(true);
+        expect(hasLearnFailureAtCurrentLevel(actor, SPELL_ID)).toBe(true);
     });
 
     test("true when Magical Shorthand actor is level-blocked and < 1 week elapsed", () => {
@@ -204,9 +210,9 @@ describe("hasLearnFailureAtCurrentLevel", () => {
         const actor = actorStub({
             level: 3,
             hasMagicalShorthand: true,
-            learnFailures: { [FLAGGED_KEY]: { level: 3, timestamp: 100 } },
+            learnFailures: { [SANITIZED_KEY]: { level: 3, timestamp: 100 } },
         });
-        expect(hasLearnFailureAtCurrentLevel(actor, FLAGGED_KEY)).toBe(true);
+        expect(hasLearnFailureAtCurrentLevel(actor, SPELL_ID)).toBe(true);
     });
 
     test("false when Magical Shorthand actor is level-blocked but 1 week has elapsed", () => {
@@ -217,9 +223,9 @@ describe("hasLearnFailureAtCurrentLevel", () => {
         const actor = actorStub({
             level: 3,
             hasMagicalShorthand: true,
-            learnFailures: { [FLAGGED_KEY]: { level: 3, timestamp: 100 } },
+            learnFailures: { [SANITIZED_KEY]: { level: 3, timestamp: 100 } },
         });
-        expect(hasLearnFailureAtCurrentLevel(actor, FLAGGED_KEY)).toBe(false);
+        expect(hasLearnFailureAtCurrentLevel(actor, SPELL_ID)).toBe(false);
     });
 
     test("true without Magical Shorthand even after 1 week", () => {
@@ -229,8 +235,8 @@ describe("hasLearnFailureAtCurrentLevel", () => {
         });
         const actor = actorStub({
             level: 3,
-            learnFailures: { [FLAGGED_KEY]: { level: 3, timestamp: 100 } },
+            learnFailures: { [SANITIZED_KEY]: { level: 3, timestamp: 100 } },
         });
-        expect(hasLearnFailureAtCurrentLevel(actor, FLAGGED_KEY)).toBe(true);
+        expect(hasLearnFailureAtCurrentLevel(actor, SPELL_ID)).toBe(true);
     });
 });

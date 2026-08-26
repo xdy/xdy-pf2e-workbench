@@ -1,10 +1,7 @@
 import { describe, expect, test } from "vitest";
-import {
-    computeEffectiveCost,
-    isFailureOutcome,
-    isSuccessOutcome,
-} from "../../../src/module/feature/spells/learn/batchLearn.js";
+import { computeEffectiveCost } from "../../../src/module/feature/spells/learn/batchLearn.js";
 import type { LearnOutcome } from "../../../src/module/feature/spells/types.js";
+import { isSuccessOutcome } from "../../../src/module/feature/spells/types.js";
 
 describe("outcome type guards", () => {
     const outcomes: (LearnOutcome | null | undefined)[] = [
@@ -18,10 +15,6 @@ describe("outcome type guards", () => {
 
     test.for(outcomes)("isSuccessOutcome(%s)", (outcome) => {
         expect(isSuccessOutcome(outcome)).toBe(outcome === "criticalSuccess" || outcome === "success");
-    });
-
-    test.for(outcomes)("isFailureOutcome(%s)", (outcome) => {
-        expect(isFailureOutcome(outcome)).toBe(outcome === "failure" || outcome === "criticalFailure");
     });
 });
 

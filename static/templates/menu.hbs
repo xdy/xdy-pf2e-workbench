@@ -3,23 +3,12 @@
         <div class="form-group">
             <label for="{{setting.key}}">{{localize setting.name}}</label>
             <div class="form-fields">
-                {{#if setting.isSelect}}
-                    <select name="{{setting.key}}">
-                        {{selectOptions setting.choices selected=setting.value}}
-                    </select>
-                {{else if setting.isCheckbox}}
-                    <input type="checkbox" name="{{setting.key}}" {{checked setting.value}} />
-                {{else if setting.isNumber}}
-                    <input type="number" name="{{setting.key}}" value="{{setting.value}}"
-                           data-dtype="{{setting.type}}" />
-                {{else if setting.isRange}}
-                    {{rangePicker name=setting.key value=setting.value min=setting.range.min max=setting.range.max
-                                  step=setting.range.step}}
-                {{else if setting.isText}}
-                    <input type="text" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}" />
-                {{else if setting.isFilepicker}}
+                {{#if setting.isFilepicker}}
                     <file-picker name="{{setting.key}}" value="{{setting.value}}"
                                  type="{{setting.filePicker}}"></file-picker>
+                {{else if setting.fieldPartial}}
+                    {{> (lookup setting 'fieldPartial') key=setting.key value=setting.value
+                        choices=setting.choices range=setting.range type=setting.type}}
                 {{/if}}
             </div>
             <p class="hint">{{localize setting.hint}}</p>

@@ -1,7 +1,7 @@
 import { EncounterPF2e, PhysicalItemPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../constants.ts";
 import { getModuleSetting, sendHeldItemChatMessage } from "../utils.ts";
-import { clearToolbeltCaches } from "../feature/damageHandler/toolbeltIntegration.ts";
+import { clearToolbeltCaches } from "../feature/damageHandler/toolbelt/toolbeltCache.ts";
 
 export async function deleteCombatHook(encounter: EncounterPF2e, _options: object): Promise<void> {
     clearToolbeltCaches();

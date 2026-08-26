@@ -23,6 +23,9 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
         sheatheHeldItemsAfterEncounter: {
             list: ["sheatheHeldItemsAfterEncounterTypes"],
         },
+        enableGeneralLearnSpell: {
+            list: ["learnSpellDcAdjustment"],
+        },
     };
 
     public static override get settings(): Record<string, SettingRegistration> {
@@ -233,15 +236,6 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: 0,
                 type: Number,
-            },
-            learnSpellDestroyScroll: {
-                name: `${MODULENAME}.SETTINGS.learnSpellDestroyScroll.name`,
-                hint: `${MODULENAME}.SETTINGS.learnSpellDestroyScroll.hint`,
-                scope: "world",
-                config: true,
-                default: false,
-                type: Boolean,
-                onChange: () => updateHooks(),
             },
             allowDebtItems: {
                 name: `${MODULENAME}.SETTINGS.allowDebtItems.name`,

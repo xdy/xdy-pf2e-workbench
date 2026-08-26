@@ -1,0 +1,44 @@
+/** License tags on item sheets and OGL tag on character sheets */
+.xdy-pf2e-workbench-license-tag,
+.xdy-pf2e-workbench-ogl-char-tag {
+    color: var(--color-text-light-7);
+    border-color: var(--color-text-light-5);
+    background: var(--color-text-light-1);
+    cursor: pointer;
+}
+
+.xdy-pf2e-workbench-ogl-char-tag:hover {
+    color: var(--color-text-dark-5);
+    border-color: var(--color-text-light-7);
+    background: var(--color-text-light-2);
+}
+
+/** OGL items list in dialog */
+.xdy-pf2e-workbench-ogl-dialog h4 {
+    margin: var(--spacer-4) 0 var(--spacer-2);
+    font-size: var(--font-size-14);
+}
+
+.xdy-pf2e-workbench-ogl-dialog ul {
+    margin: 0;
+    padding-left: var(--spacer-16);
+    line-height: 1.3;
+}
+
+.xdy-pf2e-workbench-ogl-dialog li {
+    margin: 0;
+}
+
+.xdy-pf2e-workbench-ogl-dialog p {
+    margin-bottom: var(--spacer-4);
+}
+
+.xdy-pf2e-workbench-ogl-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacer-8) 0;
+}
+
+.xdy-pf2e-workbench-ogl-list li {
+    padding: var(--spacer-4) 0;
+}

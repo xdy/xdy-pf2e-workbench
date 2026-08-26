@@ -14,13 +14,16 @@ import type { ActorPF2e, CharacterPF2e, DamageRoll, ScenePF2e, TokenDocumentPF2e
 import { ActorFlagsPF2e, ChatContextFlag, ChatMessagePF2e, RollOptionFlags, SpellPF2e } from "foundry-pf2e";
 import { Rolled } from "foundry/client/dice/roll.mts";
 import * as systems from "../../utils/systems.ts";
+import type { AutoRollDamageOptions } from "./toolbelt/toolbeltTypes.ts";
 import {
-    AutoRollDamageOptions,
     getEffectiveToolbeltTargetHelperData,
+    registerPendingInjection,
+    schedulePendingInjectionCleanup,
+} from "./toolbelt/toolbeltCache.ts";
+import {
     isExperimentalToolbeltSaveIntegrationEnabled,
-    pendingToolbeltDamageInjections,
     shouldWaitForToolbeltTargetHelper,
-} from "./toolbeltIntegration.ts";
+} from "./toolbelt/toolbeltIntegration.ts";
 
 export async function autoRollDamage(message: ChatMessagePF2e, options: AutoRollDamageOptions = {}): Promise<void> {
     const numberOfMessagesToCheck = 10;
@@ -92,12 +95,7 @@ export async function autoRollDamage(message: ChatMessagePF2e, options: AutoRoll
             const originMessage = await getLatestChatMessageWithOrigin(5, originUuid);
             const flags = originMessage?.flags;
 
-            const targetHelperActive = game.modules.get("pf2e-target-helper")?.active;
-            const targetHelperWillAutoroll =
-                targetHelperActive && game.settings.get("pf2e-target-helper", "multipleTargetRollDamage") !== "no";
-            const letTargetHelperAutorollDamage =
-                // @ts-expect-error module-specific flag
-                (flags["pf2e-target-helper"]?.targets ?? 0) > 1 && targetHelperWillAutoroll;
+            const letTargetHelperAutorollDamage = resolveTargetHelperAutoroll(flags);
 
             if (
                 actor &&
@@ -118,13 +116,19 @@ export async function autoRollDamage(message: ChatMessagePF2e, options: AutoRoll
     }
 }
 
-/**
- * Checks if the given message satisfies the conditions to perform a flat check,
- * and returns whether the damage should be rolled or not.
- *
- * @param {ChatMessagePF2e} message - The chat message to check.
- * @return {Promise<boolean>} - A boolean indicating whether to roll the damage.
- */
+function resolveTargetHelperAutoroll(flags: Record<string, unknown> | undefined): boolean {
+    const targetHelperActive = game.modules.get("pf2e-target-helper")?.active;
+    if (!targetHelperActive) {
+        return false;
+    }
+    const willAutoroll = game.settings.get("pf2e-target-helper", "multipleTargetRollDamage") !== "no";
+    if (!willAutoroll) {
+        return false;
+    }
+    // @ts-expect-error module-specific flag
+    return (flags?.["pf2e-target-helper"]?.targets ?? 0) > 1;
+}
+
 // Cache for flat check results to avoid repeated searches
 const flatCheckResultCache = new Map<string, boolean>();
 
@@ -330,7 +334,6 @@ async function handleSpell(
     const rollDamage = await noOrSuccessfulFlatcheck(message);
 
     if (rollDamage) {
-        // Fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
         const target = constructTargetElement(castRank);
 
         const toolbeltTargetHelperData = getEffectiveToolbeltTargetHelperData(message);
@@ -338,34 +341,43 @@ async function handleSpell(
             isExperimentalToolbeltSaveIntegrationEnabled() && toolbeltTargetHelperData?.type === "spell";
 
         if (isToolbeltManaged) {
-            pendingToolbeltDamageInjections.set(originUuid, {
+            registerPendingInjection(originUuid, {
                 targetHelperData: toolbeltTargetHelperData,
                 createdAt: Date.now(),
             });
         }
 
-        if ((systems.getFlag<string[]>(message, "origin.variant.overlays")?.length ?? 0) > 0) {
-            const overlays = systems.getFlag<string[]>(message, "origin.variant.overlays");
-            const variant = origin.loadVariant({
-                castRank,
-                // target,
-                overlayIds: overlays?.[0] ? [overlays[0]] : [],
-            });
-            // @ts-expect-error TODO fix typing
-            await variant.rollDamage({
-                outcome: degreeOfSuccess,
-                target,
-            });
-        } else {
-            // @ts-expect-error TODO fix typing
-            await origin?.rollDamage({
-                outcome: degreeOfSuccess,
-                target,
-            });
+        try {
+            if ((systems.getFlag<string[]>(message, "origin.variant.overlays")?.length ?? 0) > 0) {
+                const overlays = systems.getFlag<string[]>(message, "origin.variant.overlays");
+                const variant = origin.loadVariant({
+                    castRank,
+                    overlayIds: overlays?.[0] ? [overlays[0]] : [],
+                });
+                // @ts-expect-error TODO fix typing
+                await variant.rollDamage({
+                    outcome: degreeOfSuccess,
+                    target,
+                });
+            } else {
+                // @ts-expect-error TODO fix typing
+                await origin?.rollDamage({
+                    outcome: degreeOfSuccess,
+                    target,
+                });
+            }
+        } finally {
+            if (isToolbeltManaged) {
+                schedulePendingInjectionCleanup(originUuid, 5000);
+            }
         }
 
         if (isToolbeltManaged) {
-            await message.setFlag("pf2e-toolbelt", "targetHelper", null);
+            try {
+                await message.setFlag("pf2e-toolbelt", "targetHelper", null);
+            } catch {
+                fireAndForget(message.setFlag("pf2e-toolbelt", "targetHelper", null), "toolbeltFlagCleanup");
+            }
         }
     }
 }
@@ -395,6 +407,7 @@ async function determineCastRank(
 }
 
 function constructTargetElement(castRank: number): HTMLDivElement {
+    // Fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
     const target = document.createElement("div");
     target.dataset.castRank = castRank.toString();
     target.closest = () => {

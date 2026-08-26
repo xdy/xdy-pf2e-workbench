@@ -10,7 +10,7 @@ describe("calculateLearnDc", () => {
         ["10", 41],
         ["99 (unknown)", 15],
     ])("rank %s common to DC %i", (rank, expected) => {
-        expect(calculateLearnDc(rank, ["common"])).toBe(expected);
+        expect(calculateLearnDc(rank, "common")).toBe(expected);
     });
 
     test.each([
@@ -19,17 +19,14 @@ describe("calculateLearnDc", () => {
         ["rare", 20],
         ["unique", 25],
     ])("level 1 %s to DC %i", (rarity, expected) => {
-        expect(calculateLearnDc("1", [rarity])).toBe(expected);
+        expect(calculateLearnDc("1", rarity)).toBe(expected);
     });
 
     test.each([
-        { desc: "unknown non-rarity trait defaults to common", traits: ["magic"], rank: "3", expected: 20 },
-        { desc: "empty traits defaults to common", traits: [], rank: "3", expected: 20 },
-        { desc: "case-insensitive (UNCOMMON)", traits: ["UNCOMMON"], rank: "1", expected: 17 },
-        { desc: "case-insensitive (Rare)", traits: ["Rare"], rank: "1", expected: 20 },
-        { desc: "first matching rarity wins", traits: ["fire", "uncommon", "rare"], rank: "1", expected: 17 },
-    ])("$desc", ({ traits, rank, expected }) => {
-        expect(calculateLearnDc(rank, traits)).toBe(expected);
+        { desc: "case-insensitive (UNCOMMON)", rarity: "UNCOMMON", rank: "1", expected: 17 },
+        { desc: "case-insensitive (Rare)", rarity: "Rare", rank: "1", expected: 20 },
+    ])("$desc", ({ rarity, rank, expected }) => {
+        expect(calculateLearnDc(rank, rarity)).toBe(expected);
     });
 
     test.each([
@@ -38,11 +35,11 @@ describe("calculateLearnDc", () => {
         [5, 20],
         [-20, -5],
     ])("modifier %i to DC %i", (mod, expected) => {
-        expect(calculateLearnDc("1", ["common"], mod)).toBe(expected);
+        expect(calculateLearnDc("1", "common", mod)).toBe(expected);
     });
 
     test("unknown rank with rarity still adjusts", () => {
-        expect(calculateLearnDc("99", ["rare"])).toBe(20);
+        expect(calculateLearnDc("99", "rare")).toBe(20);
     });
 });
 

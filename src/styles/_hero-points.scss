@@ -1,0 +1,25 @@
+/** Hero Point Rule styles */
+.chat-message .tags.modifiers .tag.keeley-add-10,
+.chat-message .dice-total.keeley-add-10,
+.chat-message .dice-formula > .keeley-add-10 {
+    color: var(--xdy-hero-keeley);
+}
+
+.chat-message .tags.modifiers .tag.keeley-add-10 {
+    box-shadow: inset 0 0 0 1px var(--xdy-hero-keeley-shadow);
+}
+
+.chat-message .tags.modifiers .tag.use-highest-roll,
+.chat-message .dice-total.use-highest-roll,
+.chat-message .dice-formula > .use-highest-roll {
+    color: var(--xdy-hero-highest);
+}
+
+.chat-message .tags.modifiers .tag.heroic-reroll,
+.chat-message .dice-total.heroic-reroll {
+    color: var(--xdy-hero-heroic);
+}
+
+.chat-message .tags.modifiers .tag.heroic-reroll {
+    box-shadow: inset 0 0 0 1px var(--xdy-hero-heroic-shadow);
+}

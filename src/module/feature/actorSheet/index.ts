@@ -2,6 +2,7 @@ import { ActorPF2e, ActorSheetPF2e, FeatPF2e, ItemPF2e } from "foundry-pf2e";
 import { CHARACTER_TYPE } from "../../xdy-pf2e-workbench.ts";
 import { MODULENAME } from "../../constants.ts";
 import { fireAndForget, getModuleSetting, shouldIHandleThis } from "../../utils.ts";
+import { canonicalizeSpellUuid } from "../spells/spellResolver.ts";
 
 export function itemFromActor(element: Element, attributeName: string, actor: ActorPF2e): ItemPF2e | null {
     const itemId = <string>element.getAttribute(attributeName);
@@ -90,7 +91,7 @@ export function rewriteSpellToChatToSendLink(sheet: ActorSheetPF2e<ActorPF2e>, h
                 if (actionElement.getAttribute("data-action") === WORKBENCH_SPELL_TO_CHAT) return;
 
                 actionElement.setAttribute("data-action", WORKBENCH_SPELL_TO_CHAT);
-                actionElement.onclick = (event: MouseEvent) => {
+                actionElement.onclick = async (event: MouseEvent) => {
                     const target = event.target as HTMLElement;
                     const spellContainer = getSpellContainer(target);
 
@@ -99,7 +100,8 @@ export function rewriteSpellToChatToSendLink(sheet: ActorSheetPF2e<ActorPF2e>, h
                     const item = <ItemPF2e>itemFromActor(spellContainer, "data-item-id", actor);
                     if (!item || item.type !== "spell") return;
 
-                    const flavor = `${game.i18n.localize(`${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.text`)}<em>@UUID[${item.sourceId}]</em></p>`;
+                    const canonicalUuid = await canonicalizeSpellUuid(item.uuid);
+                    const flavor = `${game.i18n.localize(`${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.text`)}<em>@UUID[${canonicalUuid}]</em></p>`;
                     fireAndForget(
                         ChatMessage.create({
                             style: CONST.CHAT_MESSAGE_STYLES.OOC,

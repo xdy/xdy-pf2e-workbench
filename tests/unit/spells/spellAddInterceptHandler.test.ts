@@ -1,10 +1,9 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { shouldIntercept } from "../../../src/module/feature/spells/learn/spellAddInterceptHandler.js";
+import { shouldIntercept } from "../../../src/module/feature/spells/spellAddInterceptHandler.js";
 import type { ActorPF2e, ItemPF2e } from "foundry-pf2e";
 
-function setupSettings(spellbookHandler: boolean, generalLearnSpell: boolean): void {
+function setupSettings(generalLearnSpell: boolean): void {
     const values: Record<string, boolean> = {
-        enableSpellbookHandler: spellbookHandler,
         enableGeneralLearnSpell: generalLearnSpell,
     };
     vi.stubGlobal("game", {
@@ -55,56 +54,22 @@ interface ItemArgs {
 
 describe("shouldIntercept", () => {
     beforeEach(() => {
-        setupSettings(false, false);
+        setupSettings(false);
     });
 
     test.for([
         // false cases
-        [
-            "setting OFF",
-            { spellbookHandler: false, generalLearnSpell: false },
-            { type: "spell", actorLevel: 3, actorXp: 100 },
-            false,
-        ],
-        [
-            "non-spell item type",
-            { spellbookHandler: false, generalLearnSpell: true },
-            { type: "weapon", actorLevel: 3, actorXp: 100 },
-            false,
-        ],
-        [
-            "actor is null",
-            { spellbookHandler: false, generalLearnSpell: true },
-            { type: "spell", actorIsNull: true },
-            false,
-        ],
+        ["setting OFF", { generalLearnSpell: false }, { type: "spell", actorLevel: 3, actorXp: 100 }, false],
+        ["non-spell item type", { generalLearnSpell: true }, { type: "weapon", actorLevel: 3, actorXp: 100 }, false],
+        ["actor is null", { generalLearnSpell: true }, { type: "spell", actorIsNull: true }, false],
         [
             "actor is NPC",
-            { spellbookHandler: false, generalLearnSpell: true },
+            { generalLearnSpell: true },
             { type: "spell", actorLevel: 3, actorXp: 100, actorType: "npc" },
             false,
         ],
-        [
-            "level 1, 0 XP (starting character)",
-            { spellbookHandler: false, generalLearnSpell: true },
-            { type: "spell", actorLevel: 1, actorXp: 0 },
-            true,
-        ],
-        // true cases
-        [
-            "spell, character, setting ON, level 3 with XP",
-            { spellbookHandler: false, generalLearnSpell: true },
-            { type: "spell", actorLevel: 3, actorXp: 100 },
-            true,
-        ],
-        [
-            "level 1, non-zero XP",
-            { spellbookHandler: false, generalLearnSpell: true },
-            { type: "spell", actorLevel: 1, actorXp: 50 },
-            true,
-        ],
     ])("%s", ([_desc, settings, itemArgs, expected]) => {
-        setupSettings((settings as TestCaseArgs).spellbookHandler, (settings as TestCaseArgs).generalLearnSpell);
+        setupSettings((settings as TestCaseArgs).generalLearnSpell);
         const ia = itemArgs as ItemArgs;
         const actor = ia.actorIsNull ? null : makeActor({ level: ia.actorLevel, xp: ia.actorXp, type: ia.actorType });
         const item = makeSpellItem({ type: ia.type, actor: actor as ActorPF2e | null });

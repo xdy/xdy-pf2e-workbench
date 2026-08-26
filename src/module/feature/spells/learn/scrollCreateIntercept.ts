@@ -1,88 +1,104 @@
-import type { ActorPF2e, ItemPF2e } from "foundry-pf2e";
+import type { ActorPF2e, ItemPF2e, SpellPF2e } from "foundry-pf2e";
 import { fireAndForget, getModuleSetting } from "../../../utils.ts";
-import { I18N } from "../helpers.ts";
-import { getSpellDocData, getSpellTraitsAndRank, spellIdentifier } from "../spellData.ts";
-import { hasSpontaneousEntry, isSpellAlreadyKnownSync, pickSpellcastingEntryWithDialog } from "../spellActorQueries.ts";
-import { LearnSpellHandler } from "./learnSpellHandler.ts";
+import { logError } from "../../../utils/logging.ts";
+import { I18N_LEARN } from "../helpers.ts";
+import { spellIdentifier } from "../spellData.ts";
+import { notifyNoCompatibleEntry, pickSpellcastingEntryWithDialog } from "../spellActorQueries.ts";
 import { showConfirm } from "../dialogHelper.ts";
-import { isLocked } from "../../../utils/locks.ts";
-import { DirectEntryTarget } from "./spellAddInterceptHandler.ts";
+import { directEntryLearnHandler } from "./directEntryTarget.ts";
+import { isMystified, isScrollWithSpell } from "../itemPredicates.ts";
+import type { LearnOutcome } from "../types.ts";
+import { isSuccessOutcome } from "../types.ts";
+import { promptOverrideLearnFailure } from "./learnDialogs.ts";
+import { learnAttemptGuards } from "./batchLearn.ts";
 
-function getEmbeddedSpell(scroll: ItemPF2e): Record<string, unknown> | null {
-    const spell = (scroll.system as { spell?: Record<string, unknown> }).spell;
-    if (spell && typeof spell === "object" && (spell as { name?: string }).name) return spell;
+interface ScrollSpellSource {
+    name?: string;
+    system?: {
+        level?: { value?: number };
+        traits?: {
+            value?: string[];
+            traditions?: string[];
+            rarity?: string;
+        };
+        slug?: string | null;
+    };
+    sourceId?: string;
+    _stats?: { compendiumSource?: string };
+}
+
+export function getEmbeddedScrollSpell(scroll: ItemPF2e): ScrollSpellSource | null {
+    const spell = (scroll.system as { spell?: ScrollSpellSource }).spell;
+    if (spell?.name) return spell;
     return null;
 }
 
-function isScrollWithSpell(item: ItemPF2e): boolean {
-    const system = item.system as { category?: string; spell?: unknown };
-    return item.type === "consumable" && system.category === "scroll" && !!system.spell;
+function shouldDestroyScroll(outcome: LearnOutcome | null): boolean {
+    const mode = getModuleSetting<string>("learnSpellDestroyScroll");
+    if (mode === "onUse") return true;
+    if (mode === "onSuccess") return isSuccessOutcome(outcome);
+    return false;
 }
 
-function isMystified(item: ItemPF2e): boolean {
-    return (item.system as { identification?: { status?: string } })?.identification?.status === "unidentified";
-}
-
-async function destroyScroll(scroll: ItemPF2e): Promise<void> {
-    if (!getModuleSetting<boolean>("learnSpellDestroyScroll")) return;
+async function destroyScroll(scroll: ItemPF2e, outcome: LearnOutcome | null): Promise<void> {
+    if (!shouldDestroyScroll(outcome)) return;
     if (!scroll.actor) return;
     const quantity = (scroll.system as { quantity?: number }).quantity ?? 1;
     await (quantity > 1 ? scroll.update({ "system.quantity": quantity - 1 }) : scroll.delete());
 }
 
-async function handleScrollLearn(scroll: ItemPF2e, actor: ActorPF2e): Promise<void> {
-    if (isLocked(actor.id)) return;
+export async function learnSpellFromScroll(scroll: ItemPF2e, actor: ActorPF2e): Promise<void> {
+    if (isMystified(scroll)) return;
 
-    if (isMystified(scroll)) {
-        ui.notifications.warn(game.i18n.localize(`${I18N}.scrollMystified`));
-        return;
-    }
-
-    const embedded = getEmbeddedSpell(scroll);
+    const embedded = getEmbeddedScrollSpell(scroll);
     if (!embedded) return;
 
-    const resolved = getSpellTraitsAndRank(embedded);
+    const resolved = learnAttemptGuards(embedded as unknown as SpellPF2e, actor, embedded.name ?? "");
     if (!resolved) return;
 
-    const confirmed = await showConfirm("learnFromScrollTitle", "learnFromScrollMessage", {
+    const ident = spellIdentifier(embedded as unknown as SpellPF2e);
+    if (ident && !(await promptOverrideLearnFailure(actor, ident, resolved.spellName))) return;
+
+    const confirmed = await showConfirm(`${I18N_LEARN}.learnFromScrollTitle`, `${I18N_LEARN}.learnFromScrollMessage`, {
         spellName: resolved.spellName,
     });
     if (!confirmed) return;
 
     const entry = await pickSpellcastingEntryWithDialog(actor, resolved.traditions);
     if (!entry) {
-        ui.notifications.warn(
-            game.i18n.format(`${I18N}.traditionMismatch`, {
-                spellName: resolved.spellName,
-                traditions: resolved.traditions.join(", "),
-            }),
-        );
+        notifyNoCompatibleEntry();
         return;
     }
 
-    const spellData = getSpellDocData(embedded);
-
-    await new LearnSpellHandler(new DirectEntryTarget()).initiateFromSpellData(spellData, actor, entry.id!);
-    await destroyScroll(scroll);
+    const outcome = await directEntryLearnHandler.initiateFromSpellData(
+        embedded as unknown as SpellPF2e,
+        actor,
+        entry.id!,
+        entry,
+    );
+    await destroyScroll(scroll, outcome);
 }
 
 export function scrollCreateIntercept(item: ItemPF2e, _data: object): void {
-    if (!getModuleSetting<boolean>("enableGeneralLearnSpell")) return;
-    if (!isScrollWithSpell(item)) return;
+    try {
+        if (!getModuleSetting<boolean>("enableGeneralLearnSpell")) return;
+        if (!isScrollWithSpell(item)) return;
 
-    const actor = item.actor as ActorPF2e | null;
-    if (!actor || actor.type !== "character") return;
+        const actor = item.actor as ActorPF2e | null;
+        if (!actor || actor.type !== "character") return;
 
-    const embedded = getEmbeddedSpell(item);
-    if (embedded) {
-        const ident = spellIdentifier(embedded);
-        if (ident && isSpellAlreadyKnownSync(actor, ident) && hasSpontaneousEntry(actor)) return;
+        const embedded = getEmbeddedScrollSpell(item);
+        if (!embedded) return;
+        if (learnAttemptGuards(embedded as unknown as SpellPF2e, actor, embedded.name ?? "") === null) return;
+
+        const sourceId = (item as unknown as { sourceId?: string }).sourceId ?? item.uuid;
+        const hookId = Hooks.on("createItem", (created: ItemPF2e) => {
+            const createdSourceId = (created as unknown as { sourceId?: string }).sourceId ?? created.uuid;
+            if (created.actor?.id !== actor?.id || createdSourceId !== sourceId || !isScrollWithSpell(created)) return;
+            Hooks.off("createItem", hookId);
+            fireAndForget(learnSpellFromScroll(created, actor!), "createItem: scrollLearn");
+        });
+    } catch (err) {
+        logError("scrollCreateIntercept: unhandled error", err);
     }
-
-    const name = item.name;
-    const hookId = Hooks.on("createItem", (created: ItemPF2e) => {
-        if (created.actor?.id !== actor?.id || created.name !== name || !isScrollWithSpell(created)) return;
-        Hooks.off("createItem", hookId);
-        fireAndForget(handleScrollLearn(created, actor!), "createItem: scrollLearn");
-    });
 }

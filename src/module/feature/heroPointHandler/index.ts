@@ -315,6 +315,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
     }
 
     const maxMinutes = getModuleSettingAsNumber("heroPointHandlerDefaultTimeoutMinutes");
+    const nonGmUsers = game.users?.filter((u) => !u.isGM) ?? [];
     const templateData: HeroPointHandlerTemplateData = {
         instructions: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.instructions`),
         doWhat: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.doWhat`),
@@ -327,8 +328,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
             const currentHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.value : 0;
             const maxHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.max : 3;
             const ownerName =
-                game.users?.find((u) => !u.isGM && actor?.ownership[u.id] === CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
-                    ?.name ?? "";
+                nonGmUsers.find((u) => actor?.ownership[u.id] === CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)?.name ?? "";
             const ownerSuffix = ownerName ? ` (${ownerName})` : "";
             return {
                 id: actor.id,

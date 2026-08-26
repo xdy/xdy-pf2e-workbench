@@ -33,13 +33,13 @@ export function actionsReminder(combatant: CombatantPF2e, reduction = 0): void {
     }
 }
 
-export function shouldShowActionReminder(actor: ActorPF2e, reduction: number): boolean {
+function shouldShowActionReminder(actor: ActorPF2e, reduction: number): boolean {
     const showForPC = isAllowedFor("actionsReminderAllow", "player") && actor?.hasPlayerOwner;
     const showForNPC = isAllowedFor("actionsReminderAllow", "gm") && !actor?.hasPlayerOwner;
     return (showForPC || showForNPC) && hasConditionOrReduction(actor, reduction);
 }
 
-export function hasConditionOrReduction(actor: ActorPF2e, reduction: number): boolean {
+function hasConditionOrReduction(actor: ActorPF2e, reduction: number): boolean {
     return actor.hasCondition("stunned", "slowed", "quickened") || reduction > 0;
 }
 
@@ -76,16 +76,11 @@ export async function autoReduceStunned(combatant: CombatantPF2e, userId: string
 
 export function reminderTargeting(message: ChatMessagePF2e, setting: string): boolean {
     const context: ChatContextFlag = <ChatContextFlag>systems.getFlag(message, "context");
+    const contextType = context?.type as string | undefined;
 
-    if (
-        message.actor &&
-        shouldIHandleThis(message.actor) &&
-        message.flags &&
-        message.author &&
-        context &&
-        context.type &&
-        ["spell-attack-roll", "attack-roll"].includes(<string>context.type)
-    ) {
+    if (!contextType || !["spell-attack-roll", "attack-roll"].includes(contextType)) return true;
+
+    if (message.actor && shouldIHandleThis(message.actor) && message.flags && message.author) {
         const targets = (<UserPF2e>message.author).targets;
         if (!targets || targets.size === 0) {
             // @ts-expect-error TODO Fix typing

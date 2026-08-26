@@ -29,10 +29,6 @@ export function registerHandlebarsHelpers(): void {
         }
     });
 
-    Handlebars.registerHelper("xdy_undefined", function () {
-        return undefined;
-    });
-
     Handlebars.registerHelper("xdy_hasKey", function (context, key) {
         for (const prop of context) {
             if (Object.hasOwn(prop, key)) {

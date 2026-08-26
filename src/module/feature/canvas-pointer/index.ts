@@ -74,7 +74,7 @@ export function deactivateCanvasPointer(): boolean {
 
 function startBroadcast(): void {
     sendPosition(iconClass, userColor);
-    const interval = getModuleSetting<number>("canvasPointerBroadcastInterval") ?? 10;
+    const interval = getModuleSetting<number>("canvasPointerBroadcastInterval") || 50;
     broadcastTimer = setInterval(() => sendPosition(iconClass, userColor), interval);
 }
 

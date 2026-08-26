@@ -12,13 +12,14 @@ function encodeUriPathSegment(text: string): string {
 }
 
 export function renderGamePauseHook(): void {
+    const imagePath = getModuleSetting<string>("customPauseImage");
+    const text = getModuleSetting<string>("customPauseText");
+    const noSpin = getModuleSetting("pauseImageNoSpin");
+    if (imagePath === "" && !text && !noSpin) return;
+
     if (!document?.querySelector("#pause")?.classList.contains("paused")) {
         return;
     }
-
-    const style = document.documentElement.style;
-
-    const imagePath = getModuleSetting<string>("customPauseImage");
 
     if (imagePath !== "") {
         let url: string;
@@ -34,20 +35,18 @@ export function renderGamePauseHook(): void {
         } else {
             url = `url("../../../${encodeUriPathSegment(imagePath)}")`;
         }
-        style.setProperty("--xdy-pf2e-workbench-pause", url);
+        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause", url);
     }
 
     if (phase >= Phase.READY) {
         const element = document.querySelector<HTMLElement>("#pause > figcaption");
         const pauseImage = document.querySelector("#pause > img");
 
-        const text = getModuleSetting<string>("customPauseText");
-
         if (text && element) {
             element.textContent = text;
         }
 
-        if (getModuleSetting("pauseImageNoSpin")) {
+        if (noSpin) {
             pauseImage?.classList.remove("fa-spin");
         } else {
             pauseImage?.classList.add("fa-spin");

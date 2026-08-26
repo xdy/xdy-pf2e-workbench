@@ -1,24 +1,24 @@
 <div class="hero-point-handler-dialog">
-    <div class="hero-point-handler-note">{{instructions}}</div>
+    <div class="hp-handler-note">{{instructions}}</div>
 
     <hr>
 
-    <div class="form-group">
-        <label class="col-md-4 control-label" for="sessionStart-0">{{{doWhat}}}</label>
-        <div class="col-md-4">
-            <div class="radio">
+    <div class="hp-handler-group">
+        <label class="hp-handler-label" for="sessionStart-0">{{{doWhat}}}</label>
+        <div class="hp-handler-field">
+            <div class="hp-handler-radio">
                 <label for="sessionStart-0">
                     <input type="radio" name="sessionStart" id="sessionStart-0" value="RESET" />
                     {{resetTo}}
                 </label>
             </div>
-            <div class="radio">
+            <div class="hp-handler-radio">
                 <label for="sessionStart-1">
                     <input type="radio" name="sessionStart" id="sessionStart-1" value="ADD" />
                     {{addLabel}}
                 </label>
             </div>
-            <div class="radio">
+            <div class="hp-handler-radio">
                 <label for="sessionStart-2">
                     <input type="radio" name="sessionStart" id="sessionStart-2" value="IGNORE" checked="checked" />
                     {{ignore}}
@@ -27,29 +27,30 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="col-md-4 control-label" for="heropoints">{{thisMany}}</label>
-        <div class="col-md-4">
-            <input id="heropoints" name="heropoints" type="number" value="1" class="form-control input-md" />
+    <div class="hp-handler-group">
+        <label class="hp-handler-label" for="heropoints">{{thisMany}}</label>
+        <div class="hp-handler-field">
+            <input id="heropoints" name="heropoints" type="number" value="1"
+                   class="hp-handler-input hp-handler-input--number" />
         </div>
     </div>
 
     <hr>
 
-    <div class="form-group">
-        <label class="col-md-4 control-label" for="characters">{{{addOne}}}</label>
+    <div class="hp-handler-group">
+        <label class="hp-handler-label" for="characters">{{{addOne}}}</label>
 
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="reason">{{reasonLabel}}</label>
-            <div class="col-md-4">
+        <div class="hp-handler-group">
+            <label class="hp-handler-label" for="reason">{{reasonLabel}}</label>
+            <div class="hp-handler-field">
                 <input id="reason" name="reason" type="text" placeholder="{{reasonPlaceholder}}"
-                       class="form-control input-md" />
+                       class="hp-handler-input hp-handler-input--text" />
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="hp-handler-field">
             {{#each actors}}
-                <div class="checkbox">
+                <div class="hp-handler-checkbox">
                     <label for="{{radioId}}">
                         <input type="checkbox" name="characters" id="{{radioId}}" value="{{id}}"
                                {{#if checked}}checked="checked"{{/if}} />
@@ -62,21 +63,21 @@
 
     <hr>
 
-    <div class="form-group">
-        <div class="col-md-4">
-            <div class="input-group">
-                <span class="input-group-addon">{{timerValue}}</span>
+    <div class="hp-handler-group">
+        <div class="hp-handler-field">
+            <div class="hp-handler-input-group">
+                <span class="hp-handler-input-addon">{{timerValue}}</span>
                 <input
                     id="timerTextId"
                     name="timerText"
-                    class="form-control"
+                    class="hp-handler-input"
                     value="{{timerMinutes}}"
                     type="number"
                     min="0"
                     max="{{maxMinutes}}"
                 />
             </div>
-            <p class="help-block">{{showAfter}}</p>
+            <p class="hp-handler-help">{{showAfter}}</p>
         </div>
     </div>
 </div>

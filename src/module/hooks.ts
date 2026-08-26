@@ -14,7 +14,7 @@ export { preUpdateActorHook } from "./hooks/preUpdateActorHook.ts";
 export { preUpdateTokenHook } from "./hooks/preUpdateTokenHook.ts";
 export { readyHook } from "./hooks/readyHook.ts";
 export { renderActorSheetHook } from "./hooks/renderActorSheetHook.ts";
-export { renderChatMessageHook } from "./hooks/renderChatMessageHook.ts";
+export { renderChatMessageHTMLHook } from "./hooks/renderChatMessageHTMLHook.ts";
 export { renderGamePauseHook } from "./hooks/renderGamePauseHook.ts";
 export { renderItemSheetHook } from "./hooks/renderItemSheetHook.ts";
 export { renderTokenHUDHook } from "./hooks/renderTokenHUDHook.ts";

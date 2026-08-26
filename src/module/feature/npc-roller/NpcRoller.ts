@@ -4,20 +4,8 @@ import SCALE_APP_DATA from "../npc-scale-data.json" with { type: "json" };
 import type { RollMode } from "foundry-pf2e/foundry/common/constants.d.mts";
 
 export async function registerNpcRollerHandlebarsTemplates(): Promise<void> {
-    await foundry.applications.handlebars.loadTemplates([
-        `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
-        `modules/${MODULENAME}/templates/feature/npc-roller/table.hbs`,
-        `modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs`,
-    ]);
-
     Handlebars.registerPartial("rollAppTable", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/table.hbs"}}`);
     Handlebars.registerPartial("rollAppCell", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs"}}`);
-}
-
-export async function setupNpcRoller(): Promise<void> {
-    Hooks.on("renderJournalDirectory", enableNpcRollerButton);
-
-    await registerNpcRollerHandlebarsTemplates();
 }
 
 export function enableNpcRollerButton(_app: unknown, html: HTMLElement): void {

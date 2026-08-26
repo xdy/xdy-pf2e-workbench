@@ -1,14 +1,10 @@
-import type { ActorPF2e } from "foundry-pf2e";
-import { I18N } from "./helpers.ts";
+import type { ActorPF2e, SpellPF2e } from "foundry-pf2e";
 import { withLock } from "../../utils/locks.ts";
 import { fireAndForget } from "../../utils.ts";
+import { getSpellDocData } from "./spellData.ts";
 
-export function postLearnChatMessage(
-    actor: ActorPF2e,
-    key: string,
-    data: Record<string, string | number | boolean | null | undefined>,
-): void {
-    const message = game.i18n.format(`${I18N}.${key}`, data);
+export function postLearnChatMessage(actor: ActorPF2e, fullKey: string, data: Record<string, string | number>): void {
+    const message = game.i18n.format(fullKey, data);
     fireAndForget(
         ChatMessage.create({
             content: message,
@@ -20,14 +16,16 @@ export function postLearnChatMessage(
 
 export async function createSpellWithLock(
     actor: ActorPF2e,
-    data: Record<string, unknown>,
+    spell: SpellPF2e | Record<string, unknown>,
     entryId?: string,
 ): Promise<string | null> {
-    const clone = entryId
-        ? { ...data, system: { ...((data.system as Record<string, unknown>) ?? {}), location: { value: entryId } } }
-        : data;
+    const clone = getSpellDocData(spell);
+    if (entryId) {
+        clone.system = { ...(clone.system ?? {}), location: { value: entryId } };
+    }
     return withLock(actor.id, async () => {
         const created = await actor.createEmbeddedDocuments("Item", [clone]);
-        return Array.isArray(created) && created.length > 0 ? ((created[0] as { uuid?: string })?.uuid ?? null) : null;
+        const [first] = created;
+        return (first as { uuid?: string } | undefined)?.uuid ?? null;
     });
 }

@@ -3,11 +3,25 @@ import { SettingRegistration } from "foundry/client/helpers/client-settings.mts"
 import { toggleMenuSettings } from "../feature/settingsHandler/index.ts";
 import { getModuleSetting } from "../utils.ts";
 
+function registerSettingsFieldPartials(): void {
+    const base = `modules/${MODULENAME}/templates/settings`;
+    for (const name of ["checkbox", "select", "number", "range", "text"]) {
+        Handlebars.registerPartial(`settings-field-${name}`, `{{> "${base}/field-${name}.hbs"}}`);
+    }
+}
+
+export { registerSettingsFieldPartials };
+
 export type PartialSettingsData = Omit<SettingRegistration, "scope" | "config">;
 
 interface SettingsTemplateData extends PartialSettingsData {
     key: string;
     value: unknown;
+    isFilepicker?: boolean;
+    filePicker?: string;
+    fieldPartial?: string;
+    hasRange?: boolean;
+    choices?: Record<string, string>;
 }
 
 // Note, this type is not quite the same as MenuTemplateData from the pf2e settings menu
@@ -91,7 +105,7 @@ export class SettingsMenuPF2eWorkbench extends foundry.applications.api.Handleba
         if (form === null || form === undefined) {
             return;
         }
-        form.style.display = !condition ? "none" : "";
+        form.classList.toggle("hidden", !condition);
     }
 
     static registerSettingsAndCreateMenu(icon: string, restricted = true): void {
@@ -120,6 +134,14 @@ export class SettingsMenuPF2eWorkbench extends foundry.applications.api.Handleba
             if (!["submit", "reset"].includes(key)) {
                 await game.settings.set(MODULENAME, key, datum);
             }
+            const hidelist = (this.constructor as typeof SettingsMenuPF2eWorkbench).hidelist;
+            const entry = hidelist[key];
+            if (entry && datum === (entry.falsy ?? false)) {
+                for (const child of entry.list ?? []) {
+                    delete data[child];
+                    void game.settings.set(MODULENAME, child, false);
+                }
+            }
         }
     }
 
@@ -128,20 +150,44 @@ export class SettingsMenuPF2eWorkbench extends foundry.applications.api.Handleba
         const settings = (this.constructor as typeof SettingsMenuPF2eWorkbench).settings;
         const templateData: SettingsTemplateData[] = Object.entries(settings).map(([key, setting]) => {
             const value = getModuleSetting(key);
-            const hasRange = setting.type === Number && setting.range;
-            return {
-                ...setting,
-                key,
-                value,
-                isCheckbox: setting.type === Boolean,
-                // @ts-expect-error filePicker is not typed in SettingRegistration
-                isFilepicker: setting.type === String && setting.filePicker,
-                isNumber: setting.type === Number && !hasRange,
-                isRange: hasRange,
-                isSelect: !!setting.choices,
-                // @ts-expect-error filePicker is not typed in SettingRegistration
-                isText: setting.type === String && !setting.filePicker,
-            };
+
+            if (setting.type === String && (setting as Record<string, unknown>).filePicker) {
+                return {
+                    ...setting,
+                    key,
+                    value,
+                    choices: undefined,
+                    isFilepicker: true,
+                    filePicker: (setting as Record<string, unknown>).filePicker as string,
+                };
+            }
+
+            if (setting.type === Boolean) {
+                return { ...setting, key, value, choices: undefined, fieldPartial: "settings-field-checkbox" };
+            }
+            if (setting.choices) {
+                return {
+                    ...setting,
+                    key,
+                    value,
+                    fieldPartial: "settings-field-select",
+                    choices: setting.choices as Record<string, string>,
+                };
+            }
+            if (setting.type === Number && setting.range) {
+                return {
+                    ...setting,
+                    key,
+                    value,
+                    choices: undefined,
+                    fieldPartial: "settings-field-range",
+                    hasRange: true,
+                };
+            }
+            if (setting.type === Number) {
+                return { ...setting, key, value, choices: undefined, fieldPartial: "settings-field-number" };
+            }
+            return { ...setting, key, value, choices: undefined, fieldPartial: "settings-field-text" };
         });
         return {
             settings: templateData,
@@ -152,32 +198,43 @@ export class SettingsMenuPF2eWorkbench extends foundry.applications.api.Handleba
     override async _onRender(context: object, _options: object): Promise<void> {
         toggleMenuSettings(this.element, context as unknown as MenuTemplateData);
         const hidelist = (this.constructor as typeof SettingsMenuPF2eWorkbench).hidelist as HideListTemplateData;
+        const formEl = this.element;
+
+        function cascadeVisibility(key: string, forceHidden?: boolean): void {
+            const entry = hidelist[key];
+            if (!entry?.list) return;
+            const parentForm = formEl.querySelector<HTMLElement>(`.form-group:has(.form-fields [name="${key}"])`);
+            const parentVisible =
+                forceHidden === undefined ? !parentForm || !parentForm.classList.contains("hidden") : !forceHidden;
+            const setting = parentVisible && game.settings.get(MODULENAME, key) !== (entry.falsy ?? false);
+            for (const child of entry.list) {
+                const childForm = formEl.querySelector<HTMLElement>(`.form-group:has(.form-fields [name="${child}"])`);
+                SettingsMenuPF2eWorkbench.hideForm(childForm, setting);
+                if (setting && hidelist[child]) cascadeVisibility(child);
+                if (!setting && hidelist[child]) cascadeVisibility(child, true);
+            }
+        }
+
         Object.entries(hidelist).forEach(([k, v]) => {
-            const setting = game.settings.get("xdy-pf2e-workbench", k) !== (v.falsy ?? false);
-            const settingCheckbox = this.element.querySelector<HTMLInputElement | HTMLSelectElement>(
+            cascadeVisibility(k);
+            const settingCheckbox = formEl.querySelector<HTMLInputElement | HTMLSelectElement>(
                 `.form-fields [name="${k}"]`,
             );
-            for (const form of v.list ?? []) {
-                const settingForm = this.element.querySelector<HTMLElement>(
-                    `.form-group:has(.form-fields [name="${form}"])`,
-                );
-                SettingsMenuPF2eWorkbench.hideForm(settingForm, setting);
-            }
-            settingCheckbox?.addEventListener("change", (event) => {
-                for (const form of v.list ?? []) {
-                    const settingForm = this.element.querySelector<HTMLElement>(
-                        `.form-group:has(.form-fields [name="${form}"])`,
+            if (!settingCheckbox) return;
+            if (settingCheckbox.dataset.hidelistAttached) return;
+            settingCheckbox.dataset.hidelistAttached = "true";
+            settingCheckbox.addEventListener("change", (event) => {
+                const show =
+                    v.type === "select"
+                        ? (event.target as HTMLSelectElement).value !== v.falsy
+                        : (event.target as HTMLInputElement).checked;
+                for (const child of v.list ?? []) {
+                    const childForm = formEl.querySelector<HTMLElement>(
+                        `.form-group:has(.form-fields [name="${child}"])`,
                     );
-                    let condition = (event.target as HTMLInputElement).checked;
-                    switch (v.type) {
-                        case "select":
-                            condition = (event.target as HTMLSelectElement).value !== v.falsy;
-                            break;
-                        case "input":
-                        default:
-                            break;
-                    }
-                    SettingsMenuPF2eWorkbench.hideForm(settingForm, condition);
+                    SettingsMenuPF2eWorkbench.hideForm(childForm, show);
+                    if (show && hidelist[child]) cascadeVisibility(child);
+                    if (!show && hidelist[child]) cascadeVisibility(child, true);
                 }
             });
         });

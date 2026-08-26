@@ -1,4 +1,4 @@
-import { fireAndForget, getModuleSetting } from "./utils.ts";
+import { addTargetsLocally, clearTargetsLocally, fireAndForget, getModuleSetting } from "./utils.ts";
 import { logInfo } from "./utils/logging.ts";
 import { MODULENAME } from "./constants.ts";
 import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler/index.ts";
@@ -17,22 +17,22 @@ export function registerWorkbenchKeybindings(): void {
         hint: `${MODULENAME}.SETTINGS.addUserTargets.hint`,
         restricted: true,
         editable: [],
-        onDown: () => {
-            const map = game.users
+        onDown: async () => {
+            const users = game.users
                 .filter((user) => !user.isGM)
                 .map((user) => {
                     return { label: user.name, key: user.id };
                 });
 
-            let content = `<div style="display: flex; line-height: 2rem;">
-        <label style="flex-grow: 1;" for="dialogUserId">User</label>
-        <select style="height: 2rem;" id="dialogUserId">`;
-            for (const { key, label } of map) {
-                content += `<option value="${key}">${label}</option>`;
-            }
-            content += `</div></select>`;
+            const content = await foundry.applications.handlebars.renderTemplate(
+                `modules/${MODULENAME}/templates/dialogs/add-user-targets.hbs`,
+                {
+                    users,
+                    userLabel: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.userLabel`),
+                },
+            );
 
-            foundry.applications.api.DialogV2.wait({
+            await foundry.applications.api.DialogV2.wait({
                 window: { title: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.title`) },
                 content,
                 buttons: [
@@ -45,16 +45,18 @@ export function registerWorkbenchKeybindings(): void {
                             const targets = Array.from(canvas.tokens?.controlled ?? []).concat(
                                 canvas.tokens?.placeables.filter((it) => it.mouseInteractionManager.state === 1) ?? [],
                             );
-                            const user: User | undefined = game.users?.find(
-                                (u) =>
-                                    u.id ===
-                                    // @ts-expect-error TODO Fix typing
-                                    (dialog.element.querySelector<HTMLSelectElement>("#dialogUserId")?.value ?? ""),
-                            );
-                            if (game.user?.isGM && targets && user) {
-                                for (const t of targets) {
-                                    t.setTarget(true, { user: user, releaseOthers: false });
-                                    user.targets.add(t);
+                            const selectedUserId: string =
+                                // @ts-expect-error TODO Fix typing
+                                dialog.element.querySelector<HTMLSelectElement>("#dialogUserId")?.value ?? "";
+                            if (game.user?.isGM && targets.length > 0 && selectedUserId) {
+                                if (game.user.id === selectedUserId) {
+                                    addTargetsLocally(targets.map((t) => t.id));
+                                } else {
+                                    game.socket.emit("module." + MODULENAME, {
+                                        operation: "addTargets",
+                                        tokenIds: targets.map((t) => t.id),
+                                        targetUserId: selectedUserId,
+                                    });
                                 }
                             }
                         },
@@ -65,16 +67,17 @@ export function registerWorkbenchKeybindings(): void {
                         action: "clearFor",
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         callback: async (_event: Event, _button: HTMLButtonElement, dialog: any) => {
-                            const user: User | undefined = game.users?.find(
-                                (u) =>
-                                    u.id ===
-                                    // @ts-expect-error TODO Fix typing
-                                    (dialog.element.querySelector<HTMLSelectElement>("#dialogUserId")?.value ?? ""),
-                            );
-                            if (game.user?.isGM && user) {
-                                const targets = user.targets;
-                                for (const t of targets) {
-                                    t.setTarget(false, { user: user, releaseOthers: false });
+                            const selectedUserId: string =
+                                // @ts-expect-error TODO Fix typing
+                                dialog.element.querySelector<HTMLSelectElement>("#dialogUserId")?.value ?? "";
+                            if (game.user?.isGM && selectedUserId) {
+                                if (game.user.id === selectedUserId) {
+                                    clearTargetsLocally();
+                                } else {
+                                    game.socket.emit("module." + MODULENAME, {
+                                        operation: "clearTargets",
+                                        targetUserId: selectedUserId,
+                                    });
                                 }
                             }
                         },
@@ -163,15 +166,19 @@ export function registerWorkbenchKeybindings(): void {
         precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
     });
 
-    // Macro keybinds
+    // Macro keybinds for populated hotbar slots only
     for (let page = 1; page <= 5; page++) {
-        for (let column = 1; column <= 10; column++) {
+        const macros = game.user?.getHotbarMacros(page) ?? [];
+        const usedSlots = macros
+            .map((entry, idx) => ({ entry, column: idx + 1 }))
+            .filter(({ entry }) => entry && "macro" in entry && (entry as { macro?: unknown }).macro);
+        for (const { entry, column } of usedSlots) {
             keybindings.register(MODULENAME, `callHotbarPage${page}Macro${column}`, {
                 name: `Call hotbar macro on page ${page} position ${column}`,
                 hint: `Call hotbar macro on page ${page} position ${column}`,
                 restricted: false,
                 onDown: () => {
-                    (game.user?.getHotbarMacros(page)?.[column - 1] as Record<string, any>)["macro"].execute();
+                    (entry as { macro: { execute: () => void } }).macro.execute();
                     return true;
                 },
             });

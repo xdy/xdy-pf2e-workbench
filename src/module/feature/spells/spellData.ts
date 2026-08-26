@@ -1,18 +1,26 @@
 import type { ActorPF2e, SpellPF2e } from "foundry-pf2e";
-import type { ResolvedSpellTraits, SpellSourceIdAccess } from "./types.ts";
+import type { ResolvedSpellTraits, SpellSourceId } from "./types.ts";
 import { RANK_CANTRIP } from "./helpers.ts";
 import { actorHasItemBySlug, getModuleSetting } from "../../utils.ts";
 import { getCostDenominationMultiplier } from "./economyHandler.ts";
 
-function resolveSpellSystem(spell: SpellPF2e | Record<string, unknown>): Record<string, unknown> | undefined {
-    return (spell as Record<string, unknown>).system as Record<string, unknown> | undefined;
+export function getSpellSourceInfo(spell: SpellPF2e): {
+    sourceId?: string;
+    compendiumSource?: string;
+    slug?: string | null;
+} {
+    const spellSourceId = spell as unknown as SpellSourceId;
+    return {
+        sourceId: spellSourceId.sourceId,
+        compendiumSource: spellSourceId._stats?.compendiumSource,
+        slug: spell.system?.slug,
+    };
 }
 
-export function spellIdentifier(spell: SpellPF2e | Record<string, unknown>): string | null {
-    const access = spell as SpellSourceIdAccess;
-    const sourceId: string | undefined = access.sourceId ?? access._stats?.compendiumSource;
-    if (sourceId) return `sourceId:${sourceId}`;
-    const slug = resolveSpellSystem(spell)?.slug;
+export function spellIdentifier(spell: SpellPF2e): string | null {
+    const { sourceId, compendiumSource, slug } = getSpellSourceInfo(spell);
+    const resolved = compendiumSource ?? sourceId;
+    if (resolved) return `sourceId:${resolved}`;
     if (slug) return `slug:${slug}`;
     return null;
 }
@@ -31,7 +39,6 @@ const LEARN_SPELL_BASE_DC: Readonly<Record<string, number>> = {
     "10": 41,
 };
 
-/** Rarity DC adjustments (GM Core p.52). */
 const RARITY_DC_ADJUSTMENT: Readonly<Record<string, number>> = {
     common: 0,
     uncommon: 2,
@@ -39,11 +46,7 @@ const RARITY_DC_ADJUSTMENT: Readonly<Record<string, number>> = {
     unique: 10,
 };
 
-/**
- * Spell formula base cost per rank, in gp. (Convert to sp/credits for sf2e)
- * Learn a Spell costs are twice this. Use {@link getCostDenominationMultiplier} to convert to copper.
- */
-const SPELL_FORMULA_COST: Readonly<Record<string, number>> = {
+export const SPELL_FORMULA_COST: Readonly<Record<string, number>> = {
     [RANK_CANTRIP]: 1,
     "1": 1,
     "2": 3,
@@ -57,21 +60,23 @@ const SPELL_FORMULA_COST: Readonly<Record<string, number>> = {
     "10": 3500,
 };
 
-function getLearnSpellBaseDc(rankKey: string): number {
-    return LEARN_SPELL_BASE_DC[rankKey] ?? 15;
-}
-
-function getRarityDcAdjustment(rarity: string): number {
-    return RARITY_DC_ADJUSTMENT[rarity?.toLowerCase()] ?? 0;
-}
-
-export function calculateLearnDc(rankKey: string, traits: string[], modifier = 0): number {
-    const baseDc = getLearnSpellBaseDc(rankKey);
-    const rarity = traits.find((t) => RARITY_DC_ADJUSTMENT[t.toLowerCase()] !== undefined) ?? "common";
-    const rarityAdj = getRarityDcAdjustment(rarity);
+export function calculateLearnDc(rankKey: string, rarity: string, modifier = 0): number {
+    const baseDc = LEARN_SPELL_BASE_DC[rankKey] ?? 15;
+    const rarityAdj = RARITY_DC_ADJUSTMENT[rarity.toLowerCase()] ?? 0;
     return baseDc + rarityAdj + modifier;
 }
 
+export function computeLearnParams(
+    rankKey: string,
+    rarity: string,
+    actor?: ActorPF2e,
+): { finalDc: number; costCopper: number; hours: number } {
+    return {
+        finalDc: calculateLearnDc(rankKey, rarity, getLearnSpellDcAdjustment()),
+        costCopper: getLearnSpellCostCopper(rankKey),
+        hours: getLearnSpellHours(rankKey, actor),
+    };
+}
 export function getLearnSpellDcAdjustment(): number {
     return getModuleSetting<number>("learnSpellDcAdjustment") ?? 0;
 }
@@ -87,25 +92,32 @@ export function getLearnSpellHours(rankKey: string, actor?: ActorPF2e): number {
     return Number.isFinite(rank) && rank > 0 ? rank : 1;
 }
 
-export function getSpellTraitsAndRank(spell: SpellPF2e | Record<string, unknown>): ResolvedSpellTraits | null {
-    const spellSystem = resolveSpellSystem(spell) as
-        | {
-              level?: { value?: number };
-              traits?: { value?: string[]; traditions?: string[] };
-          }
-        | undefined;
-    const spellLevel: number | undefined = spellSystem?.level?.value;
+export function getSpellTraitsAndRank(spell: SpellPF2e): ResolvedSpellTraits | null {
+    const spellLevel = spell.system?.level?.value;
     if (spellLevel === undefined) return null;
-    const traits: string[] = spellSystem?.traits?.value ?? [];
-    const traditions: string[] = spellSystem?.traits?.traditions ?? [];
+    const traits: string[] = spell.system?.traits?.value ?? [];
+    const traditions: string[] = spell.system?.traits?.traditions ?? [];
+    const rarity: string = spell.system?.traits?.rarity ?? "common";
     const isCantrip = traits.includes(RANK_CANTRIP) || spellLevel <= 0;
     const rankKey = isCantrip ? RANK_CANTRIP : String(spellLevel);
-    const spellName = (spell as { name?: string }).name ?? "";
-    return { traits, traditions, rankKey, spellName };
+    const spellName = spell.name;
+    return { traits, traditions, rarity, rankKey, spellName };
 }
 
+type ToObjectable = { toObject(): Record<string, unknown>; uuid?: string };
+
 export function getSpellDocData(spellDoc: SpellPF2e | Record<string, unknown>): Record<string, unknown> {
-    return "toObject" in (spellDoc as unknown as Record<string, unknown>)
-        ? (spellDoc as unknown as { toObject: () => Record<string, unknown> }).toObject()
-        : (spellDoc as unknown as Record<string, unknown>);
+    if (typeof (spellDoc as ToObjectable).toObject === "function") {
+        const obj = (spellDoc as ToObjectable).toObject();
+        obj.uuid = (spellDoc as ToObjectable).uuid;
+        return obj;
+    }
+    return spellDoc as Record<string, unknown>;
+}
+
+export async function resolveSpellFromUuid(uuid: string): Promise<SpellPF2e | null> {
+    const doc = await fromUuid(uuid);
+    if (!doc) return null;
+    if ((doc as { type?: string }).type !== "spell") return null;
+    return doc as SpellPF2e;
 }

@@ -1,126 +1,95 @@
-import { MODULENAME } from "../../constants.ts";
 import { getModuleSetting, isActuallyDamageRoll, NOT_MYSTIFIED_VALUE } from "../../utils.ts";
 import { ChatMessagePF2e, CreaturePF2e, PhysicalItemPF2e, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 
-export function chatCardDescriptionCollapse(html: HTMLElement): void {
-    if (!(html instanceof HTMLElement)) {
-        return;
-    }
+const EYE_ICON = '<i style="font-size: small; max-width: min-content" class="fa-solid fa-eye-slash"></i>';
 
-    const hasCardContent = html.querySelectorAll(".card-content:not(span.flavor-text *)");
-    if (hasCardContent.length > 0) {
-        const effectItem = game.i18n.localize(`${MODULENAME}.effectItem`);
-        if (getModuleSetting<string>("autoCollapseItemChatCardContent") === "collapsedDefault") {
-            hasCardContent.forEach((content) => ((content as HTMLElement).style.display = "none"));
-            const cardContentSiblings = (hasCardContent[0] as HTMLElement).parentElement?.children;
-            if (cardContentSiblings?.[0]) {
-                cardContentSiblings[0].insertAdjacentHTML("beforeend", eye);
-            }
-            if (getModuleSetting<boolean>("autoCollapseItemChatCardMoveEffectLinks")) {
-                const linksToMove: any[] = [];
-                const pTags = Array.from(html.getElementsByTagName("p"));
-                for (const pTag of pTags) {
-                    const contentLink = pTag.querySelector("a.content-link");
-                    if (contentLink && contentLink?.getAttribute("data-tooltip")?.includes(effectItem)) {
-                        linksToMove.push(pTag);
-                    }
-                }
+type CollapseConfig = {
+    contentSelector: string;
+    settingKey: string;
+    eyeInsertIndex: number;
+    useGrandparent?: boolean;
+    toggleMatchSelector?: string;
+    toggleMode: "roll-note" | "card-content";
+};
 
-                const chatMessageContainer = html.closest(".chat-message");
-                if (chatMessageContainer && linksToMove.length > 0) {
-                    linksToMove[0].classList.add("item-block-line");
-                    // Append all linksToMove to the end of the chatMessageContainer
-                    chatMessageContainer.append(...linksToMove);
-                }
-            }
+function applyCollapseToggle(html: HTMLElement, config: CollapseConfig): void {
+    const contentElements = html.querySelectorAll(config.contentSelector);
+    if (contentElements.length === 0) return;
+
+    if (getModuleSetting<string>(config.settingKey) === "collapsedDefault") {
+        for (const el of contentElements) {
+            (el as HTMLElement).style.display = "none";
         }
 
-        // Add listener for hide/unhide click
-        const header = html.querySelector(".card-header");
-        if (header instanceof HTMLElement) {
-            header.addEventListener("click", (event) => {
-                event.preventDefault();
-                header
+        let target: ParentNode | null | undefined;
+        if (config.useGrandparent) {
+            target = contentElements[0].parentNode?.parentNode;
+        } else {
+            target = (contentElements[0] as HTMLElement).parentElement;
+        }
+        if (target?.children?.[config.eyeInsertIndex]) {
+            target.children[config.eyeInsertIndex].insertAdjacentHTML("beforeend", EYE_ICON);
+        }
+    }
+
+    html.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement;
+        if (target?.matches(`h4.action, .fa-eye, .fa-eye-slash, strong, .card-header`)) {
+            event.preventDefault();
+            if (config.toggleMode === "roll-note") {
+                for (const note of html.querySelectorAll(config.contentSelector)) {
+                    (note as HTMLElement).style.display =
+                        (note as HTMLElement).style.display === "none" ? "block" : "none";
+                }
+                toggleEyes(html);
+            } else {
+                target
                     .closest(".chat-message")
-                    ?.querySelectorAll(".card-content")
+                    ?.querySelectorAll(config.contentSelector)
                     ?.forEach((content) => {
                         if (content instanceof HTMLElement)
                             content.style.display = content.style.display === "none" ? "block" : "none";
                     });
-                toggleEyes(header);
-            });
+                toggleEyes(target as HTMLElement);
+            }
         }
-    }
+    });
 }
 
 function toggleEyes(html: HTMLElement) {
-    const hasEye = html.querySelectorAll(".fa-eye");
-    const hasEyeSlash = html.querySelectorAll(".fa-eye-slash");
-    for (const eye of Array.from(hasEye)) {
+    html.querySelectorAll(".fa-eye, .fa-eye-slash").forEach((eye) => {
         eye.classList.toggle("fa-eye-slash");
         eye.classList.toggle("fa-eye");
-    }
-    for (const eye of Array.from(hasEyeSlash)) {
-        eye.classList.toggle("fa-eye-slash");
-        eye.classList.toggle("fa-eye");
-    }
+    });
 }
 
-function handleRollNoteToggling(html: HTMLElement) {
-    let note;
-    const hasNote = html.querySelectorAll(".roll-note");
-    for (note of Array.from(hasNote)) {
-        (note as HTMLElement).style.display = (note as HTMLElement).style.display === "none" ? "block" : "none";
-    }
-    toggleEyes(html);
+export function chatCardDescriptionCollapse(html: HTMLElement): void {
+    applyCollapseToggle(html, {
+        contentSelector: ".card-content:not(span.flavor-text *)",
+        settingKey: "autoCollapseItemChatCardContent",
+        eyeInsertIndex: 0,
+        toggleMatchSelector: ".card-header",
+        toggleMode: "card-content",
+    });
 }
 
 export function chatActionCardDescriptionCollapse(html: HTMLElement): void {
-    const hasAction = html.querySelectorAll(".action");
-    if (hasAction.length > 0) {
-        const rollNotes = html.querySelectorAll(".roll-note");
-        if (rollNotes.length > 0) {
-            if (getModuleSetting<string>("autoCollapseItemActionChatCardContent") === "collapsedDefault") {
-                for (const note of Array.from(rollNotes)) {
-                    (note as HTMLElement).style.display = "none";
-                }
-
-                const actionSiblings = (hasAction[0] as HTMLElement).parentElement?.children;
-                if (actionSiblings?.[1]) {
-                    actionSiblings[1].insertAdjacentHTML("beforeend", eye);
-                }
-            }
-            html.addEventListener("click", (event) => {
-                const target = event.target as HTMLElement;
-                if (target?.matches("h4.action, .fa-eye, .fa-eye-slash, strong")) {
-                    event.preventDefault();
-                    handleRollNoteToggling(html);
-                }
-            });
-        }
-    }
+    applyCollapseToggle(html, {
+        contentSelector: ".roll-note",
+        settingKey: "autoCollapseItemActionChatCardContent",
+        eyeInsertIndex: 1,
+        toggleMode: "roll-note",
+    });
 }
 
-const eye = ' <i style="font-size: small; max-width: min-content" class="fa-solid fa-eye-slash">';
-
 export function chatAttackCardDescriptionCollapse(html: HTMLElement): void {
-    const hasRollNote = html.querySelectorAll(".roll-note");
-    if (hasRollNote.length > 0) {
-        if (getModuleSetting<string>("autoCollapseItemAttackChatCardContent") === "collapsedDefault") {
-            for (const note of hasRollNote) {
-                (note as HTMLElement).style.display = "none";
-            }
-
-            hasRollNote[0].parentNode?.parentNode?.children[0].insertAdjacentHTML("beforeend", eye);
-        }
-        html.addEventListener("click", (event) => {
-            const target = event.target as HTMLElement;
-            if (target.matches("h4.action, .fa-eye, .fa-eye-slash, strong")) {
-                event.preventDefault();
-                handleRollNoteToggling(html);
-            }
-        });
-    }
+    applyCollapseToggle(html, {
+        contentSelector: ".roll-note",
+        settingKey: "autoCollapseItemAttackChatCardContent",
+        eyeInsertIndex: 0,
+        useGrandparent: true,
+        toggleMode: "roll-note",
+    });
 }
 
 // Cache for recent damage messages to avoid filtering all messages repeatedly

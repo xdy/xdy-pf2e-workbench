@@ -2,7 +2,7 @@ import { CreaturePF2e, ItemPF2e } from "foundry-pf2e";
 import { CHARACTER_TYPE } from "../xdy-pf2e-workbench.ts";
 import { MODULENAME } from "../constants.ts";
 import { getModuleSetting, sendHeldItemChatMessage } from "../utils.ts";
-import { preCreateItemSpellIntercept } from "../feature/spells/learn/spellAddInterceptHandler.ts";
+import { preCreateItemSpellIntercept } from "../feature/spells/spellAddInterceptHandler.ts";
 import { scrollCreateIntercept } from "../feature/spells/learn/scrollCreateIntercept.ts";
 
 export function preCreateItemHook(item: ItemPF2e, data: object, _options: object, _id: string): false | void {
@@ -10,15 +10,14 @@ export function preCreateItemHook(item: ItemPF2e, data: object, _options: object
         item.type === "condition" &&
         item.slug === "unconscious" &&
         item.actor?.isOfType(CHARACTER_TYPE) &&
-        getModuleSetting("dropHeldItemsOnBecomingUnconscious")
+        getModuleSetting<boolean>("dropHeldItemsOnBecomingUnconscious")
     ) {
         dropHeldItemsOnBecomingUnconscious(item.actor);
     }
 
     if (getModuleSetting<boolean>("enableGeneralLearnSpell")) {
         scrollCreateIntercept(item, data);
-        const spellResult = preCreateItemSpellIntercept(item, data);
-        if (spellResult === false) return false;
+        return preCreateItemSpellIntercept(item, data);
     }
 }
 

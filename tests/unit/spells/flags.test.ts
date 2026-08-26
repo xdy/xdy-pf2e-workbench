@@ -1,69 +1,44 @@
-import { beforeEach, describe, expect, test, vi } from "vitest";
-import { getLearnFailureLevel, sanitizeFlagKey } from "../../../src/module/feature/spells/flags.js";
+import { describe, expect, test } from "vitest";
+import { getLearnFailureEntry } from "../../../src/module/feature/spells/flags.js";
 import type { ActorPF2e } from "foundry-pf2e";
 
-function stubGamePf2e(): void {
-    vi.stubGlobal("game", {
-        system: { id: "pf2e" },
-        user: { isGM: true, id: "gm1" },
-        settings: { get: () => ({}) },
-        time: { worldTime: 1000000 },
-        i18n: {
-            localize: (key: string) => key,
-            format: (key: string, data?: Record<string, unknown>) => (data ? `${key} ${JSON.stringify(data)}` : key),
-        },
-    });
-}
-
-beforeEach(() => {
-    stubGamePf2e();
-});
-
-describe("sanitizeFlagKey", () => {
-    test("replaces dots with exclamation marks in compendium source IDs", () => {
-        expect(sanitizeFlagKey("Compendium.pf2e.spells-srd.Item.abc123")).toBe(
-            "Compendium!pf2e!spells-srd!Item!abc123",
-        );
-    });
-
-    test("plain slug passes through unchanged", () => {
-        expect(sanitizeFlagKey("fireball")).toBe("fireball");
-    });
-});
-
 const SPELL_ID = "Compendium.pf2e.spells-srd.Item.fireball";
-const FLAGGED_KEY = sanitizeFlagKey(SPELL_ID);
+const SANITIZED_KEY = "Compendium!pf2e!spells-srd!Item!fireball";
 
-function actorStub(overrides: {
-    level?: number;
-    learnFailures?: Record<string, { level: number; timestamp: number }>;
-}): ActorPF2e {
+function actorStub(learnFailures?: Record<string, { level: number; timestamp: number }>): ActorPF2e {
     return {
-        system: { details: { level: { value: overrides.level ?? 1 } } },
+        system: { details: { level: { value: 1 } } },
         items: [],
         getFlag(_module: string, key: string) {
-            if (key === "learnSpellFailures") return overrides.learnFailures ?? {};
+            if (key === "learnSpellFailures") return learnFailures ?? {};
             return undefined;
         },
     } as unknown as ActorPF2e;
 }
 
-describe("getLearnFailureLevel", () => {
-    test("returns undefined when actor has no failure flag", () => {
-        expect(getLearnFailureLevel(actorStub({}), FLAGGED_KEY)).toBeUndefined();
+describe("getLearnFailureEntry", () => {
+    test("returns undefined when no failure is recorded", () => {
+        expect(getLearnFailureEntry(actorStub(), SPELL_ID)).toBeUndefined();
+        expect(getLearnFailureEntry(actorStub({ other: { level: 2, timestamp: 100 } }), SPELL_ID)).toBeUndefined();
     });
 
-    test("returns undefined when identifier is not in the map", () => {
-        const actor = actorStub({
-            learnFailures: { other: { level: 2, timestamp: 100 } },
-        });
-        expect(getLearnFailureLevel(actor, FLAGGED_KEY)).toBeUndefined();
+    test("returns full entry when found, sanitizing dots in the identifier", () => {
+        const entry = { level: 3, timestamp: 100 };
+        const actor = actorStub({ [SANITIZED_KEY]: entry });
+        expect(getLearnFailureEntry(actor, SPELL_ID)).toEqual(entry);
     });
 
-    test("returns level from failure entry", () => {
-        const actor = actorStub({
-            learnFailures: { [FLAGGED_KEY]: { level: 3, timestamp: 100 } },
-        });
-        expect(getLearnFailureLevel(actor, FLAGGED_KEY)).toBe(3);
+    test("plain slug identifier passes through unchanged", () => {
+        const entry = { level: 1, timestamp: 100 };
+        expect(getLearnFailureEntry(actorStub({ fireball: entry }), "fireball")).toEqual(entry);
+    });
+});
+
+describe("getLearnFailureEntry", () => {
+    test("returns level when found via entry", () => {
+        expect(getLearnFailureEntry(actorStub(), SPELL_ID)).toBeUndefined();
+        expect(
+            getLearnFailureEntry(actorStub({ [SANITIZED_KEY]: { level: 3, timestamp: 100 } }), SPELL_ID)?.level,
+        ).toBe(3);
     });
 });

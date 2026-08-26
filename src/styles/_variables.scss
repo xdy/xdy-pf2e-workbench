@@ -1,0 +1,12 @@
+:root {
+    --xdy-pf2e-workbench-pause: "";
+    --xdy-pf2e-workbench-pause-bottom: 10%;
+    --xdy-pf2e-workbench-pause-figcaption-top: 0%;
+
+    /* Hero point rule colors */
+    --xdy-hero-keeley: var(--color-pf-secondary);
+    --xdy-hero-keeley-shadow: color-mix(in srgb, var(--color-pf-secondary) 30%, transparent);
+    --xdy-hero-highest: var(--color-pf-text-success);
+    --xdy-hero-heroic: var(--color-pf-text-adjusted-higher);
+    --xdy-hero-heroic-shadow: color-mix(in srgb, var(--color-pf-text-adjusted-higher) 30%, transparent);
+}

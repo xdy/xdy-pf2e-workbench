@@ -1,4 +1,4 @@
-import { ActorSystemData, CreaturePF2e } from "foundry-pf2e";
+import { CreaturePF2e } from "foundry-pf2e";
 import { NPC_TYPE } from "../xdy-pf2e-workbench.ts";
 import { getModuleSetting } from "../utils.ts";
 import * as systems from "../utils/systems.ts";
@@ -10,7 +10,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
 
     // All these are only relevant if hp has changed (it's undefined otherwise)
     if (typeof updateHp === "number") {
-        const currentActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
+        const currentActorHp = actor.system.attributes.hp.value;
         if (
             game.user?.isGM &&
             actor?.type === NPC_TYPE &&

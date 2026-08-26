@@ -1,0 +1,54 @@
+.hero-point-handler-dialog {
+    .hp-handler-group {
+        display: block;
+        margin-bottom: var(--spacer-8);
+    }
+
+    .hp-handler-label,
+    .hp-handler-field {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+
+    .hp-handler-field {
+        margin-top: var(--spacer-4);
+    }
+
+    .hp-handler-note,
+    .hp-handler-label {
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    .hp-handler-radio + .hp-handler-radio {
+        margin-top: var(--spacer-4);
+    }
+
+    .hp-handler-input-group {
+        display: flex;
+        align-items: center;
+        gap: var(--spacer-8);
+    }
+
+    .hp-handler-input-addon {
+        flex: 0 0 auto;
+    }
+
+    .hp-handler-input-group .hp-handler-input {
+        flex: 1 1 auto;
+    }
+
+    .hp-handler-help {
+        margin: var(--spacer-4) 0 0;
+    }
+
+    .hp-handler-note {
+        margin-bottom: var(--spacer-8);
+    }
+
+    hr {
+        margin: var(--spacer-8) 0;
+    }
+}

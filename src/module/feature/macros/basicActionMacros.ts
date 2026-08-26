@@ -35,11 +35,6 @@ function isSingleCheckAction(action: Action | Function | ActionVariant): action 
 }
 
 export async function registerBasicActionMacrosHandlebarsTemplates(): Promise<void> {
-    await foundry.applications.handlebars.loadTemplates([
-        `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
-        `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
-    ]);
-
     Handlebars.registerPartial("actionButton", `{{> "modules/${MODULENAME}/templates/macros/bam/actionButton.hbs"}}`);
 }
 

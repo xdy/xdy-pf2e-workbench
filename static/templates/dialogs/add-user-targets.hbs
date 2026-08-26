@@ -1,0 +1,8 @@
+<div style="display: flex; line-height: 2rem;">
+    <label style="flex-grow: 1;" for="dialogUserId">{{userLabel}}</label>
+    <select style="height: 2rem;" id="dialogUserId">
+        {{#each users}}
+            <option value="{{this.key}}">{{this.label}}</option>
+        {{/each}}
+    </select>
+</div>

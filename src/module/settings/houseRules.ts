@@ -75,6 +75,20 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
                 default: "",
                 type: String,
             },
+            learnSpellDestroyScroll: {
+                name: `${MODULENAME}.SETTINGS.learnSpellDestroyScroll.name`,
+                hint: `${MODULENAME}.SETTINGS.learnSpellDestroyScroll.hint`,
+                scope: "world",
+                config: true,
+                default: "onUse",
+                type: String,
+                choices: {
+                    onSuccess: game.i18n.localize(`${MODULENAME}.SETTINGS.learnSpellDestroyScroll.onSuccess`),
+                    onUse: game.i18n.localize(`${MODULENAME}.SETTINGS.learnSpellDestroyScroll.onUse`),
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.learnSpellDestroyScroll.no`),
+                },
+                onChange: () => updateHooks(),
+            },
         };
     }
 }

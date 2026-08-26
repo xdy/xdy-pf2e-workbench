@@ -1,4 +1,4 @@
-import { clearToolbeltCaches } from "../feature/damageHandler/toolbeltIntegration.ts";
+import { clearToolbeltCaches } from "../feature/damageHandler/toolbelt/toolbeltCache.ts";
 
 export function combatStartHook(): void {
     clearToolbeltCaches();

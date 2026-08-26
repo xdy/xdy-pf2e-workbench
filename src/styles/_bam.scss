@@ -1,0 +1,144 @@
+.bam-dialog {
+    container: bam-dialog / inline-size;
+}
+
+.bam-tabs.tabs {
+    margin: var(--spacer-8) 0;
+
+    a.active > span {
+        text-decoration: underline;
+    }
+}
+
+.bam-body {
+    padding-top: var(--space-3);
+
+    h3 {
+        margin: var(--spacer-16) 0 var(--spacer-8) 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+.bam-body .tab {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.bam-action-list {
+    display: grid;
+    align-items: center;
+    margin-bottom: var(--spacer-8);
+    column-gap: var(--space-2);
+    grid-auto-flow: column;
+    grid-template-rows: repeat(calc((var(--bam-count) + var(--bam-columns) / 2 - 0.01) / var(--bam-columns)), 1fr);
+    grid-template-columns: repeat(var(--bam-columns), 1fr);
+
+    .bam-map-wrapper {
+        display: flex;
+        gap: var(--space-1);
+        margin: 0 auto;
+        width: 100%;
+
+        button {
+            width: unset;
+
+            &:first-child {
+                flex: 1 1 auto;
+            }
+
+            &:not(:first-child) {
+                flex: 0 0 4ch;
+                justify-content: center;
+            }
+        }
+    }
+
+    button.bam-action-btn {
+        margin: var(--space-1) auto;
+        height: fit-content;
+        min-height: var(--form-field-height, 26px);
+        width: 100%;
+        box-shadow: inset 0 0 0 1px var(--color-cool-5-50);
+        text-shadow: none;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        white-space: nowrap;
+        overflow: hidden;
+        color: var(--text-light);
+
+        &:hover {
+            text-shadow: 0 0 var(--space-2) var(--color-text-light-0);
+        }
+
+        &.glow {
+            --color-glow1: 35;
+            --color-glow2: 50;
+            animation: glow2 alternate infinite 2s;
+            z-index: 1;
+        }
+
+        &[data-rank="0"],
+        &[data-rank] {
+            background: var(--color-proficiency-untrained);
+        }
+
+        &[data-rank="1"] {
+            background: var(--color-proficiency-trained);
+        }
+
+        &[data-rank="2"] {
+            background: var(--color-proficiency-expert);
+        }
+
+        &[data-rank="3"] {
+            background: var(--color-proficiency-master);
+        }
+
+        &[data-rank="4"] {
+            background: var(--color-proficiency-legendary);
+        }
+
+        img {
+            margin-right: var(--space-6);
+        }
+    }
+}
+
+@keyframes glow2 {
+    0% {
+        color: hsl(var(--color-glow1), 90%, 50%);
+        box-shadow: 0 0 var(--space-2) var(--space-2) hsl(var(--color-glow1), 100%, 50%);
+    }
+    100% {
+        color: hsl(var(--color-glow2), 90%, 50%);
+        box-shadow: 0 0 var(--space-2) var(--space-2) hsl(var(--color-glow2), 100%, 50%);
+    }
+}
+
+@function bamWidth($columns) {
+    @return 26 + $columns * 250px;
+}
+
+@for $i from 1 through 40 {
+    @container bam-dialog (width <= #{bamWidth($i+1)}) and (width > #{bamWidth($i)}) {
+        .bam-action-list {
+            --bam-columns: #{$i};
+        }
+    }
+}
+
+@container bam-dialog (width < #{bamWidth(1)}) {
+    .bam-action-list {
+        --bam-columns: 1;
+    }
+}
+
+@container bam-dialog (width > #{bamWidth(41)}) {
+    .bam-action-list {
+        --bam-columns: 41;
+    }
+}

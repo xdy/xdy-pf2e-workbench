@@ -1,6 +1,6 @@
-import type { ActorPF2e } from "foundry-pf2e";
+import type { ActorPF2e, SpellcastingEntryPF2e, SpellPF2e } from "foundry-pf2e";
 
-export interface SpellSourceIdAccess {
+export interface SpellSourceId {
     sourceId?: string;
     _stats?: { compendiumSource?: string };
 }
@@ -8,6 +8,7 @@ export interface SpellSourceIdAccess {
 export interface ResolvedSpellTraits {
     traits: string[];
     traditions: string[];
+    rarity: string;
     rankKey: string;
     spellName: string;
 }
@@ -24,6 +25,10 @@ export interface LearnFailures {
 }
 
 export type LearnOutcome = "criticalSuccess" | "success" | "failure" | "criticalFailure" | "skipped" | "alreadyKnown";
+
+export function isSuccessOutcome(outcome: LearnOutcome | null | undefined): outcome is "criticalSuccess" | "success" {
+    return outcome === "criticalSuccess" || outcome === "success";
+}
 
 export interface BatchLearnSpellEntry {
     uuid: string;
@@ -52,12 +57,32 @@ export interface BatchLearnResult {
 }
 
 export interface LearnSpellTarget {
-    addSpell(
-        spellData: Record<string, unknown>,
+    addSpell(spellData: SpellPF2e | Record<string, unknown>, actor: ActorPF2e, entryId: string): Promise<string | null>;
+    afterLearn?(actor: ActorPF2e): Promise<void>;
+}
+
+export interface LearnSpellService {
+    initiateFromSpellData(
+        spell: SpellPF2e,
         actor: ActorPF2e,
         entryId: string,
-        rankKey: string,
-        spellName: string,
-    ): Promise<string | null>;
-    afterLearn?(actor: ActorPF2e): Promise<void>;
+        entry?: SpellcastingEntryPF2e,
+    ): Promise<LearnOutcome | null>;
+    addSpellDirectly(spell: SpellPF2e, actor: ActorPF2e, entryId: string, spellName: string): Promise<void>;
+    batchLearnSpells(
+        spells: BatchLearnSpellEntry[],
+        actor: ActorPF2e,
+        entryId?: string,
+        suppressMessages?: boolean,
+    ): Promise<BatchLearnResult>;
+}
+
+export interface SpellRollSkill {
+    roll(args: {
+        dc: { value: number };
+        skipDialog?: boolean;
+        extraRollOptions?: string[];
+        createMessage?: boolean;
+        callback?: (roll: unknown, outcome: LearnOutcome | null) => Promise<void>;
+    }): Promise<unknown>;
 }

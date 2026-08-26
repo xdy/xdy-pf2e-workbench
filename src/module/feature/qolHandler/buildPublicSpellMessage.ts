@@ -1,15 +1,9 @@
 import { SpellPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../constants.ts";
+import { TRADITION_SKILL } from "../spells/spellActorQueries.ts";
 
 const I18N_RECALL_KNOWLEDGE = "PF2E.RecallKnowledge.Label";
 const I18N_TRAIT_PREFIX = "PF2E.Trait";
-
-export const TRADITION_SKILLS: Record<string, string> = {
-    arcane: "arcana",
-    divine: "religion",
-    occult: "occultism",
-    primal: "nature",
-};
 
 export function buildSpellMessage(
     originSpell: SpellPF2e | null,
@@ -71,7 +65,7 @@ function buildTraitsSection(originSpell: SpellPF2e, blocklistRaw: string): strin
 function buildRecallKnowledgeSection(originSpell: SpellPF2e, tradition: string): string {
     const level = originSpell.system.level.value;
     const dcRK = getDcRkForSpellRank(level) + getDcRkForRarity(originSpell.system.traits?.rarity ?? "common");
-    const skill = TRADITION_SKILLS[tradition] ?? "";
+    const skill = TRADITION_SKILL[tradition] ?? "";
 
     return game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.secondPartRK`, {
         skill,

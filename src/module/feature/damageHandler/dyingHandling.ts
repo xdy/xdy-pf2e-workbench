@@ -160,17 +160,14 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boole
             );
 
             const total = message.rolls.reduce((total, roll) => total + roll.total, 0);
+            const chatFlavor = buildDyingRecoveryFlavor(
+                outcomeString,
+                { combatant: token?.combatant ?? undefined, actor: token?.actor ?? undefined },
+                total,
+            );
             fireAndForget(
                 ChatMessage.create({
-                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.handled`, {
-                        outcome: outcomeString,
-                        defeated: token.combatant?.defeated
-                            ? game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.defeated`, {
-                                  name: token.actor?.name ?? "???",
-                              })
-                            : "",
-                        roll: total,
-                    }),
+                    flavor: chatFlavor,
                     speaker: message.speaker,
                 }),
                 "handleDyingRecoveryRoll ChatMessage",
@@ -178,6 +175,22 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boole
             fireAndForget(message.delete({ render: false }), "handleDyingRecoveryRoll delete");
         }
     }
+}
+
+function buildDyingRecoveryFlavor(
+    outcome: string,
+    token: { combatant?: { defeated?: boolean }; actor?: { name?: string } },
+    roll: number,
+): string {
+    return game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.handled`, {
+        outcome,
+        defeated: token.combatant?.defeated
+            ? game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.defeated`, {
+                  name: token.actor?.name ?? "???",
+              })
+            : "",
+        roll,
+    });
 }
 
 export async function handleDying(
