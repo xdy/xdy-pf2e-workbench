@@ -11,22 +11,28 @@ function isDamageTaken(message: ChatMessagePF2e): boolean {
     return systems.getFlag(message, "context.type") === "damage-taken";
 }
 
+const UNHANDLED_MODULE_FLAGS = ["pf2e-ranged-combat", "pf2e-dailies"] as const;
+
+export function messageFromUnhandledModule(message: ChatMessagePF2e): boolean {
+    return UNHANDLED_MODULE_FLAGS.some((flag) => {
+        return Boolean(message.flags && flag in message.flags);
+    });
+}
+
 export function createChatMessageHook(message: ChatMessagePF2e): void {
+    if (messageFromUnhandledModule(message)) return;
+
     evictDamageHandlerCaches();
     const reminderCancelAttack = getModuleSetting<string>("reminderCannotAttack");
     if (reminderCancelAttack === "reminder") {
         checkAttackValidity(message, false);
     }
-
     const reminderTargetingSetting = getModuleSetting<string>("reminderTargeting");
     if (["no", "reminder"].includes(reminderTargetingSetting)) {
         reminderTargeting(message, reminderTargetingSetting);
     }
-
-    // Early return for damage rolls or damage taken messages
     const isDamageRoll = isActuallyDamageRoll(message);
     const isDamage = isDamageRoll || isDamageTaken(message);
-
     if (!isDamage) {
         const skipAutoRoll = getModuleFlag(message, "noAutoDamageRoll");
         if (!skipAutoRoll) {
@@ -39,7 +45,5 @@ export function createChatMessageHook(message: ChatMessagePF2e): void {
             fireAndForget(reminderBreathWeapon(message), "reminderBreathWeapon");
         }
     }
-
-    // Always process dying handling
     dyingHandlingCreateChatMessageHook(message);
 }

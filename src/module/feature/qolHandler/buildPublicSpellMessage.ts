@@ -147,7 +147,7 @@ function getDcRkForRarity(rarity: string): number {
     return rarityMapping[rarity] ?? 0;
 }
 
-export function localizeTrait(trait: string): string {
+function localizeTrait(trait: string): string {
     if (!trait) return trait;
     return game.i18n.localize(`${I18N_TRAIT_PREFIX}${trait.charAt(0).toUpperCase() + trait.slice(1)}`);
 }

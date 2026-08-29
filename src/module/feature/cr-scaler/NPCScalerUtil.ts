@@ -23,7 +23,7 @@ interface ScaleEntry {
 
 type ScaleTable = ScaleEntry[];
 
-export function parseDamage(value: string): IDicePool {
+function parseDamage(value: string): IDicePool {
     const [diceString, bonusString] = value.split("+");
     let bonus = 0;
     if (bonusString !== undefined) {
@@ -44,7 +44,7 @@ export function parseDamage(value: string): IDicePool {
     return result;
 }
 
-export function constructFormula({
+function constructFormula({
     diceCount,
     diceSize,
     bonus,
@@ -157,7 +157,7 @@ export function getMinMaxData(
     return Math.round(newLevelData.minimum + newRange * oldPercentile);
 }
 
-export function constructRelativeDamage(oldDmg: IDicePool, stdDmg: IDicePool, newDmg: IDicePool): IDicePool {
+function constructRelativeDamage(oldDmg: IDicePool, stdDmg: IDicePool, newDmg: IDicePool): IDicePool {
     const count = newDmg.diceCount;
     const size = newDmg.diceSize;
     const bonus = newDmg.bonus + oldDmg.bonus - stdDmg.bonus;

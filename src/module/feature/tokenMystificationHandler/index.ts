@@ -61,7 +61,7 @@ async function fetchRandomWordPrefix(): Promise<string> {
     return "";
 }
 
-export async function buildTokenName(
+async function buildTokenName(
     token: TokenDocumentPF2e<ScenePF2e>,
     isMystified: boolean,
     useFullTraitName = true,

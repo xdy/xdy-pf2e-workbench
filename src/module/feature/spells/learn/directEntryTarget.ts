@@ -3,7 +3,7 @@ import type { LearnSpellTarget } from "../types.ts";
 import { createSpellWithLock } from "../spellChatUtils.ts";
 import { LearnSpellHandler } from "./learnSpellHandler.ts";
 
-export class DirectEntryTarget implements LearnSpellTarget {
+class DirectEntryTarget implements LearnSpellTarget {
     async addSpell(
         spell: SpellPF2e | Record<string, unknown>,
         actor: ActorPF2e,

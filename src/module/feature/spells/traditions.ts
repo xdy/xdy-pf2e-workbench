@@ -70,7 +70,7 @@ async function getClassForcedTraditionSpells(actor: ActorPF2e, classSlug: string
     return [];
 }
 
-export async function getActorForcedTraditionSpells(actor: ActorPF2e): Promise<Set<string>> {
+async function getActorForcedTraditionSpells(actor: ActorPF2e): Promise<Set<string>> {
     const spells = new Set<string>();
     for (const slug of getActorClassSlugs(actor)) {
         for (const spell of await getClassForcedTraditionSpells(actor, slug)) {

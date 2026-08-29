@@ -9,10 +9,6 @@ const LogLevel = {
     ERROR: 4,
 } as const;
 
-export function logTrace(...args: unknown[]): void {
-    log(LogLevel.TRACE, ...args);
-}
-
 export function logDebug(...args: unknown[]): void {
     log(LogLevel.DEBUG, ...args);
 }

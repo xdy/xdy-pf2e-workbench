@@ -44,12 +44,38 @@ export function shouldIntercept(item: ItemPF2e): boolean {
     if (spell.flags?.["pf2e-dailies"]) return false;
     const actor = spell.actor;
     if (!actor || actor.type !== "character" || inCharacterCreation(actor)) return false;
+
+    // TODO For now, ignore rituals
+    if (spell.system?.ritual) return false;
+
     return getModuleSetting<boolean>("enableGeneralLearnSpell");
 }
 
 export function preCreateItemSpellIntercept(item: ItemPF2e, _data: object): false | void {
     try {
-        return doPreCreateIntercept(item);
+        const actor = item.actor as ActorPF2e;
+        if (!actor || isLocked(actor.id) || !shouldIntercept(item)) return;
+
+        const spell = item as SpellPF2e;
+
+        const traits = getSpellTraitsAndRank(spell);
+        if (!traits) {
+            ui.notifications.warn(game.i18n.localize(`${I18N_SHARED}.learnSpellInvalidRank`));
+            return false;
+        }
+
+        const actorEntryId = getTargetEntryIdFromData(spell);
+        const action = decidePreCreateAction(actor, spell, actorEntryId);
+
+        switch (action) {
+            case PreCreateAction.Allow:
+                return;
+            case PreCreateAction.Block:
+                return false;
+            case PreCreateAction.InterceptGeneral:
+                scheduleIntercept(spell, actor, traits, actorEntryId, action);
+                return false;
+        }
     } catch (err) {
         logError("preCreateItemSpellIntercept: unhandled error", err);
         return;
@@ -199,32 +225,6 @@ function totalBatchCost(entries: PendingSpellIntercept[]): { totalCostCopper: nu
 
 function toBatchEntries(entries: PendingSpellIntercept[]): BatchLearnSpellEntry[] {
     return entries.map((e) => ({ uuid: e.spell.uuid, name: e.spell.name, rankKey: e.traits.rankKey }));
-}
-
-function doPreCreateIntercept(item: ItemPF2e): false | void {
-    const actor = item.actor as ActorPF2e;
-    if (!actor || isLocked(actor.id) || !shouldIntercept(item)) return;
-
-    const spell = item as SpellPF2e;
-
-    const traits = getSpellTraitsAndRank(spell);
-    if (!traits) {
-        ui.notifications.warn(game.i18n.localize(`${I18N_SHARED}.learnSpellInvalidRank`));
-        return false;
-    }
-
-    const actorEntryId = getTargetEntryIdFromData(spell);
-    const action = decidePreCreateAction(actor, spell, actorEntryId);
-
-    switch (action) {
-        case PreCreateAction.Allow:
-            return;
-        case PreCreateAction.Block:
-            return false;
-        case PreCreateAction.InterceptGeneral:
-            scheduleIntercept(spell, actor, traits, actorEntryId, action);
-            return false;
-    }
 }
 
 function decidePreCreateAction(actor: ActorPF2e, spell: SpellPF2e, actorEntryId: string | undefined): PreCreateAction {

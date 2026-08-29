@@ -61,7 +61,7 @@ export function getSpellcastingEntryById(actor: ActorPF2e, entryId: string): Spe
     return undefined;
 }
 
-export function getActorXp(actor: ActorPF2e): number {
+function getActorXp(actor: ActorPF2e): number {
     return (actor.system.details as { xp?: { value?: number } }).xp?.value ?? 0;
 }
 

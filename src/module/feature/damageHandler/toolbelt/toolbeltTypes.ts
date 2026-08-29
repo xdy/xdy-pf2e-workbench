@@ -8,7 +8,7 @@ export type ToolbeltTargetHelperSaveData = {
     [key: string]: unknown;
 };
 
-export type ToolbeltTargetHelperSaveVariant = {
+type ToolbeltTargetHelperSaveVariant = {
     basic?: boolean;
     saves?: Record<string, ToolbeltTargetHelperSaveData>;
     [key: string]: unknown;

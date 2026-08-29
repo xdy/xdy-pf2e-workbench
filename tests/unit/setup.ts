@@ -27,6 +27,18 @@ vi.stubGlobal("game", {
 
 vi.stubGlobal("fromUuid", vi.fn().mockResolvedValue(null));
 
+vi.stubGlobal("fu", {
+    mergeObject: (a: any, b: any) => ({ ...a, ...b }),
+    duplicate: (x: any) => structuredClone(x),
+    getProperty: (obj: any, path: string) => path.split(".").reduce((o, k) => o?.[k], obj),
+    setProperty: (obj: any, path: string, val: any) => {
+        const parts = path.split(".");
+        const last = parts.pop()!;
+        const target = parts.reduce((o, k) => (o[k] ??= {}), obj);
+        target[last] = val;
+    },
+});
+
 vi.stubGlobal("foundry", {
     applications: {
         api: {
@@ -50,8 +62,10 @@ vi.stubGlobal("CONFIG", {});
 
 vi.stubGlobal("Hooks", {
     on: () => {},
+    once: () => {},
     off: () => {},
     call: () => {},
+    callAll: () => {},
 });
 
 vi.stubGlobal("TextEditor", {

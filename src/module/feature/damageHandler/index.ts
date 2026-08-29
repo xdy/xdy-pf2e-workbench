@@ -24,8 +24,11 @@ import {
     isExperimentalToolbeltSaveIntegrationEnabled,
     shouldWaitForToolbeltTargetHelper,
 } from "./toolbelt/toolbeltIntegration.ts";
+import { messageFromUnhandledModule } from "../../hooks/createChatMessageHook.ts";
 
 export async function autoRollDamage(message: ChatMessagePF2e, options: AutoRollDamageOptions = {}): Promise<void> {
+    if (messageFromUnhandledModule(message)) return;
+
     const numberOfMessagesToCheck = 10;
     const settings = {
         autoRollDamageAllow: getModuleSetting<string>("autoRollDamageAllow"),

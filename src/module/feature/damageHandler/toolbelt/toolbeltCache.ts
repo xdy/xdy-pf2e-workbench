@@ -58,7 +58,7 @@ export function deleteCachedToolbeltTargetHelperData(messageId: string): void {
     toolbeltTargetHelperCache.delete(messageId);
 }
 
-export function getToolbeltTargetHelperData(message: ChatMessagePF2e): ToolbeltTargetHelperData | null {
+function getToolbeltTargetHelperData(message: ChatMessagePF2e): ToolbeltTargetHelperData | null {
     if (!game.modules.get("pf2e-toolbelt")?.active) {
         return null;
     }
@@ -66,7 +66,7 @@ export function getToolbeltTargetHelperData(message: ChatMessagePF2e): ToolbeltT
     return targetHelper && typeof targetHelper === "object" ? (targetHelper as ToolbeltTargetHelperData) : null;
 }
 
-export function getCachedToolbeltTargetHelperData(messageId: string): ToolbeltTargetHelperData | null {
+function getCachedToolbeltTargetHelperData(messageId: string): ToolbeltTargetHelperData | null {
     return toolbeltTargetHelperCache.get(messageId)?.data ?? null;
 }
 

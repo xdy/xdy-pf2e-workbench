@@ -193,7 +193,7 @@ function buildDyingRecoveryFlavor(
     });
 }
 
-export async function handleDying(
+async function handleDying(
     dyingCounter: number,
     originalDyingCounter: number,
     actor: ActorPF2e,
@@ -236,7 +236,7 @@ export async function handleDying(
     }
 }
 
-export async function autoRemoveDyingAtGreaterThanZeroHp(
+async function autoRemoveDyingAtGreaterThanZeroHp(
     actor: ActorPF2e,
     hpAboveZero: boolean,
     autoRemoveDying: string,
@@ -257,7 +257,7 @@ function isRelevantForActor(actorType: string, option: string): boolean {
     return option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actorType) : true;
 }
 
-export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
+async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     actor: ActorPF2e,
     hpRaisedAboveZero: boolean,
 ): Promise<void> {
@@ -267,7 +267,7 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     }
 }
 
-export function getRelevantMessages(actor: ActorPF2e): ChatMessagePF2e[] {
+function getRelevantMessages(actor: ActorPF2e): ChatMessagePF2e[] {
     const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
     return getModuleSetting<boolean>("autoGainDyingIgnoresTargeting")
         ? relevant
@@ -293,7 +293,7 @@ function findLastMessageWithTotalGreaterOrEqual(
     return messages.findLast((message) => message.rolls?.[0]?.total >= total);
 }
 
-export function checkIfLatestDamageMessageIsCriticalHitByEnemy(actor: ActorPF2e, option: string): boolean {
+function checkIfLatestDamageMessageIsCriticalHitByEnemy(actor: ActorPF2e, option: string): boolean {
     const hp = actor.attributes.hp;
     if (hp && hp.value && game.messages.contents.length > 0 && isRelevantForActor(actor.type, option)) {
         const relevant = getRelevantMessages(actor);
@@ -312,7 +312,7 @@ function filterMessagesByCriticalSuccess(messages: ChatMessagePF2e[]): ChatMessa
     return messages.filter((message) => systems.getFlag(message, "context.outcome") === "criticalSuccess");
 }
 
-export function handleOrcFerocity(
+function handleOrcFerocity(
     actor: ActorPF2e,
     update: Record<string, string>,
     effectsToCreate: any[],
@@ -366,7 +366,7 @@ export function handleOrcFerocity(
     return { shouldIncreaseWounded, hpNowAboveZero };
 }
 
-export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], name: string): void {
+function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], name: string): void {
     const deliberateDeath = actor.itemTypes.feat.find((feat) => feat.slug === "deliberate-death");
     const deliberateDeathUsed: any = actor.itemTypes.effect.find((effect) => effect.slug === "deliberate-death-used");
     if (deliberateDeath && (!deliberateDeathUsed || deliberateDeathUsed.isExpired)) {
@@ -398,7 +398,7 @@ export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], 
     }
 }
 
-export async function handleDyingOnZeroHP(
+async function handleDyingOnZeroHP(
     actor: any,
     update: Record<string, string>,
     hp: number,
@@ -465,7 +465,7 @@ export async function handleDyingOnZeroHP(
     return hpNowAboveZero;
 }
 
-export async function giveWoundedWhenDyingRemoved(item: ItemPF2e): Promise<void> {
+async function giveWoundedWhenDyingRemoved(item: ItemPF2e): Promise<void> {
     const actor = item.parent;
     if (isFirstGM() && item.slug === "dying" && actor) {
         const items: any = actor.items;
@@ -535,7 +535,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e): Promise<void>
     }
 }
 
-export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e): Promise<void> {
+async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e): Promise<void> {
     const actor = <ActorPF2e>item.parent;
     if (
         isFirstGM() &&
@@ -589,7 +589,7 @@ export function dyingHandlingCreateChatMessageHook(message: ChatMessagePF2e): vo
     }
 }
 
-export function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string): boolean {
+function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string): boolean {
     const hp = actor.attributes.hp;
     if (hp && hp.value && game.messages.contents.length > 0 && isRelevantForActor(actor.type, option)) {
         const relevant = getRelevantMessages(actor);

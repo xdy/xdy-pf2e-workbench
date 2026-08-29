@@ -59,7 +59,7 @@ const dialogLifecycle = {
     },
 };
 
-export async function showCharacterOglItemsDialog(actor: ActorPF2e): Promise<void> {
+async function showCharacterOglItemsDialog(actor: ActorPF2e): Promise<void> {
     const oglItems = getOglItems(actor);
     const title = `${game.i18n.localize(`${MODULENAME}.SETTINGS.showCharacterOglTag.title`)}: ${actor.name}`;
 
@@ -79,7 +79,7 @@ export async function showCharacterOglItemsDialog(actor: ActorPF2e): Promise<voi
     });
 }
 
-export function actorHasOglContent(actor: ActorPF2e): boolean {
+function actorHasOglContent(actor: ActorPF2e): boolean {
     return actor.items.some(isOglItem);
 }
 

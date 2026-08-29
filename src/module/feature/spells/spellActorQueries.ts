@@ -4,7 +4,7 @@ import { getSpellcastingEntries, I18N_LEARN, I18N_SHARED } from "./helpers.ts";
 import type { SpellRollSkill } from "./types.ts";
 import { getCrossTraditionGrants, hasCompatibleTraditionCrossTrad } from "./traditions.ts";
 
-export function* iterateKnownSpells(actor: ActorPF2e): Generator<[ItemPF2e, string]> {
+function* iterateKnownSpells(actor: ActorPF2e): Generator<[ItemPF2e, string]> {
     for (const entry of getSpellcastingEntries(actor)) {
         const spells: ItemPF2e[] = entry.spells?.contents ? [...entry.spells.contents] : [];
         for (const spell of spells) {
@@ -44,7 +44,7 @@ export function hasCompatibleTradition(actor: ActorPF2e, spellTraditions: string
     return false;
 }
 
-export function entryHasCompatibleTradition(entry: SpellcastingEntryPF2e, traditions: string[]): boolean {
+function entryHasCompatibleTradition(entry: SpellcastingEntryPF2e, traditions: string[]): boolean {
     if (traditions.length === 0) return true;
     const trad = getEntryTradition(entry);
     return trad !== null && traditions.includes(trad);
@@ -185,7 +185,7 @@ export function notifyTraditionMismatch(spellName: string, traditions: string[])
     );
 }
 
-export async function promptTraditionOverrideAndAnnounce(
+async function promptTraditionOverrideAndAnnounce(
     spellName: string,
     traditions: string[],
     actor: ActorPF2e,
