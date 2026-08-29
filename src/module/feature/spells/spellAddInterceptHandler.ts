@@ -1,4 +1,9 @@
-import { getTargetEntryIdFromData, hasLearnFailureAtCurrentLevel, I18N_SHARED } from "./helpers.ts";
+import {
+    getTargetEntryIdFromData,
+    hasLearnFailureAtCurrentLevel,
+    I18N_SHARED,
+    inCharacterCreation,
+} from "./helpers.ts";
 import type { ActorPF2e, ItemPF2e, SpellcastingEntryPF2e, SpellPF2e } from "foundry-pf2e";
 import {
     computeLearnParams,
@@ -35,8 +40,10 @@ import { directEntryLearnHandler } from "./learn/directEntryTarget.ts";
 
 export function shouldIntercept(item: ItemPF2e): boolean {
     if (item.type !== "spell") return false;
-    const actor = item.actor;
-    if (!actor || actor.type !== "character") return false;
+    const spell = item as SpellPF2e;
+    if (spell.flags?.["pf2e-dailies"]) return false;
+    const actor = spell.actor;
+    if (!actor || actor.type !== "character" || inCharacterCreation(actor)) return false;
     return getModuleSetting<boolean>("enableGeneralLearnSpell");
 }
 

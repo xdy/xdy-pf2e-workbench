@@ -1,7 +1,7 @@
 import type { ActorPF2e, SpellcastingEntryPF2e, SpellPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../constants.ts";
 import { getLearnFailureEntry } from "./flags.ts";
-import { actorHasItemBySlug } from "../../utils.ts";
+import { actorHasItemBySlug, getModuleSetting } from "../../utils.ts";
 
 export const I18N_SHARED = `${MODULENAME}.spellShared` as const;
 export const I18N_LEARN = `${MODULENAME}.spellLearn` as const;
@@ -61,8 +61,20 @@ export function getSpellcastingEntryById(actor: ActorPF2e, entryId: string): Spe
     return undefined;
 }
 
+export function getActorXp(actor: ActorPF2e): number {
+    return (actor.system.details as { xp?: { value?: number } }).xp?.value ?? 0;
+}
+
 export function getActorLevel(actor: ActorPF2e): number {
     return actor.system.details.level.value;
+}
+
+export function inCharacterCreation(actor: ActorPF2e): boolean {
+    return getActorLevel(actor) === 1 && getActorXp(actor) === 0;
+}
+
+export function shouldAutoSkipLearnSpellDialog(actor: ActorPF2e): boolean {
+    return getModuleSetting<boolean>("autoSkipLearnSpellAtLevelOne") && inCharacterCreation(actor);
 }
 
 export function hasLearnFailureAtCurrentLevel(actor: ActorPF2e, identifier: string): boolean {

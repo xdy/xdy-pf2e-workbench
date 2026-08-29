@@ -31,16 +31,18 @@ function makeActor(overrides: Partial<{ level: number; xp: number; type: string;
     return actor as unknown as ActorPF2e;
 }
 
-function makeSpellItem(overrides: Partial<{ type: string; actor: ActorPF2e | null }> = {}): ItemPF2e {
+function makeSpellItem(
+    overrides: Partial<{ type: string; actor: ActorPF2e | null; flags: Record<string, unknown> }> = {},
+): ItemPF2e {
     const item = {
         type: overrides.type ?? "spell",
         actor: overrides.actor ?? null,
+        flags: overrides.flags ?? {},
     };
     return item as unknown as ItemPF2e;
 }
 
 interface TestCaseArgs {
-    spellbookHandler: boolean;
     generalLearnSpell: boolean;
 }
 
@@ -50,6 +52,7 @@ interface ItemArgs {
     actorXp?: number;
     actorIsNull?: boolean;
     actorType?: string;
+    flags?: Record<string, unknown>;
 }
 
 describe("shouldIntercept", () => {
@@ -58,7 +61,6 @@ describe("shouldIntercept", () => {
     });
 
     test.for([
-        // false cases
         ["setting OFF", { generalLearnSpell: false }, { type: "spell", actorLevel: 3, actorXp: 100 }, false],
         ["non-spell item type", { generalLearnSpell: true }, { type: "weapon", actorLevel: 3, actorXp: 100 }, false],
         ["actor is null", { generalLearnSpell: true }, { type: "spell", actorIsNull: true }, false],
@@ -68,11 +70,30 @@ describe("shouldIntercept", () => {
             { type: "spell", actorLevel: 3, actorXp: 100, actorType: "npc" },
             false,
         ],
+        [
+            "pf2e-dailies flag set",
+            { generalLearnSpell: true },
+            { type: "spell", actorLevel: 3, actorXp: 100, flags: { "pf2e-dailies": true } },
+            false,
+        ],
+        [
+            "character in creation (level 1, xp 0)",
+            { generalLearnSpell: true },
+            { type: "spell", actorLevel: 1, actorXp: 0 },
+            false,
+        ],
+        [
+            "valid character with xp > 0",
+            { generalLearnSpell: true },
+            { type: "spell", actorLevel: 1, actorXp: 10 },
+            true,
+        ],
+        ["valid character level > 1", { generalLearnSpell: true }, { type: "spell", actorLevel: 2, actorXp: 0 }, true],
     ])("%s", ([_desc, settings, itemArgs, expected]) => {
         setupSettings((settings as TestCaseArgs).generalLearnSpell);
         const ia = itemArgs as ItemArgs;
         const actor = ia.actorIsNull ? null : makeActor({ level: ia.actorLevel, xp: ia.actorXp, type: ia.actorType });
-        const item = makeSpellItem({ type: ia.type, actor: actor as ActorPF2e | null });
+        const item = makeSpellItem({ type: ia.type, actor: actor as ActorPF2e | null, flags: ia.flags });
         expect(shouldIntercept(item)).toBe(expected);
     });
 });
