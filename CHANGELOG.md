@@ -1,3 +1,10 @@
+# [7.7.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.6.0...v7.7.0) (2026-08-29)
+
+
+### Features
+
+* Learn a spell now steps out of the way of dailies spells and when a character is still in character creation (level 1 with 0 xp). ([3ebc133](https://github.com/xdy/xdy-pf2e-workbench/commit/3ebc133e19b3234e49a706e81e3904bd6e2c660e))
+
 # [7.6.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.5.4...v7.6.0) (2026-08-26)
 
 
