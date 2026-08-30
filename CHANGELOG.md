@@ -1,3 +1,10 @@
+## [7.7.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.7.0...v7.7.1) (2026-08-30)
+
+
+### Bug Fixes
+
+* Learn a Spell ignores rituals (for now), exit early in chat message hook if message from another module (currently checking for pf2e-dailies and pf2e-ranged-combat), clean up some unused code. ([775b0c8](https://github.com/xdy/xdy-pf2e-workbench/commit/775b0c805ff82eb96bfd178b271518b9cfd5662f))
+
 # [7.7.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.6.0...v7.7.0) (2026-08-29)
 
 
