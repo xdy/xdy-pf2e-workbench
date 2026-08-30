@@ -18,11 +18,16 @@ async function sheatheHeldItemsAfterEncounter(encounter: EncounterPF2e) {
         .filter((t) => t);
 
     for (const combatant of encounter.combatants) {
+        if (combatant.isDefeated) {
+            continue;
+        }
+
         const actor = combatant.actor;
         if (!actor) {
             continue;
         }
-        const items = <PhysicalItemPF2e[]>actor.items?.filter((i) => (i as PhysicalItemPF2e).isHeld);
+
+        const items = actor.items?.filter((i) => i.isOfType("physical") && i.isHeld && i.handsHeld > 0);
         if (!items || items.length === 0) {
             continue;
         }
@@ -35,7 +40,7 @@ async function sheatheHeldItemsAfterEncounter(encounter: EncounterPF2e) {
             }
             sendHeldItemChatMessage(
                 actor,
-                itemsToSheathe,
+                <PhysicalItemPF2e[]>itemsToSheathe,
                 `${MODULENAME}.SETTINGS.sheatheHeldItemsAfterEncounter.message`,
                 "sheatheHeldItems ChatMessage",
             );
