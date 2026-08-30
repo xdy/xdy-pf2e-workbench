@@ -1,3 +1,10 @@
+## [7.7.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.7.1...v7.7.2) (2026-08-30)
+
+
+### Bug Fixes
+
+* Defeated actors don't sheathe their weapons after an encounter ends. ([7d10c38](https://github.com/xdy/xdy-pf2e-workbench/commit/7d10c38525be4d9a6c569d7c42d8034ccf75f147))
+
 ## [7.7.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.7.0...v7.7.1) (2026-08-30)
 
 
