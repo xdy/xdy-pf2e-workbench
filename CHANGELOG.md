@@ -1,3 +1,10 @@
+## [7.7.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.7.2...v7.7.3) (2026-09-03)
+
+
+### Bug Fixes
+
+* Ignore messages without kinds set when handing persistent healing or damage. ([d9bd9b9](https://github.com/xdy/xdy-pf2e-workbench/commit/d9bd9b9b9c975201039116c56e72ddf80f1922db))
+
 ## [7.7.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.7.1...v7.7.2) (2026-08-30)
 
 
