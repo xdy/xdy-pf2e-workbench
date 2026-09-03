@@ -201,7 +201,7 @@ export function persistentDamageHealing(message: ChatMessagePF2e): void {
     if (rolls[0]?.instances?.some((i) => i.persistent && i.options.evaluatePersistent)) {
         dtype = "Damage";
     } else if (
-        rolls.some((r) => r.kinds.has("healing")) &&
+        rolls.some((r) => r.kinds?.has("healing")) &&
         (message.flavor?.includes(
             game.i18n.localize("PF2E.Encounter.Broadcast.FastHealing.fast-healing.ReceivedMessage"),
         ) ||
