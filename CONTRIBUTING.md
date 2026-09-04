@@ -36,10 +36,13 @@ Or, if you prefer to do it as a separate module, make sure to ping me so I can l
 1. Clone project to your local working directory
 1. Clone the submodule containing Symon's macros with `git submodule set-url submodules/my-foundryvtt-macros https://gitlab.com/symonsch/my-foundryvtt-macros`
 1. Copy the file foundryconfig.example.json to foundryconfig.json and edit the new file to point to the appropriate
-   directory. 1. Windows example of foundryconfig.json contents:
+   directories. 1. Windows example of foundryconfig.json contents (pf2eSourcePath can be ignored):
     ```
     {
     "dataPath": "C:\\Users\\jk\\AppData\\Local\\FoundryVTT",
+    "moduleName": "xdy-pf2e-workbench",
+    "installPath": "C:\\Program Files\\Foundry Virtual Tabletop",
+    "pf2eSourcePath": "C:\\Users\\jk\\foundryvtt\\forks\\pf2e"
     }
    ```
   1. Mac/unix example of foundryconfig.json contents:
