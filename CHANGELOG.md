@@ -1,3 +1,10 @@
+## [7.7.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.7.4...v7.7.5) (2026-09-04)
+
+
+### Bug Fixes
+
+* Update CONTRIBUTORS.md ([674bb04](https://github.com/xdy/xdy-pf2e-workbench/commit/674bb04943c897c6679532e3bde4bceefff34567))
+
 ## [7.7.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.7.3...v7.7.4) (2026-09-04)
 
 
