@@ -1,3 +1,10 @@
+## [7.7.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.7.3...v7.7.4) (2026-09-04)
+
+
+### Bug Fixes
+
+* BAMs for aid and cover no longer fail. ([5f43b90](https://github.com/xdy/xdy-pf2e-workbench/commit/5f43b903ad8cdccdd9361be9ebb16173089091a2))
+
 ## [7.7.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.7.2...v7.7.3) (2026-09-03)
 
 
