@@ -34,7 +34,7 @@ Or, if you prefer to do it as a separate module, make sure to ping me so I can l
 
 1. Fork project in github
 1. Clone project to your local working directory
-1. Do one of the following:
+1. Clone the submodule containing Symon's macros with `git submodule set-url submodules/my-foundryvtt-macros https://gitlab.com/symonsch/my-foundryvtt-macros`
 1. Copy the file foundryconfig.example.json to foundryconfig.json and edit the new file to point to the appropriate
    directory. 1. Windows example of foundryconfig.json contents:
     ```
@@ -48,19 +48,10 @@ Or, if you prefer to do it as a separate module, make sure to ping me so I can l
       "dataPath": "/Users/xdy/Library/Application Support/FoundryVTT",
       }
       ```
-1. Symlink dist directory to your Foundry data directory. 1. Mac/unix example:
-    ```
-    ln -s /Users/xdy/Projects/FoundryVTT/xdy-pf2e-workbench/dist "/Users/xdy/Library/Application Support/FoundryVTT/Data/xdy-pf2e-workbench"
-    ```
-  1. Windows example (add /h to mklink to get a hard link rather than a soft link):
-      ```
-      mklink /d C:\Users\jk\AppData\Local\FoundryVTT\Data\modules\xdy-pf2e-workbench C:\Users\jk\foundryvtt\xdy-pf2e-workbench\dist
-      ```
-1. Do the following each time you have updated your fork and want to test your code:
-1. Builds the prerequisites
-   `pnpm install`
-1. Runs the module in 'developer mode', watching for changes in the code as they happen
-   `pnpm run build:dev`
+1. Symlink dist directory to your Foundry data directory by running `pnpm run link`
+1. Build the module with `pnpm install && pnpm run build`
+1. Make your changes. You probably want to run `pnpm run build:dev` so it builds your changes while you work.
+   
 
 ## Coding conventions
 
