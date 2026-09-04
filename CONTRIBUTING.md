@@ -49,6 +49,9 @@ Or, if you prefer to do it as a separate module, make sure to ping me so I can l
       ```
       {
       "dataPath": "/Users/xdy/Library/Application Support/FoundryVTT",
+      "moduleName": "xdy-pf2e-workbench",
+      "installPath": "$HOME/foundryvtt",
+      "pf2eSourcePath": ""
       }
       ```
 1. Symlink dist directory to your Foundry data directory by running `pnpm run link`
